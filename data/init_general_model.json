@@ -1,0 +1,8 @@
+{
+    "general_model": {},
+    "completion_exclusion": {},
+    "general_service": {
+        "marked_general_conclusions": [],
+        "diffalg_for_marked_gc": {}
+    }
+}

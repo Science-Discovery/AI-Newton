@@ -1,0 +1,8 @@
+Deprecated==1.2.15
+jupyter==1.1.1
+matplotlib==3.10.1
+numpy==2.2.4
+scipy==1.15.2
+sympy==1.13.2
+torch==2.4.1
+tqdm==4.66.5

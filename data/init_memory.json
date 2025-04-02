@@ -1,0 +1,243 @@
+{
+    "experiment_bandit": {
+        "motion0y": [
+            1.0,
+            1.0,
+            null
+        ],
+        "oscillation": [
+            1.0,
+            1.0,
+            null
+        ],
+        "stringmotion0": [
+            1.0,
+            1.0,
+            null
+        ],
+        "motion0": [
+            1.0,
+            1.0,
+            null
+        ],
+        "oscillationy": [
+            1.0,
+            1.0,
+            null
+        ],
+        "motiony": [
+            1.0,
+            1.0,
+            null
+        ],
+        "collision": [
+            1.0,
+            1.0,
+            null
+        ],
+        "motion": [
+            1.0,
+            1.0,
+            null
+        ],
+        "motion0_3d": [
+            1.0,
+            1.0,
+            null
+        ],
+        "motion_3d": [
+            1.0,
+            1.0,
+            null
+        ],
+        "collision_elastic_3body": [
+            1.0,
+            1.0,
+            null
+        ],
+        "collision_y": [
+            1.0,
+            1.0,
+            null
+        ],
+        "collision_2d": [
+            1.0,
+            1.0,
+            null
+        ],
+        "collision_nh": [
+            1.0,
+            1.0,
+            null
+        ],
+        "gravity": [
+            1.0,
+            1.0,
+            null
+        ],
+        "free_fall": [
+            1.0,
+            1.0,
+            null
+        ],
+        "projectile": [
+            1.0,
+            1.0,
+            null
+        ],
+        "oblique_projectile": [
+            1.0,
+            1.0,
+            null
+        ],
+        "vertical_projectile": [
+            1.0,
+            1.0,
+            null
+        ],
+        "hanging_spring_1": [
+            1.0,
+            1.0,
+            null
+        ],
+        "hanging_spring_2": [
+            1.0,
+            1.0,
+            null
+        ],
+        "hanging_spring_3": [
+            1.0,
+            1.0,
+            null
+        ],
+        "pendulum_oscillation_1": [
+            1.0,
+            1.0,
+            null
+        ],
+        "pendulum_oscillation_2": [
+            1.0,
+            1.0,
+            null
+        ],
+        "slope_oscillation_1": [
+            1.0,
+            1.0,
+            null
+        ],
+        "slope_oscillation_2": [
+            1.0,
+            1.0,
+            null
+        ],
+        "projectile_oscillation_1": [
+            1.0,
+            1.0,
+            null
+        ],
+        "projectile_oscillation_2": [
+            1.0,
+            1.0,
+            null
+        ],
+        "oscillation_x_1": [
+            1.0,
+            1.0,
+            null
+        ],
+        "oscillation_x_2": [
+            1.0,
+            1.0,
+            null
+        ],
+        "oscillation_x_3": [
+            1.0,
+            1.0,
+            null
+        ],
+        "oscillation_2d_1": [
+            1.0,
+            1.0,
+            null
+        ],
+        "oscillation_2d_2": [
+            1.0,
+            1.0,
+            null
+        ],
+        "oscillation_2d_3": [
+            1.0,
+            1.0,
+            null
+        ],
+        "oscillation_r_3": [
+            1.0,
+            1.0,
+            null
+        ],
+        "oscillation_r_4": [
+            1.0,
+            1.0,
+            null
+        ],
+        "oscillation_rot_1": [
+            1.0,
+            1.0,
+            null
+        ],
+        "oscillation_rot_2": [
+            1.0,
+            1.0,
+            null
+        ],
+        "oscillation_rot_3": [
+            1.0,
+            1.0,
+            null
+        ],
+        "celestial_2": [
+            1.0,
+            1.0,
+            null
+        ],
+        "celestial_3": [
+            1.0,
+            1.0,
+            null
+        ],
+        "celestial_4": [
+            1.0,
+            1.0,
+            null
+        ]
+    },
+    "action_bandit": {
+        "actions": [
+            "length",
+            "cx",
+            "posx",
+            "cz",
+            "posz",
+            "t",
+            "posy",
+            "dist",
+            "cy"
+        ],
+        "groups_V": {
+            "('posy',)": 2.0,
+            "('t',)": 2.0,
+            "('posx',)": 2.0,
+            "('posz',)": 2.0,
+            "('length',)": 2.0,
+            "('cz',)": 2.0,
+            "('cy',)": 2.0,
+            "('dist',)": 2.0,
+            "('cx',)": 2.0
+        },
+        "groups_N": {}
+    },
+    "history": {},
+    "computational_limit": 4,
+    "experiments_pool": [],
+    "general_conclusion_attempts": {}
+}

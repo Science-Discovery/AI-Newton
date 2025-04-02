@@ -1,0 +1,269 @@
+use std::collections::HashMap;
+use crate::language::*;
+use crate::experiments::{
+    ATTR, ObjType, Objstructure, Parastructure,
+};
+
+// lalrpop 里的约定
+grammar;
+
+// 约束 lexer 的行为
+match {
+  // 跳过空白符和注释
+  r"\s*" => {},
+  r"//[^\n\r]*[\n\r]*" => {},
+  r"/\*.*\*/" => {},    // 匹配 /* ... */
+  // 剩下的情况采用默认方式处理
+  _
+}
+
+
+
+pub Knowledge: (Vec<(String, Objstructure)>, Vec<(String, Expression)>, Vec<(String, Proposition)>) = {
+  <knowledge: KnowledgeContent> "[end]" => knowledge,
+}
+
+KnowledgeContent: (Vec<(String, Objstructure)>, Vec<(String, Expression)>, Vec<(String, Proposition)>) = {
+  "[Knowledge]" "\n" => (vec![], vec![], vec![]),
+  <knowledge: KnowledgeContent> 
+    <name: Ident> ":=" <objstructure: Objstructure> "\n" => {
+        let mut knowledge = knowledge;
+        knowledge.0.push((name, objstructure));
+        knowledge
+    },
+  <knowledge: KnowledgeContent>
+    <name: Ident> ":=" <concept: Concept> "\n" => {
+      let mut knowledge = knowledge;
+      knowledge.1.push((name, Expression::Concept{ concept }));
+      knowledge
+    },
+  <knowledge: KnowledgeContent>
+    <name: Ident> ":=" <intrinsic: Intrinsic> "\n" => {
+      let mut knowledge = knowledge;
+      knowledge.1.push((name, Expression::Intrinsic{ intrinsic }));
+      knowledge
+    },
+  <knowledge: KnowledgeContent>
+    <name: Ident> ":=" <prop: Proposition> "\n" => {
+      let mut knowledge = knowledge;
+      knowledge.2.push((name, *prop));
+      knowledge
+    }
+}
+
+
+pub Objstructure: Objstructure = {
+    "[Objstructure]" 
+    "obj_type:" <obj_type: ObjType> ","
+    "attribute:" "[" <list_attr: VecIdent> "]" "\n"
+    <attribute_list: AttributeList> "." => {
+        let mut attribute = HashMap::new();
+        for i in 0..list_attr.len() {
+            assert_eq!(list_attr[i], attribute_list[i].0);
+            let attr = ATTR::new(obj_type.clone(), &list_attr[i]);
+            let parastructure = attribute_list[i].1.clone();
+            attribute.insert(attr, parastructure);
+        }
+        Objstructure::new(obj_type.clone(), attribute)
+    }
+}
+
+ObjType: ObjType = {
+    <ident: Ident> => ident.parse().unwrap()
+}
+
+pub AttributeList: Vec<(String, Parastructure)> = {
+    "Attribute:" => vec![],
+    <attribute_list: AttributeList> "\n"
+    "|" <attr_name: Ident> ":" <parastructure: Parastructure>
+        => {
+            let mut attribute_list = attribute_list;
+            attribute_list.push((attr_name, parastructure));
+            attribute_list
+        }
+}
+
+pub Parastructure: Parastructure = {
+    "[Parastructure]" "value:"
+    <option_float: OptionFloatConst> ","
+    "range:" "(" <low: FloatConst> "," <high: FloatConst> ")"
+    => Parastructure::new_with_value(option_float, (low, high))
+}
+
+
+
+
+
+
+pub Expression: Box<Expression> = {
+  <exp: Exp> => Box::new(Expression::Exp{ <> }),
+  <sexp: SExp> => Box::new(Expression::SExp{ <> }),
+  <concept: Concept> => Box::new(Expression::Concept{ <> }),
+  <intrinsic: Intrinsic> => Box::new(Expression::Intrinsic{ <> }),
+  <prop: Proposition> => Box::new(Expression::Proposition{ <> }),
+}
+pub Intrinsic: Box<Intrinsic> = {
+  "[" <sexp: SExp> "]" => Box::new(Intrinsic::From{ <> }),
+}
+pub Exp: Box<Exp> = <addexp: AddExp> => <>;
+pub PrimaryProposition: Box<Proposition> = {
+  "(" <proposition: Proposition> ")" => <>,
+}
+pub Proposition: Box<Proposition> = {
+  <concept: Concept> "is" "conserved" => Box::new(Proposition::Conserved{ <> }),
+  <concept: Concept> "is" "zero" => Box::new(Proposition::Zero{ <> }),
+  <exp: Exp> "is" "conserved" => Box::new(Proposition::IsConserved{ <> }),
+  <exp: Exp> "is" "zero" => Box::new(Proposition::IsZero{ <> }),
+  <left: Exp> "=" <right: Exp> => Box::new(Proposition::Eq{ <> }),
+  "not" <prop: PrimaryProposition> => Box::new(Proposition::Not{ <> }),
+}
+pub ExpConfig: Box<IExpConfig> = {
+  "#"<name: Ident> => Box::new(IExpConfig::From{ name: name }),
+  <expconfig: ExpConfig>"("<id:Number>"->"<objtype:Ident>")" => Box::new(IExpConfig::Mk{ <> }),
+  <expconfig: ExpConfig>"["<id:Number>"->"<object:Ident>"]" => Box::new(IExpConfig::Mkfix{ <> }),
+}
+pub SExp: Box<SExp> = {
+  <expconfig: ExpConfig> "|-" <exp: Exp> => Box::new(SExp::Mk{ <> }),
+}
+pub Concept: Box<Concept> = {
+  "|-" <exp: Exp> => Box::new(Concept::Mk0{ <> }),
+  // "(" <id:Number> "->" <objtype:Ident> ")" <concept: Concept> => Box::new(Concept::Mksucc{ <> }),
+  <inttoidentvec: IntToIdentVec> "|-" <exp: Exp> => {
+    let mut concept = Concept::Mk0{ exp };
+    for (id, objtype) in inttoidentvec {
+      concept = Concept::Mksucc{ id, objtype, concept: Box::new(concept) };
+    }
+    Box::new(concept)
+  },
+  "[Sum:" <objtype: Ident> "]" <concept: Concept> => {
+    Box::new(Concept::Mksum{ <> })
+  }
+}
+
+pub AtomExp: Box<AtomExp> = {
+  <name: Ident> => Box::new(AtomExp::Variable{ <> }),
+  <name: Ident>"["<ids: IntVecConst>"]" => Box::new(AtomExp::VariableIds{ <> }),
+}
+
+MeasureType: Box<MeasureType> = {
+  "[t_end=" <t_end: FloatConst> ",n=" <n: Number> ",repeat_time=" <repeat_time: Number> ",error=" <error: FloatConst> "]"
+    => Box::new(MeasureType::new(<>)),
+}
+
+PrimaryExp: Box<Exp> = {
+  <num: Number> => Box::new(Exp::Number{ <> }),
+  <atom: AtomExp> => Box::new(Exp::Atom{ <> }),
+  "(" <exp: Exp> ")" => <>,
+}
+
+PowExp: Box<Exp> = {
+  <primaryexp: PrimaryExp> => <>,
+  <powexp: PowExp> "**" <primaryexp: PrimaryExp> =>
+    Box::new(Exp::BinaryExp{ left: powexp, op: BinaryOp::Pow, right: primaryexp }),
+  "D[" <left: Exp> "]/D[" <right: Exp> "]" =>
+    Box::new(Exp::DiffExp{ left: left, right: right, ord: 1 }),
+  "D^" <ord: Number> "[" <left: Exp> "]/D[" <right: Exp> "]^" <ord2: Number> => {
+    assert!(ord == ord2);
+    Box::new(Exp::DiffExp{ left: left, right: right, ord: ord })
+  },
+  <primaryexp: PrimaryExp> "'" =>
+    Box::new(Exp::DiffExp{ left: primaryexp, right: Box::new(Exp::get_t()), ord: 1 }),
+  <primaryexp: PrimaryExp> "''" =>
+    Box::new(Exp::DiffExp{ left: primaryexp, right: Box::new(Exp::get_t()), ord: 2 }),
+  "Partial[" <powexp: PowExp> "]/Partial[" <right: AtomExp> "]" =>
+    Box::new(Exp::Partial{ left: powexp, right: right }),
+}
+
+UnaryExp: Box<Exp> = {
+  <powexp: PowExp> => <>,
+  "-" <unaryexp: UnaryExp> =>
+    Box::new(Exp::UnaryExp{ op: UnaryOp::Neg, exp: unaryexp }),
+}
+
+MulExp: Box<Exp> = {
+  <unaryexp: UnaryExp> => <>,
+  <mulexp: MulExp> "*" <unaryexp: UnaryExp> =>
+    Box::new(Exp::BinaryExp{ left: mulexp, op: BinaryOp::Mul, right: unaryexp }),
+  <mulexp: MulExp> "/" <unaryexp: UnaryExp> =>
+    Box::new(Exp::BinaryExp{ left: mulexp, op: BinaryOp::Div, right: unaryexp }),
+}
+
+AddExp: Box<Exp> = {
+  <mulexp: MulExp> => <>,
+  <addexp: AddExp> "+" <mulexp: MulExp> =>
+    Box::new(Exp::BinaryExp{ left: addexp, op: BinaryOp::Add, right: mulexp }),
+  <addexp: AddExp> "-" <mulexp: MulExp> =>
+    Box::new(Exp::BinaryExp{ left: addexp, op: BinaryOp::Sub, right: mulexp }),
+}
+
+WithExp: Box<Exp> = {
+  <addexp: AddExp> => <>,
+  <addexp: AddExp> "with" <measuretype: MeasureType> =>
+    Box::new(Exp::ExpWithMeasureType{ exp: addexp, measuretype: measuretype }),
+}
+
+// Basic!
+
+
+pub Number: i32 = <num: IntConst> => <>;
+
+
+pub VecIdent: Vec<String> = {
+  => vec![],
+  <ident: Ident> => vec![<>],
+  <identlist: VecIdent> "," <ident: Ident> => {
+    let mut identlist = identlist;
+    identlist.push(ident);
+    identlist
+  },
+}
+
+// 如果匹配到标识符, 就返回这个字符串
+// 一对尖括号在此处指代的是正则表达式匹配到的字符串 (&str)
+pub Ident: String = r"[_a-zA-Z][_a-zA-Z0-9]*" => <>.to_string();
+
+pub IntToIdent: (i32, String) = {
+  "(" <id:IntConst> "->" <objtype:Ident> ")" => (id, objtype),
+}
+
+pub IntToIdentVec: Vec<(i32, String)> = {
+  <inttoident: IntToIdent> => vec![<>],
+  <inttoidentvec: IntToIdentVec> <inttoident: IntToIdent> => {
+    let mut inttoidentvec = inttoidentvec;
+    inttoidentvec.push(inttoident);
+    inttoidentvec
+  },
+}
+
+pub IntVecConst: Vec<i32> = {
+  <num: IntConst> => vec![<>],
+  <numlist: IntVecConst> "," <num: IntConst> => {
+    let mut numlist = numlist;
+    numlist.push(num);
+    numlist
+  },
+}
+
+// 对整数字面量的处理方式: 把匹配到的字符串按对应进制转换成数字
+pub IntConst: i32 = {
+  r"0" => 0,
+  r"-0" => 0,
+  r"[1-9][0-9]*" => i32::from_str_radix(<>, 10).unwrap(),
+  r"\-[1-9][0-9]*" => -i32::from_str_radix(&<>[1..], 10).unwrap(),
+}
+
+pub OptionFloatConst: Option<f64> = {
+    "Some(" <float: FloatConst> ")" => Some(float),
+    "None" => None
+}
+
+pub FloatConst: f64 = {
+  r"[0-9]*\.[0-9]+" => (&<>).parse().unwrap(),
+  r"[1-9][0-9]*[eE][+-]?[0-9]+" => (&<>).parse().unwrap(),
+  r"[0-9]*\.[0-9]+[eE][+-]?[0-9]+" => (&<>).parse().unwrap(),
+  // 解析负数
+  r"\-[0-9]*\.[0-9]+" => (&<>).parse().unwrap(),
+  r"\-[1-9][0-9]*[eE][+-]?[0-9]+" => (&<>).parse().unwrap(),
+  r"\-[0-9]*\.[0-9]+[eE][+-]?[0-9]+" => (&<>).parse().unwrap(),
+  <intconst: IntConst> => intconst as f64,
+}

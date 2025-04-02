@@ -1,0 +1,3474 @@
+{
+    "collision": {
+        "exp_name": "collision",
+        "conclusions": {
+            "conclusion": {
+                "P1": "posz[1] is zero",
+                "P2": "posy[1] is zero",
+                "P3": "posz[2] is zero",
+                "P4": "posy[2] is zero",
+                "P5": "D[C_01[2]]/D[t[0]] is zero",
+                "P9": "(dist[1, 2] + (posx[1] + (-1 * posx[2]))) is zero",
+                "P79": "((C_05[1] * (C_01[1] ** 2)) + (C_05[2] * (C_01[2] ** 2))) is conserved",
+                "P128": "(dist[1, 2] - dist[2, 1]) is zero",
+                "P139": "(C_85[2] + (C_01[1] * C_05[1])) is conserved"
+            },
+            "conclusion_id": 148,
+            "conserved_list": [
+                [
+                    "collision",
+                    "P79",
+                    "((C_05[1] * (C_01[1] ** 2)) + (C_05[2] * (C_01[2] ** 2)))",
+                    false,
+                    []
+                ],
+                [
+                    "collision",
+                    "P139",
+                    "(C_85[2] + (C_01[1] * C_05[1]))",
+                    false,
+                    []
+                ]
+            ],
+            "zero_list": [
+                [
+                    "collision",
+                    "P1",
+                    "posz[1]"
+                ],
+                [
+                    "collision",
+                    "P2",
+                    "posy[1]"
+                ],
+                [
+                    "collision",
+                    "P3",
+                    "posz[2]"
+                ],
+                [
+                    "collision",
+                    "P4",
+                    "posy[2]"
+                ],
+                [
+                    "collision",
+                    "P5",
+                    "D[C_01[2]]/D[t[0]]"
+                ],
+                [
+                    "collision",
+                    "P9",
+                    "(dist[1, 2] + (posx[1] + (-1 * posx[2])))"
+                ],
+                [
+                    "collision",
+                    "P128",
+                    "(dist[1, 2] - dist[2, 1])"
+                ]
+            ]
+        }
+    },
+    "gravity": {
+        "exp_name": "gravity",
+        "conclusions": {
+            "conclusion": {
+                "P1": "(posz[1] + length[2]) is conserved",
+                "P2": "posx[1] is zero",
+                "P3": "posy[1] is zero",
+                "P4": "length[2] is conserved",
+                "P6": "((posz[1] + length[2]) + (-1 * length[2])) is zero",
+                "P7": "(C_07[2] - C_19) is zero",
+                "P8": "(C_04[2] + C_05[1]) is zero"
+            },
+            "conclusion_id": 24,
+            "conserved_list": [
+                [
+                    "gravity",
+                    "P1",
+                    "(posz[1] + length[2])",
+                    true,
+                    [
+                        1,
+                        2
+                    ]
+                ],
+                [
+                    "gravity",
+                    "P4",
+                    "length[2]",
+                    true,
+                    [
+                        1,
+                        2
+                    ]
+                ]
+            ],
+            "zero_list": [
+                [
+                    "gravity",
+                    "P2",
+                    "posx[1]"
+                ],
+                [
+                    "gravity",
+                    "P3",
+                    "posy[1]"
+                ],
+                [
+                    "gravity",
+                    "P6",
+                    "((posz[1] + length[2]) + (-1 * length[2]))"
+                ],
+                [
+                    "gravity",
+                    "P7",
+                    "(C_07[2] - C_19)"
+                ],
+                [
+                    "gravity",
+                    "P8",
+                    "(C_04[2] + C_05[1])"
+                ]
+            ]
+        }
+    },
+    "oscillation": {
+        "exp_name": "oscillation",
+        "conclusions": {
+            "conclusion": {
+                "P1": "posz[1] is zero",
+                "P2": "posy[1] is zero",
+                "P3": "(length[2] - posx[1]) is conserved",
+                "P26": "((C_05[1] * (C_01[1] ** 2)) - (C_07[2] * (C_04[2] ** 2))) is conserved",
+                "P31": "(C_42[1] / C_04[2]) is conserved",
+                "P32": "((C_04[2] * C_07[2]) + (C_05[1] * C_42[1])) is zero"
+            },
+            "conclusion_id": 37,
+            "conserved_list": [
+                [
+                    "oscillation",
+                    "P3",
+                    "(length[2] - posx[1])",
+                    false,
+                    []
+                ],
+                [
+                    "oscillation",
+                    "P26",
+                    "((C_05[1] * (C_01[1] ** 2)) - (C_07[2] * (C_04[2] ** 2)))",
+                    false,
+                    []
+                ],
+                [
+                    "oscillation",
+                    "P31",
+                    "(C_42[1] / C_04[2])",
+                    true,
+                    [
+                        1,
+                        2
+                    ]
+                ]
+            ],
+            "zero_list": [
+                [
+                    "oscillation",
+                    "P1",
+                    "posz[1]"
+                ],
+                [
+                    "oscillation",
+                    "P2",
+                    "posy[1]"
+                ],
+                [
+                    "oscillation",
+                    "P32",
+                    "((C_04[2] * C_07[2]) + (C_05[1] * C_42[1]))"
+                ]
+            ]
+        }
+    },
+    "oscillation_2d_3": {
+        "exp_name": "oscillation_2d_3",
+        "conclusions": {
+            "conclusion": {
+                "P1": "(dist[1, 2] - length[5]) is zero",
+                "P2": "(((dist[1, 2] ** 2) - ((posx[1] - posx[2]) ** 2)) - ((posy[1] - posy[2]) ** 2)) is zero",
+                "P3": "(dist[1, 2] - dist[2, 1]) is zero",
+                "P4": "(dist[2, 3] - length[6]) is zero",
+                "P5": "(((dist[2, 3] ** 2) - ((posx[2] - posx[3]) ** 2)) - ((posy[2] - posy[3]) ** 2)) is zero",
+                "P6": "(dist[2, 3] - dist[3, 2]) is zero",
+                "P7": "(dist[3, 4] - length[7]) is zero",
+                "P8": "(((dist[3, 4] ** 2) - ((posx[3] - posx[4]) ** 2)) - ((posy[3] - posy[4]) ** 2)) is zero",
+                "P9": "(dist[3, 4] - dist[4, 3]) is zero",
+                "P10": "(((dist[1, 3] ** 2) - ((posx[1] - posx[3]) ** 2)) - ((posy[1] - posy[3]) ** 2)) is zero",
+                "P11": "(dist[1, 3] - dist[3, 1]) is zero",
+                "P12": "(((dist[2, 4] ** 2) - ((posx[2] - posx[4]) ** 2)) - ((posy[2] - posy[4]) ** 2)) is zero",
+                "P13": "(dist[2, 4] - dist[4, 2]) is zero",
+                "P14": "(((dist[1, 4] ** 2) - ((posx[1] - posx[4]) ** 2)) - ((posy[1] - posy[4]) ** 2)) is zero",
+                "P15": "(dist[1, 4] - dist[4, 1]) is zero",
+                "P16": "posz[1] is zero",
+                "P17": "posz[2] is zero",
+                "P18": "posz[3] is zero",
+                "P19": "posz[4] is zero"
+            },
+            "conclusion_id": 19,
+            "conserved_list": [],
+            "zero_list": [
+                [
+                    "oscillation_2d_3",
+                    "P1",
+                    "(dist[1, 2] - length[5])"
+                ],
+                [
+                    "oscillation_2d_3",
+                    "P2",
+                    "(((dist[1, 2] ** 2) - ((posx[1] - posx[2]) ** 2)) - ((posy[1] - posy[2]) ** 2))"
+                ],
+                [
+                    "oscillation_2d_3",
+                    "P3",
+                    "(dist[1, 2] - dist[2, 1])"
+                ],
+                [
+                    "oscillation_2d_3",
+                    "P4",
+                    "(dist[2, 3] - length[6])"
+                ],
+                [
+                    "oscillation_2d_3",
+                    "P5",
+                    "(((dist[2, 3] ** 2) - ((posx[2] - posx[3]) ** 2)) - ((posy[2] - posy[3]) ** 2))"
+                ],
+                [
+                    "oscillation_2d_3",
+                    "P6",
+                    "(dist[2, 3] - dist[3, 2])"
+                ],
+                [
+                    "oscillation_2d_3",
+                    "P7",
+                    "(dist[3, 4] - length[7])"
+                ],
+                [
+                    "oscillation_2d_3",
+                    "P8",
+                    "(((dist[3, 4] ** 2) - ((posx[3] - posx[4]) ** 2)) - ((posy[3] - posy[4]) ** 2))"
+                ],
+                [
+                    "oscillation_2d_3",
+                    "P9",
+                    "(dist[3, 4] - dist[4, 3])"
+                ],
+                [
+                    "oscillation_2d_3",
+                    "P10",
+                    "(((dist[1, 3] ** 2) - ((posx[1] - posx[3]) ** 2)) - ((posy[1] - posy[3]) ** 2))"
+                ],
+                [
+                    "oscillation_2d_3",
+                    "P11",
+                    "(dist[1, 3] - dist[3, 1])"
+                ],
+                [
+                    "oscillation_2d_3",
+                    "P12",
+                    "(((dist[2, 4] ** 2) - ((posx[2] - posx[4]) ** 2)) - ((posy[2] - posy[4]) ** 2))"
+                ],
+                [
+                    "oscillation_2d_3",
+                    "P13",
+                    "(dist[2, 4] - dist[4, 2])"
+                ],
+                [
+                    "oscillation_2d_3",
+                    "P14",
+                    "(((dist[1, 4] ** 2) - ((posx[1] - posx[4]) ** 2)) - ((posy[1] - posy[4]) ** 2))"
+                ],
+                [
+                    "oscillation_2d_3",
+                    "P15",
+                    "(dist[1, 4] - dist[4, 1])"
+                ],
+                [
+                    "oscillation_2d_3",
+                    "P16",
+                    "posz[1]"
+                ],
+                [
+                    "oscillation_2d_3",
+                    "P17",
+                    "posz[2]"
+                ],
+                [
+                    "oscillation_2d_3",
+                    "P18",
+                    "posz[3]"
+                ],
+                [
+                    "oscillation_2d_3",
+                    "P19",
+                    "posz[4]"
+                ]
+            ]
+        }
+    },
+    "motiony": {
+        "exp_name": "motiony",
+        "conclusions": {
+            "conclusion": {
+                "P1": "posx[1] is zero",
+                "P2": "cz[2] is conserved",
+                "P3": "cy[2] is conserved",
+                "P4": "D[C_02[1]]/D[t[0]] is conserved",
+                "P5": "D[posz[1]]/D[posy[1]] is conserved",
+                "P8": "((cy[2] * posy[1]) + (cz[2] * posz[1])) is conserved",
+                "P16": "((2 * (C_28[1] * posz[1])) - (-1 * (C_02[1] * C_02[1]))) is conserved",
+                "P21": "C_16[1] is conserved",
+                "P22": "D[C_134[1]]/D[t[0]] is conserved"
+            },
+            "conclusion_id": 22,
+            "conserved_list": [
+                [
+                    "motiony",
+                    "P2",
+                    "cz[2]",
+                    false,
+                    []
+                ],
+                [
+                    "motiony",
+                    "P3",
+                    "cy[2]",
+                    false,
+                    []
+                ],
+                [
+                    "motiony",
+                    "P4",
+                    "D[C_02[1]]/D[t[0]]",
+                    false,
+                    []
+                ],
+                [
+                    "motiony",
+                    "P5",
+                    "D[posz[1]]/D[posy[1]]",
+                    false,
+                    []
+                ],
+                [
+                    "motiony",
+                    "P8",
+                    "((cy[2] * posy[1]) + (cz[2] * posz[1]))",
+                    false,
+                    []
+                ],
+                [
+                    "motiony",
+                    "P16",
+                    "((2 * (C_28[1] * posz[1])) - (-1 * (C_02[1] * C_02[1])))",
+                    false,
+                    []
+                ],
+                [
+                    "motiony",
+                    "P21",
+                    "C_16[1]",
+                    false,
+                    []
+                ],
+                [
+                    "motiony",
+                    "P22",
+                    "D[C_134[1]]/D[t[0]]",
+                    false,
+                    []
+                ]
+            ],
+            "zero_list": [
+                [
+                    "motiony",
+                    "P1",
+                    "posx[1]"
+                ]
+            ]
+        }
+    },
+    "motion": {
+        "exp_name": "motion",
+        "conclusions": {
+            "conclusion": {
+                "P1": "posy[1] is zero",
+                "P2": "cz[2] is conserved",
+                "P3": "cx[2] is conserved",
+                "P4": "C_16[1] is conserved",
+                "P5": "D[C_01[1]]/D[t[0]] is conserved",
+                "P6": "D[posx[1]]/D[posz[1]] is conserved",
+                "P8": "((cx[2] * posx[1]) + (cz[2] * posz[1])) is conserved",
+                "P24": "((2 * (C_28[1] * posz[1])) - (-1 * (C_01[1] * C_01[1]))) is conserved",
+                "P35": "D[C_134[1]]/D[t[0]] is conserved"
+            },
+            "conclusion_id": 35,
+            "conserved_list": [
+                [
+                    "motion",
+                    "P2",
+                    "cz[2]",
+                    false,
+                    []
+                ],
+                [
+                    "motion",
+                    "P3",
+                    "cx[2]",
+                    false,
+                    []
+                ],
+                [
+                    "motion",
+                    "P4",
+                    "C_16[1]",
+                    false,
+                    []
+                ],
+                [
+                    "motion",
+                    "P5",
+                    "D[C_01[1]]/D[t[0]]",
+                    false,
+                    []
+                ],
+                [
+                    "motion",
+                    "P6",
+                    "D[posx[1]]/D[posz[1]]",
+                    false,
+                    []
+                ],
+                [
+                    "motion",
+                    "P8",
+                    "((cx[2] * posx[1]) + (cz[2] * posz[1]))",
+                    false,
+                    []
+                ],
+                [
+                    "motion",
+                    "P24",
+                    "((2 * (C_28[1] * posz[1])) - (-1 * (C_01[1] * C_01[1])))",
+                    false,
+                    []
+                ],
+                [
+                    "motion",
+                    "P35",
+                    "D[C_134[1]]/D[t[0]]",
+                    false,
+                    []
+                ]
+            ],
+            "zero_list": [
+                [
+                    "motion",
+                    "P1",
+                    "posy[1]"
+                ]
+            ]
+        }
+    },
+    "oscillation_x_3": {
+        "exp_name": "oscillation_x_3",
+        "conclusions": {
+            "conclusion": {
+                "P1": "((posx[2] - posx[1]) - length[5]) is zero",
+                "P2": "((posx[3] - posx[2]) - length[6]) is zero",
+                "P3": "((posx[4] - posx[3]) - length[7]) is zero",
+                "P4": "((posx[2] - posx[1]) - dist[1, 2]) is zero",
+                "P5": "(dist[1, 2] - dist[2, 1]) is zero",
+                "P6": "((posx[3] - posx[1]) - dist[1, 3]) is zero",
+                "P7": "(dist[1, 3] - dist[3, 1]) is zero",
+                "P8": "((posx[4] - posx[1]) - dist[1, 4]) is zero",
+                "P9": "(dist[1, 4] - dist[4, 1]) is zero",
+                "P10": "((posx[3] - posx[2]) - dist[2, 3]) is zero",
+                "P11": "(dist[2, 3] - dist[3, 2]) is zero",
+                "P12": "((posx[4] - posx[2]) - dist[2, 4]) is zero",
+                "P13": "(dist[2, 4] - dist[4, 2]) is zero",
+                "P14": "((posx[4] - posx[3]) - dist[3, 4]) is zero",
+                "P15": "(dist[3, 4] - dist[4, 3]) is zero",
+                "P16": "posy[1] is zero",
+                "P17": "posy[2] is zero",
+                "P18": "posy[3] is zero",
+                "P19": "posy[4] is zero",
+                "P20": "posz[1] is zero",
+                "P21": "posz[2] is zero",
+                "P22": "posz[3] is zero",
+                "P23": "posz[4] is zero"
+            },
+            "conclusion_id": 23,
+            "conserved_list": [],
+            "zero_list": [
+                [
+                    "oscillation_x_3",
+                    "P1",
+                    "((posx[2] - posx[1]) - length[5])"
+                ],
+                [
+                    "oscillation_x_3",
+                    "P2",
+                    "((posx[3] - posx[2]) - length[6])"
+                ],
+                [
+                    "oscillation_x_3",
+                    "P3",
+                    "((posx[4] - posx[3]) - length[7])"
+                ],
+                [
+                    "oscillation_x_3",
+                    "P4",
+                    "((posx[2] - posx[1]) - dist[1, 2])"
+                ],
+                [
+                    "oscillation_x_3",
+                    "P5",
+                    "(dist[1, 2] - dist[2, 1])"
+                ],
+                [
+                    "oscillation_x_3",
+                    "P6",
+                    "((posx[3] - posx[1]) - dist[1, 3])"
+                ],
+                [
+                    "oscillation_x_3",
+                    "P7",
+                    "(dist[1, 3] - dist[3, 1])"
+                ],
+                [
+                    "oscillation_x_3",
+                    "P8",
+                    "((posx[4] - posx[1]) - dist[1, 4])"
+                ],
+                [
+                    "oscillation_x_3",
+                    "P9",
+                    "(dist[1, 4] - dist[4, 1])"
+                ],
+                [
+                    "oscillation_x_3",
+                    "P10",
+                    "((posx[3] - posx[2]) - dist[2, 3])"
+                ],
+                [
+                    "oscillation_x_3",
+                    "P11",
+                    "(dist[2, 3] - dist[3, 2])"
+                ],
+                [
+                    "oscillation_x_3",
+                    "P12",
+                    "((posx[4] - posx[2]) - dist[2, 4])"
+                ],
+                [
+                    "oscillation_x_3",
+                    "P13",
+                    "(dist[2, 4] - dist[4, 2])"
+                ],
+                [
+                    "oscillation_x_3",
+                    "P14",
+                    "((posx[4] - posx[3]) - dist[3, 4])"
+                ],
+                [
+                    "oscillation_x_3",
+                    "P15",
+                    "(dist[3, 4] - dist[4, 3])"
+                ],
+                [
+                    "oscillation_x_3",
+                    "P16",
+                    "posy[1]"
+                ],
+                [
+                    "oscillation_x_3",
+                    "P17",
+                    "posy[2]"
+                ],
+                [
+                    "oscillation_x_3",
+                    "P18",
+                    "posy[3]"
+                ],
+                [
+                    "oscillation_x_3",
+                    "P19",
+                    "posy[4]"
+                ],
+                [
+                    "oscillation_x_3",
+                    "P20",
+                    "posz[1]"
+                ],
+                [
+                    "oscillation_x_3",
+                    "P21",
+                    "posz[2]"
+                ],
+                [
+                    "oscillation_x_3",
+                    "P22",
+                    "posz[3]"
+                ],
+                [
+                    "oscillation_x_3",
+                    "P23",
+                    "posz[4]"
+                ]
+            ]
+        }
+    },
+    "collision_nh": {
+        "exp_name": "collision_nh",
+        "conclusions": {
+            "conclusion": {
+                "P1": "posz[1] is zero",
+                "P2": "posz[2] is zero",
+                "P3": "(dist[1, 2] - dist[2, 1]) is zero",
+                "P4": "(((dist[1, 2] ** 2) - ((posx[1] - posx[2]) ** 2)) - ((posy[1] - posy[2]) ** 2)) is zero",
+                "P5": "D[C_02[1]]/D[t[0]] is zero",
+                "P6": "D[C_01[2]]/D[t[0]] is zero",
+                "P7": "D[C_02[2]]/D[t[0]] is zero",
+                "P8": "D[C_01[1]]/D[t[0]] is zero",
+                "P17": "C_90 is conserved",
+                "P18": "(C_85[1] + C_85[2]) is conserved",
+                "P31": "((C_05[1] * C_53[1]) + (C_05[2] * C_53[2])) is conserved"
+            },
+            "conclusion_id": 31,
+            "conserved_list": [
+                [
+                    "collision_nh",
+                    "P17",
+                    "C_90",
+                    false,
+                    []
+                ],
+                [
+                    "collision_nh",
+                    "P18",
+                    "(C_85[1] + C_85[2])",
+                    false,
+                    []
+                ],
+                [
+                    "collision_nh",
+                    "P31",
+                    "((C_05[1] * C_53[1]) + (C_05[2] * C_53[2]))",
+                    false,
+                    []
+                ]
+            ],
+            "zero_list": [
+                [
+                    "collision_nh",
+                    "P1",
+                    "posz[1]"
+                ],
+                [
+                    "collision_nh",
+                    "P2",
+                    "posz[2]"
+                ],
+                [
+                    "collision_nh",
+                    "P3",
+                    "(dist[1, 2] - dist[2, 1])"
+                ],
+                [
+                    "collision_nh",
+                    "P4",
+                    "(((dist[1, 2] ** 2) - ((posx[1] - posx[2]) ** 2)) - ((posy[1] - posy[2]) ** 2))"
+                ],
+                [
+                    "collision_nh",
+                    "P5",
+                    "D[C_02[1]]/D[t[0]]"
+                ],
+                [
+                    "collision_nh",
+                    "P6",
+                    "D[C_01[2]]/D[t[0]]"
+                ],
+                [
+                    "collision_nh",
+                    "P7",
+                    "D[C_02[2]]/D[t[0]]"
+                ],
+                [
+                    "collision_nh",
+                    "P8",
+                    "D[C_01[1]]/D[t[0]]"
+                ]
+            ]
+        }
+    },
+    "hanging_spring_3": {
+        "exp_name": "hanging_spring_3",
+        "conclusions": {
+            "conclusion": {
+                "P1": "(posz[1] + length[4]) is conserved",
+                "P2": "((posz[2] - posz[1]) + length[5]) is zero",
+                "P3": "((posz[3] - posz[2]) + length[6]) is zero",
+                "P4": "posx[1] is zero",
+                "P5": "posy[1] is zero",
+                "P6": "posx[2] is zero",
+                "P7": "posy[2] is zero",
+                "P8": "posx[3] is zero",
+                "P9": "posy[3] is zero",
+                "P10": "(dist[1, 2] - dist[2, 1]) is zero",
+                "P11": "((dist[1, 2] - posz[1]) + posz[2]) is zero",
+                "P12": "(dist[1, 3] - dist[3, 1]) is zero",
+                "P13": "((dist[1, 3] - posz[1]) + posz[3]) is zero",
+                "P14": "(dist[2, 3] - dist[3, 2]) is zero",
+                "P15": "((dist[2, 3] - posz[2]) + posz[3]) is zero"
+            },
+            "conclusion_id": 15,
+            "conserved_list": [
+                [
+                    "hanging_spring_3",
+                    "P1",
+                    "(posz[1] + length[4])",
+                    false,
+                    []
+                ]
+            ],
+            "zero_list": [
+                [
+                    "hanging_spring_3",
+                    "P2",
+                    "((posz[2] - posz[1]) + length[5])"
+                ],
+                [
+                    "hanging_spring_3",
+                    "P3",
+                    "((posz[3] - posz[2]) + length[6])"
+                ],
+                [
+                    "hanging_spring_3",
+                    "P4",
+                    "posx[1]"
+                ],
+                [
+                    "hanging_spring_3",
+                    "P5",
+                    "posy[1]"
+                ],
+                [
+                    "hanging_spring_3",
+                    "P6",
+                    "posx[2]"
+                ],
+                [
+                    "hanging_spring_3",
+                    "P7",
+                    "posy[2]"
+                ],
+                [
+                    "hanging_spring_3",
+                    "P8",
+                    "posx[3]"
+                ],
+                [
+                    "hanging_spring_3",
+                    "P9",
+                    "posy[3]"
+                ],
+                [
+                    "hanging_spring_3",
+                    "P10",
+                    "(dist[1, 2] - dist[2, 1])"
+                ],
+                [
+                    "hanging_spring_3",
+                    "P11",
+                    "((dist[1, 2] - posz[1]) + posz[2])"
+                ],
+                [
+                    "hanging_spring_3",
+                    "P12",
+                    "(dist[1, 3] - dist[3, 1])"
+                ],
+                [
+                    "hanging_spring_3",
+                    "P13",
+                    "((dist[1, 3] - posz[1]) + posz[3])"
+                ],
+                [
+                    "hanging_spring_3",
+                    "P14",
+                    "(dist[2, 3] - dist[3, 2])"
+                ],
+                [
+                    "hanging_spring_3",
+                    "P15",
+                    "((dist[2, 3] - posz[2]) + posz[3])"
+                ]
+            ]
+        }
+    },
+    "motion0_3d": {
+        "exp_name": "motion0_3d",
+        "conclusions": {
+            "conclusion": {
+                "P1": "posz[1] is zero",
+                "P2": "C_02[1] is conserved",
+                "P3": "C_01[1] is conserved",
+                "P4": "((t[0] * C_01[1]) - posx[1]) is conserved",
+                "P5": "((t[0] * C_02[1]) - posy[1]) is conserved",
+                "P9": "D[C_01[1]]/D[t[0]] is zero",
+                "P10": "D[C_02[1]]/D[t[0]] is zero"
+            },
+            "conclusion_id": 10,
+            "conserved_list": [
+                [
+                    "motion0_3d",
+                    "P2",
+                    "C_02[1]",
+                    false,
+                    []
+                ],
+                [
+                    "motion0_3d",
+                    "P3",
+                    "C_01[1]",
+                    false,
+                    []
+                ],
+                [
+                    "motion0_3d",
+                    "P4",
+                    "((t[0] * C_01[1]) - posx[1])",
+                    false,
+                    []
+                ],
+                [
+                    "motion0_3d",
+                    "P5",
+                    "((t[0] * C_02[1]) - posy[1])",
+                    false,
+                    []
+                ]
+            ],
+            "zero_list": [
+                [
+                    "motion0_3d",
+                    "P1",
+                    "posz[1]"
+                ],
+                [
+                    "motion0_3d",
+                    "P9",
+                    "D[C_01[1]]/D[t[0]]"
+                ],
+                [
+                    "motion0_3d",
+                    "P10",
+                    "D[C_02[1]]/D[t[0]]"
+                ]
+            ]
+        }
+    },
+    "slope_oscillation_2": {
+        "exp_name": "slope_oscillation_2",
+        "conclusions": {
+            "conclusion": {
+                "P1": "cx[5] is conserved",
+                "P2": "cy[5] is conserved",
+                "P3": "cz[5] is conserved",
+                "P4": "(((cx[5] * posx[1]) + (cy[5] * posy[1])) + (cz[5] * posz[1])) is conserved",
+                "P5": "(((cx[5] * posx[2]) + (cy[5] * posy[2])) + (cz[5] * posz[2])) is conserved",
+                "P6": "((((posx[1] ** 2) + (posy[1] ** 2)) + (posz[1] ** 2)) - (length[3] ** 2)) is zero",
+                "P7": "(dist[1, 2] - length[4]) is zero",
+                "P8": "(dist[1, 2] - dist[2, 1]) is zero",
+                "P9": "((((dist[1, 2] ** 2) - ((posx[1] - posx[2]) ** 2)) - ((posy[1] - posy[2]) ** 2)) - ((posz[1] - posz[2]) ** 2)) is zero"
+            },
+            "conclusion_id": 9,
+            "conserved_list": [
+                [
+                    "slope_oscillation_2",
+                    "P1",
+                    "cx[5]",
+                    false,
+                    []
+                ],
+                [
+                    "slope_oscillation_2",
+                    "P2",
+                    "cy[5]",
+                    false,
+                    []
+                ],
+                [
+                    "slope_oscillation_2",
+                    "P3",
+                    "cz[5]",
+                    false,
+                    []
+                ],
+                [
+                    "slope_oscillation_2",
+                    "P4",
+                    "(((cx[5] * posx[1]) + (cy[5] * posy[1])) + (cz[5] * posz[1]))",
+                    false,
+                    []
+                ],
+                [
+                    "slope_oscillation_2",
+                    "P5",
+                    "(((cx[5] * posx[2]) + (cy[5] * posy[2])) + (cz[5] * posz[2]))",
+                    false,
+                    []
+                ]
+            ],
+            "zero_list": [
+                [
+                    "slope_oscillation_2",
+                    "P6",
+                    "((((posx[1] ** 2) + (posy[1] ** 2)) + (posz[1] ** 2)) - (length[3] ** 2))"
+                ],
+                [
+                    "slope_oscillation_2",
+                    "P7",
+                    "(dist[1, 2] - length[4])"
+                ],
+                [
+                    "slope_oscillation_2",
+                    "P8",
+                    "(dist[1, 2] - dist[2, 1])"
+                ],
+                [
+                    "slope_oscillation_2",
+                    "P9",
+                    "((((dist[1, 2] ** 2) - ((posx[1] - posx[2]) ** 2)) - ((posy[1] - posy[2]) ** 2)) - ((posz[1] - posz[2]) ** 2))"
+                ]
+            ]
+        }
+    },
+    "celestial_2_xz": {
+        "exp_name": "celestial_2_xz",
+        "conclusions": {
+            "conclusion": {
+                "P1": "(dist[1, 2] - dist[2, 1]) is zero",
+                "P2": "(((dist[1, 2] ** 2) - ((posx[1] - posx[2]) ** 2)) - ((posz[1] - posz[2]) ** 2)) is zero",
+                "P3": "posy[1] is zero",
+                "P4": "posy[2] is zero",
+                "P5": "(C_42[1] / C_42[2]) is conserved",
+                "P6": "((C_05[1] * C_42[1]) + (C_05[2] * C_42[2])) is zero",
+                "P10": "(C_1938[1] + C_1938[2]) is zero",
+                "P11": "C_1609[2, 1] is conserved",
+                "P34": "((5 * D[(C_19 * C_101[2])]/D[t[0]]) - (-49 * D[C_101[2]]/D[t[0]])) is conserved",
+                "P36": "((5 * (C_19 * C_42[1])) - (-49 * (C_42[2] * C_1828[1, 2]))) is zero"
+            },
+            "conclusion_id": 36,
+            "conserved_list": [
+                [
+                    "celestial_2_xz",
+                    "P5",
+                    "(C_42[1] / C_42[2])",
+                    true,
+                    [
+                        1,
+                        2
+                    ]
+                ],
+                [
+                    "celestial_2_xz",
+                    "P11",
+                    "C_1609[2, 1]",
+                    false,
+                    []
+                ],
+                [
+                    "celestial_2_xz",
+                    "P34",
+                    "((5 * D[(C_19 * C_101[2])]/D[t[0]]) - (-49 * D[C_101[2]]/D[t[0]]))",
+                    true,
+                    []
+                ]
+            ],
+            "zero_list": [
+                [
+                    "celestial_2_xz",
+                    "P1",
+                    "(dist[1, 2] - dist[2, 1])"
+                ],
+                [
+                    "celestial_2_xz",
+                    "P2",
+                    "(((dist[1, 2] ** 2) - ((posx[1] - posx[2]) ** 2)) - ((posz[1] - posz[2]) ** 2))"
+                ],
+                [
+                    "celestial_2_xz",
+                    "P3",
+                    "posy[1]"
+                ],
+                [
+                    "celestial_2_xz",
+                    "P4",
+                    "posy[2]"
+                ],
+                [
+                    "celestial_2_xz",
+                    "P6",
+                    "((C_05[1] * C_42[1]) + (C_05[2] * C_42[2]))"
+                ],
+                [
+                    "celestial_2_xz",
+                    "P10",
+                    "(C_1938[1] + C_1938[2])"
+                ],
+                [
+                    "celestial_2_xz",
+                    "P36",
+                    "((5 * (C_19 * C_42[1])) - (-49 * (C_42[2] * C_1828[1, 2])))"
+                ]
+            ]
+        }
+    },
+    "oscillation_x_1": {
+        "exp_name": "oscillation_x_1",
+        "conclusions": {
+            "conclusion": {
+                "P1": "((posx[2] - posx[1]) - length[3]) is zero",
+                "P4": "posy[1] is zero",
+                "P5": "posy[2] is zero",
+                "P6": "posz[1] is zero",
+                "P7": "posz[2] is zero",
+                "P8": "(dist[1, 2] - length[3]) is zero",
+                "P9": "(dist[2, 1] - length[3]) is zero",
+                "P16": "((C_01[1] * C_05[1]) + (C_01[2] * C_05[2])) is conserved",
+                "P106": "C_237[1, 3] is conserved",
+                "P107": "C_237[2, 3] is conserved",
+                "P125": "(C_83[2] + C_13[1, 3]) is conserved",
+                "P135": "((C_04[3] * C_07[3]) - (C_05[1] * C_42[1])) is zero",
+                "P136": "((C_04[3] * C_07[3]) + (C_05[2] * C_42[2])) is zero"
+            },
+            "conclusion_id": 143,
+            "conserved_list": [
+                [
+                    "oscillation_x_1",
+                    "P16",
+                    "((C_01[1] * C_05[1]) + (C_01[2] * C_05[2]))",
+                    false,
+                    []
+                ],
+                [
+                    "oscillation_x_1",
+                    "P106",
+                    "C_237[1, 3]",
+                    true,
+                    [
+                        1,
+                        3
+                    ]
+                ],
+                [
+                    "oscillation_x_1",
+                    "P107",
+                    "C_237[2, 3]",
+                    true,
+                    [
+                        2,
+                        3
+                    ]
+                ],
+                [
+                    "oscillation_x_1",
+                    "P125",
+                    "(C_83[2] + C_13[1, 3])",
+                    false,
+                    []
+                ]
+            ],
+            "zero_list": [
+                [
+                    "oscillation_x_1",
+                    "P1",
+                    "((posx[2] - posx[1]) - length[3])"
+                ],
+                [
+                    "oscillation_x_1",
+                    "P4",
+                    "posy[1]"
+                ],
+                [
+                    "oscillation_x_1",
+                    "P5",
+                    "posy[2]"
+                ],
+                [
+                    "oscillation_x_1",
+                    "P6",
+                    "posz[1]"
+                ],
+                [
+                    "oscillation_x_1",
+                    "P7",
+                    "posz[2]"
+                ],
+                [
+                    "oscillation_x_1",
+                    "P8",
+                    "(dist[1, 2] - length[3])"
+                ],
+                [
+                    "oscillation_x_1",
+                    "P9",
+                    "(dist[2, 1] - length[3])"
+                ],
+                [
+                    "oscillation_x_1",
+                    "P135",
+                    "((C_04[3] * C_07[3]) - (C_05[1] * C_42[1]))"
+                ],
+                [
+                    "oscillation_x_1",
+                    "P136",
+                    "((C_04[3] * C_07[3]) + (C_05[2] * C_42[2]))"
+                ]
+            ]
+        }
+    },
+    "oscillationy": {
+        "exp_name": "oscillationy",
+        "conclusions": {
+            "conclusion": {
+                "P1": "posx[1] is zero",
+                "P2": "posz[1] is zero",
+                "P3": "(length[2] - posy[1]) is conserved",
+                "P8": "((C_07[2] * (C_04[2] ** 2)) - (C_05[1] * (C_02[1] ** 2))) is conserved",
+                "P12": "(C_04[2] / C_34[1]) is conserved",
+                "P23": "D[(length[2] * C_820[1, 2])]/D[length[2]] is conserved",
+                "P24": "D[(length[2] * C_820[1, 2])]/D[C_04[2]] is conserved",
+                "P25": "D[(length[2] * C_820[1, 2])]/D[(C_04[2] * C_07[2])] is conserved",
+                "P26": "D[(C_07[2] * length[2])]/D[(length[2] * C_820[1, 2])] is conserved"
+            },
+            "conclusion_id": 26,
+            "conserved_list": [
+                [
+                    "oscillationy",
+                    "P3",
+                    "(length[2] - posy[1])",
+                    false,
+                    []
+                ],
+                [
+                    "oscillationy",
+                    "P8",
+                    "((C_07[2] * (C_04[2] ** 2)) - (C_05[1] * (C_02[1] ** 2)))",
+                    false,
+                    []
+                ],
+                [
+                    "oscillationy",
+                    "P12",
+                    "(C_04[2] / C_34[1])",
+                    true,
+                    [
+                        1,
+                        2
+                    ]
+                ],
+                [
+                    "oscillationy",
+                    "P23",
+                    "D[(length[2] * C_820[1, 2])]/D[length[2]]",
+                    true,
+                    [
+                        1,
+                        2
+                    ]
+                ],
+                [
+                    "oscillationy",
+                    "P24",
+                    "D[(length[2] * C_820[1, 2])]/D[C_04[2]]",
+                    true,
+                    [
+                        1,
+                        2
+                    ]
+                ],
+                [
+                    "oscillationy",
+                    "P25",
+                    "D[(length[2] * C_820[1, 2])]/D[(C_04[2] * C_07[2])]",
+                    true,
+                    [
+                        1
+                    ]
+                ],
+                [
+                    "oscillationy",
+                    "P26",
+                    "D[(C_07[2] * length[2])]/D[(length[2] * C_820[1, 2])]",
+                    true,
+                    [
+                        1
+                    ]
+                ]
+            ],
+            "zero_list": [
+                [
+                    "oscillationy",
+                    "P1",
+                    "posx[1]"
+                ],
+                [
+                    "oscillationy",
+                    "P2",
+                    "posz[1]"
+                ]
+            ]
+        }
+    },
+    "collision_2d": {
+        "exp_name": "collision_2d",
+        "conclusions": {
+            "conclusion": {
+                "P1": "(dist[1, 2] - dist[2, 1]) is zero",
+                "P2": "(((dist[1, 2] ** 2) - ((posx[1] - posx[2]) ** 2)) - ((posy[1] - posy[2]) ** 2)) is zero",
+                "P3": "posz[1] is zero",
+                "P4": "posz[2] is zero",
+                "P5": "D[C_01[1]]/D[t[0]] is zero",
+                "P6": "D[C_02[1]]/D[t[0]] is zero",
+                "P7": "D[C_01[2]]/D[t[0]] is zero",
+                "P8": "D[C_02[2]]/D[t[0]] is zero",
+                "P10": "(posy[2] / posx[2]) is conserved",
+                "P12": "((posx[1] * posy[2]) - (posx[2] * posy[1])) is zero",
+                "P45": "C_78 is conserved",
+                "P86": "C_25 is conserved"
+            },
+            "conclusion_id": 92,
+            "conserved_list": [
+                [
+                    "collision_2d",
+                    "P10",
+                    "(posy[2] / posx[2])",
+                    false,
+                    []
+                ],
+                [
+                    "collision_2d",
+                    "P45",
+                    "C_78",
+                    false,
+                    []
+                ],
+                [
+                    "collision_2d",
+                    "P86",
+                    "C_25",
+                    false,
+                    []
+                ]
+            ],
+            "zero_list": [
+                [
+                    "collision_2d",
+                    "P1",
+                    "(dist[1, 2] - dist[2, 1])"
+                ],
+                [
+                    "collision_2d",
+                    "P2",
+                    "(((dist[1, 2] ** 2) - ((posx[1] - posx[2]) ** 2)) - ((posy[1] - posy[2]) ** 2))"
+                ],
+                [
+                    "collision_2d",
+                    "P3",
+                    "posz[1]"
+                ],
+                [
+                    "collision_2d",
+                    "P4",
+                    "posz[2]"
+                ],
+                [
+                    "collision_2d",
+                    "P5",
+                    "D[C_01[1]]/D[t[0]]"
+                ],
+                [
+                    "collision_2d",
+                    "P6",
+                    "D[C_02[1]]/D[t[0]]"
+                ],
+                [
+                    "collision_2d",
+                    "P7",
+                    "D[C_01[2]]/D[t[0]]"
+                ],
+                [
+                    "collision_2d",
+                    "P8",
+                    "D[C_02[2]]/D[t[0]]"
+                ],
+                [
+                    "collision_2d",
+                    "P12",
+                    "((posx[1] * posy[2]) - (posx[2] * posy[1]))"
+                ]
+            ]
+        }
+    },
+    "oscillation_r_3": {
+        "exp_name": "oscillation_r_3",
+        "conclusions": {
+            "conclusion": {
+                "P1": "(dist[1, 2] - length[4]) is zero",
+                "P2": "(((dist[1, 2] ** 2) - ((posx[1] - posx[2]) ** 2)) - ((posy[1] - posy[2]) ** 2)) is zero",
+                "P3": "(dist[1, 2] - dist[2, 1]) is zero",
+                "P4": "(dist[2, 3] - length[5]) is zero",
+                "P5": "(((dist[2, 3] ** 2) - ((posx[2] - posx[3]) ** 2)) - ((posy[2] - posy[3]) ** 2)) is zero",
+                "P6": "(dist[2, 3] - dist[3, 2]) is zero",
+                "P7": "(dist[1, 3] - length[6]) is zero",
+                "P8": "(((dist[1, 3] ** 2) - ((posx[1] - posx[3]) ** 2)) - ((posy[1] - posy[3]) ** 2)) is zero",
+                "P9": "(dist[1, 3] - dist[3, 1]) is zero",
+                "P10": "posz[1] is zero",
+                "P11": "posz[2] is zero",
+                "P12": "posz[3] is zero"
+            },
+            "conclusion_id": 12,
+            "conserved_list": [],
+            "zero_list": [
+                [
+                    "oscillation_r_3",
+                    "P1",
+                    "(dist[1, 2] - length[4])"
+                ],
+                [
+                    "oscillation_r_3",
+                    "P2",
+                    "(((dist[1, 2] ** 2) - ((posx[1] - posx[2]) ** 2)) - ((posy[1] - posy[2]) ** 2))"
+                ],
+                [
+                    "oscillation_r_3",
+                    "P3",
+                    "(dist[1, 2] - dist[2, 1])"
+                ],
+                [
+                    "oscillation_r_3",
+                    "P4",
+                    "(dist[2, 3] - length[5])"
+                ],
+                [
+                    "oscillation_r_3",
+                    "P5",
+                    "(((dist[2, 3] ** 2) - ((posx[2] - posx[3]) ** 2)) - ((posy[2] - posy[3]) ** 2))"
+                ],
+                [
+                    "oscillation_r_3",
+                    "P6",
+                    "(dist[2, 3] - dist[3, 2])"
+                ],
+                [
+                    "oscillation_r_3",
+                    "P7",
+                    "(dist[1, 3] - length[6])"
+                ],
+                [
+                    "oscillation_r_3",
+                    "P8",
+                    "(((dist[1, 3] ** 2) - ((posx[1] - posx[3]) ** 2)) - ((posy[1] - posy[3]) ** 2))"
+                ],
+                [
+                    "oscillation_r_3",
+                    "P9",
+                    "(dist[1, 3] - dist[3, 1])"
+                ],
+                [
+                    "oscillation_r_3",
+                    "P10",
+                    "posz[1]"
+                ],
+                [
+                    "oscillation_r_3",
+                    "P11",
+                    "posz[2]"
+                ],
+                [
+                    "oscillation_r_3",
+                    "P12",
+                    "posz[3]"
+                ]
+            ]
+        }
+    },
+    "motion_3d": {
+        "exp_name": "motion_3d",
+        "conclusions": {
+            "conclusion": {
+                "P1": "cx[2] is conserved",
+                "P2": "cy[2] is conserved",
+                "P3": "cz[2] is conserved",
+                "P4": "(((cx[2] * posx[1]) + (cy[2] * posy[1])) + (cz[2] * posz[1])) is conserved",
+                "P5": "((cy[2] * posx[1]) - (cx[2] * posy[1])) is conserved",
+                "P7": "D[C_134[1]]/D[t[0]] is conserved",
+                "P9": "((2 * (C_28[1] * posz[1])) - (-1 * C_102[1])) is conserved",
+                "P10": "C_42[1] is conserved",
+                "P11": "C_34[1] is conserved",
+                "P12": "D[posx[1]]/D[posz[1]] is conserved",
+                "P17": "C_16[1] is conserved",
+                "P18": "D[posz[1]]/D[posy[1]] is conserved",
+                "P19": "((C_05[1] * C_35[1]) + ((C_85[1] ** 2) / C_05[1])) is conserved"
+            },
+            "conclusion_id": 20,
+            "conserved_list": [
+                [
+                    "motion_3d",
+                    "P1",
+                    "cx[2]",
+                    false,
+                    []
+                ],
+                [
+                    "motion_3d",
+                    "P2",
+                    "cy[2]",
+                    false,
+                    []
+                ],
+                [
+                    "motion_3d",
+                    "P3",
+                    "cz[2]",
+                    false,
+                    []
+                ],
+                [
+                    "motion_3d",
+                    "P4",
+                    "(((cx[2] * posx[1]) + (cy[2] * posy[1])) + (cz[2] * posz[1]))",
+                    false,
+                    []
+                ],
+                [
+                    "motion_3d",
+                    "P5",
+                    "((cy[2] * posx[1]) - (cx[2] * posy[1]))",
+                    false,
+                    []
+                ],
+                [
+                    "motion_3d",
+                    "P7",
+                    "D[C_134[1]]/D[t[0]]",
+                    false,
+                    []
+                ],
+                [
+                    "motion_3d",
+                    "P9",
+                    "((2 * (C_28[1] * posz[1])) - (-1 * C_102[1]))",
+                    false,
+                    []
+                ],
+                [
+                    "motion_3d",
+                    "P10",
+                    "C_42[1]",
+                    false,
+                    []
+                ],
+                [
+                    "motion_3d",
+                    "P11",
+                    "C_34[1]",
+                    false,
+                    []
+                ],
+                [
+                    "motion_3d",
+                    "P12",
+                    "D[posx[1]]/D[posz[1]]",
+                    false,
+                    []
+                ],
+                [
+                    "motion_3d",
+                    "P17",
+                    "C_16[1]",
+                    false,
+                    []
+                ],
+                [
+                    "motion_3d",
+                    "P18",
+                    "D[posz[1]]/D[posy[1]]",
+                    false,
+                    []
+                ],
+                [
+                    "motion_3d",
+                    "P19",
+                    "((C_05[1] * C_35[1]) + ((C_85[1] ** 2) / C_05[1]))",
+                    false,
+                    []
+                ]
+            ],
+            "zero_list": []
+        }
+    },
+    "hanging_spring_2": {
+        "exp_name": "hanging_spring_2",
+        "conclusions": {
+            "conclusion": {
+                "P1": "(posz[1] + length[3]) is conserved",
+                "P2": "((posz[2] - posz[1]) + length[4]) is zero",
+                "P3": "posx[1] is zero",
+                "P4": "posy[1] is zero",
+                "P5": "posx[2] is zero",
+                "P6": "posy[2] is zero",
+                "P7": "(dist[1, 2] - dist[2, 1]) is zero",
+                "P8": "((dist[1, 2] - posz[1]) + posz[2]) is zero",
+                "P9": "C_23[2, 4] is conserved",
+                "P10": "((C_07[4] * C_22[4, 1]) - C_1938[2]) is conserved",
+                "P65": "C_98[4, 2] is conserved",
+                "P72": "((C_07[3] * C_98[3, 1]) - (C_07[4] * C_98[4, 1])) is conserved",
+                "P108": "D[C_664]/D[posz[1]] is conserved",
+                "P110": "(C_07[3] + (-1 * D[C_664]/D[posz[1]])) is zero"
+            },
+            "conclusion_id": 110,
+            "conserved_list": [
+                [
+                    "hanging_spring_2",
+                    "P1",
+                    "(posz[1] + length[3])",
+                    false,
+                    []
+                ],
+                [
+                    "hanging_spring_2",
+                    "P9",
+                    "C_23[2, 4]",
+                    true,
+                    [
+                        2,
+                        4
+                    ]
+                ],
+                [
+                    "hanging_spring_2",
+                    "P10",
+                    "((C_07[4] * C_22[4, 1]) - C_1938[2])",
+                    true,
+                    [
+                        1,
+                        2,
+                        4
+                    ]
+                ],
+                [
+                    "hanging_spring_2",
+                    "P65",
+                    "C_98[4, 2]",
+                    true,
+                    [
+                        2,
+                        4
+                    ]
+                ],
+                [
+                    "hanging_spring_2",
+                    "P72",
+                    "((C_07[3] * C_98[3, 1]) - (C_07[4] * C_98[4, 1]))",
+                    true,
+                    [
+                        1
+                    ]
+                ],
+                [
+                    "hanging_spring_2",
+                    "P108",
+                    "D[C_664]/D[posz[1]]",
+                    true,
+                    [
+                        3
+                    ]
+                ]
+            ],
+            "zero_list": [
+                [
+                    "hanging_spring_2",
+                    "P2",
+                    "((posz[2] - posz[1]) + length[4])"
+                ],
+                [
+                    "hanging_spring_2",
+                    "P3",
+                    "posx[1]"
+                ],
+                [
+                    "hanging_spring_2",
+                    "P4",
+                    "posy[1]"
+                ],
+                [
+                    "hanging_spring_2",
+                    "P5",
+                    "posx[2]"
+                ],
+                [
+                    "hanging_spring_2",
+                    "P6",
+                    "posy[2]"
+                ],
+                [
+                    "hanging_spring_2",
+                    "P7",
+                    "(dist[1, 2] - dist[2, 1])"
+                ],
+                [
+                    "hanging_spring_2",
+                    "P8",
+                    "((dist[1, 2] - posz[1]) + posz[2])"
+                ],
+                [
+                    "hanging_spring_2",
+                    "P110",
+                    "(C_07[3] + (-1 * D[C_664]/D[posz[1]]))"
+                ]
+            ]
+        }
+    },
+    "oscillation_rot_3": {
+        "exp_name": "oscillation_rot_3",
+        "conclusions": {
+            "conclusion": {
+                "P1": "(((length[4] ** 2) - (posx[1] ** 2)) - (posy[1] ** 2)) is zero",
+                "P2": "(dist[1, 2] - dist[2, 1]) is zero",
+                "P3": "(((dist[1, 2] ** 2) - ((posx[1] - posx[2]) ** 2)) - ((posy[1] - posy[2]) ** 2)) is zero",
+                "P4": "(dist[1, 2] - length[5]) is zero",
+                "P5": "(dist[2, 3] - dist[3, 2]) is zero",
+                "P6": "(((dist[2, 3] ** 2) - ((posx[3] - posx[2]) ** 2)) - ((posy[3] - posy[2]) ** 2)) is zero",
+                "P7": "(dist[2, 3] - length[6]) is zero",
+                "P8": "(((dist[1, 3] ** 2) - ((posx[1] - posx[3]) ** 2)) - ((posy[1] - posy[3]) ** 2)) is zero",
+                "P9": "(dist[1, 3] - dist[3, 1]) is zero",
+                "P10": "posz[1] is zero",
+                "P11": "posz[2] is zero",
+                "P12": "posz[3] is zero"
+            },
+            "conclusion_id": 12,
+            "conserved_list": [],
+            "zero_list": [
+                [
+                    "oscillation_rot_3",
+                    "P1",
+                    "(((length[4] ** 2) - (posx[1] ** 2)) - (posy[1] ** 2))"
+                ],
+                [
+                    "oscillation_rot_3",
+                    "P2",
+                    "(dist[1, 2] - dist[2, 1])"
+                ],
+                [
+                    "oscillation_rot_3",
+                    "P3",
+                    "(((dist[1, 2] ** 2) - ((posx[1] - posx[2]) ** 2)) - ((posy[1] - posy[2]) ** 2))"
+                ],
+                [
+                    "oscillation_rot_3",
+                    "P4",
+                    "(dist[1, 2] - length[5])"
+                ],
+                [
+                    "oscillation_rot_3",
+                    "P5",
+                    "(dist[2, 3] - dist[3, 2])"
+                ],
+                [
+                    "oscillation_rot_3",
+                    "P6",
+                    "(((dist[2, 3] ** 2) - ((posx[3] - posx[2]) ** 2)) - ((posy[3] - posy[2]) ** 2))"
+                ],
+                [
+                    "oscillation_rot_3",
+                    "P7",
+                    "(dist[2, 3] - length[6])"
+                ],
+                [
+                    "oscillation_rot_3",
+                    "P8",
+                    "(((dist[1, 3] ** 2) - ((posx[1] - posx[3]) ** 2)) - ((posy[1] - posy[3]) ** 2))"
+                ],
+                [
+                    "oscillation_rot_3",
+                    "P9",
+                    "(dist[1, 3] - dist[3, 1])"
+                ],
+                [
+                    "oscillation_rot_3",
+                    "P10",
+                    "posz[1]"
+                ],
+                [
+                    "oscillation_rot_3",
+                    "P11",
+                    "posz[2]"
+                ],
+                [
+                    "oscillation_rot_3",
+                    "P12",
+                    "posz[3]"
+                ]
+            ]
+        }
+    },
+    "oblique_projectile_x": {
+        "exp_name": "oblique_projectile_x",
+        "conclusions": {
+            "conclusion": {
+                "P1": "posy[1] is zero",
+                "P2": "(C_16[1] - C_19) is zero",
+                "P3": "C_01[1] is conserved",
+                "P27": "D[C_01[1]]/D[t[0]] is zero",
+                "P28": "((C_15[1] * C_15[1]) - (2 * (C_19 * posz[1]))) is conserved",
+                "P30": "C_101[1] is conserved"
+            },
+            "conclusion_id": 30,
+            "conserved_list": [
+                [
+                    "oblique_projectile_x",
+                    "P3",
+                    "C_01[1]",
+                    false,
+                    []
+                ],
+                [
+                    "oblique_projectile_x",
+                    "P28",
+                    "((C_15[1] * C_15[1]) - (2 * (C_19 * posz[1])))",
+                    false,
+                    []
+                ],
+                [
+                    "oblique_projectile_x",
+                    "P30",
+                    "C_101[1]",
+                    false,
+                    []
+                ]
+            ],
+            "zero_list": [
+                [
+                    "oblique_projectile_x",
+                    "P1",
+                    "posy[1]"
+                ],
+                [
+                    "oblique_projectile_x",
+                    "P2",
+                    "(C_16[1] - C_19)"
+                ],
+                [
+                    "oblique_projectile_x",
+                    "P27",
+                    "D[C_01[1]]/D[t[0]]"
+                ]
+            ]
+        }
+    },
+    "oscillation_r_4": {
+        "exp_name": "oscillation_r_4",
+        "conclusions": {
+            "conclusion": {
+                "P1": "(dist[1, 2] - length[5]) is zero",
+                "P2": "(((dist[1, 2] ** 2) - ((posx[1] - posx[2]) ** 2)) - ((posy[1] - posy[2]) ** 2)) is zero",
+                "P3": "(dist[1, 2] - dist[2, 1]) is zero",
+                "P4": "(dist[2, 3] - length[6]) is zero",
+                "P5": "(((dist[2, 3] ** 2) - ((posx[2] - posx[3]) ** 2)) - ((posy[2] - posy[3]) ** 2)) is zero",
+                "P6": "(dist[2, 3] - dist[3, 2]) is zero",
+                "P7": "(dist[3, 4] - length[7]) is zero",
+                "P8": "(((dist[3, 4] ** 2) - ((posx[3] - posx[4]) ** 2)) - ((posy[3] - posy[4]) ** 2)) is zero",
+                "P9": "(dist[3, 4] - dist[4, 3]) is zero",
+                "P10": "(dist[4, 1] - length[8]) is zero",
+                "P11": "(((dist[4, 1] ** 2) - ((posx[4] - posx[1]) ** 2)) - ((posy[4] - posy[1]) ** 2)) is zero",
+                "P12": "(dist[4, 1] - dist[1, 4]) is zero",
+                "P13": "(((dist[1, 3] ** 2) - ((posx[1] - posx[3]) ** 2)) - ((posy[1] - posy[3]) ** 2)) is zero",
+                "P14": "(dist[1, 3] - dist[3, 1]) is zero",
+                "P15": "(((dist[2, 4] ** 2) - ((posx[2] - posx[4]) ** 2)) - ((posy[2] - posy[4]) ** 2)) is zero",
+                "P16": "(dist[2, 4] - dist[4, 2]) is zero",
+                "P17": "posz[1] is zero",
+                "P18": "posz[2] is zero",
+                "P19": "posz[3] is zero",
+                "P20": "posz[4] is zero"
+            },
+            "conclusion_id": 20,
+            "conserved_list": [],
+            "zero_list": [
+                [
+                    "oscillation_r_4",
+                    "P1",
+                    "(dist[1, 2] - length[5])"
+                ],
+                [
+                    "oscillation_r_4",
+                    "P2",
+                    "(((dist[1, 2] ** 2) - ((posx[1] - posx[2]) ** 2)) - ((posy[1] - posy[2]) ** 2))"
+                ],
+                [
+                    "oscillation_r_4",
+                    "P3",
+                    "(dist[1, 2] - dist[2, 1])"
+                ],
+                [
+                    "oscillation_r_4",
+                    "P4",
+                    "(dist[2, 3] - length[6])"
+                ],
+                [
+                    "oscillation_r_4",
+                    "P5",
+                    "(((dist[2, 3] ** 2) - ((posx[2] - posx[3]) ** 2)) - ((posy[2] - posy[3]) ** 2))"
+                ],
+                [
+                    "oscillation_r_4",
+                    "P6",
+                    "(dist[2, 3] - dist[3, 2])"
+                ],
+                [
+                    "oscillation_r_4",
+                    "P7",
+                    "(dist[3, 4] - length[7])"
+                ],
+                [
+                    "oscillation_r_4",
+                    "P8",
+                    "(((dist[3, 4] ** 2) - ((posx[3] - posx[4]) ** 2)) - ((posy[3] - posy[4]) ** 2))"
+                ],
+                [
+                    "oscillation_r_4",
+                    "P9",
+                    "(dist[3, 4] - dist[4, 3])"
+                ],
+                [
+                    "oscillation_r_4",
+                    "P10",
+                    "(dist[4, 1] - length[8])"
+                ],
+                [
+                    "oscillation_r_4",
+                    "P11",
+                    "(((dist[4, 1] ** 2) - ((posx[4] - posx[1]) ** 2)) - ((posy[4] - posy[1]) ** 2))"
+                ],
+                [
+                    "oscillation_r_4",
+                    "P12",
+                    "(dist[4, 1] - dist[1, 4])"
+                ],
+                [
+                    "oscillation_r_4",
+                    "P13",
+                    "(((dist[1, 3] ** 2) - ((posx[1] - posx[3]) ** 2)) - ((posy[1] - posy[3]) ** 2))"
+                ],
+                [
+                    "oscillation_r_4",
+                    "P14",
+                    "(dist[1, 3] - dist[3, 1])"
+                ],
+                [
+                    "oscillation_r_4",
+                    "P15",
+                    "(((dist[2, 4] ** 2) - ((posx[2] - posx[4]) ** 2)) - ((posy[2] - posy[4]) ** 2))"
+                ],
+                [
+                    "oscillation_r_4",
+                    "P16",
+                    "(dist[2, 4] - dist[4, 2])"
+                ],
+                [
+                    "oscillation_r_4",
+                    "P17",
+                    "posz[1]"
+                ],
+                [
+                    "oscillation_r_4",
+                    "P18",
+                    "posz[2]"
+                ],
+                [
+                    "oscillation_r_4",
+                    "P19",
+                    "posz[3]"
+                ],
+                [
+                    "oscillation_r_4",
+                    "P20",
+                    "posz[4]"
+                ]
+            ]
+        }
+    },
+    "pendulum_oscillation_1": {
+        "exp_name": "pendulum_oscillation_1",
+        "conclusions": {
+            "conclusion": {
+                "P1": "(((posz[1] ** 2) + (posx[1] ** 2)) - (length[2] ** 2)) is zero",
+                "P2": "posy[1] is zero",
+                "P4": "(((C_130[1] * length[2]) / (C_04[2] * posx[1])) + C_07[2]) is zero"
+            },
+            "conclusion_id": 4,
+            "conserved_list": [],
+            "zero_list": [
+                [
+                    "pendulum_oscillation_1",
+                    "P1",
+                    "(((posz[1] ** 2) + (posx[1] ** 2)) - (length[2] ** 2))"
+                ],
+                [
+                    "pendulum_oscillation_1",
+                    "P2",
+                    "posy[1]"
+                ],
+                [
+                    "pendulum_oscillation_1",
+                    "P4",
+                    "(((C_130[1] * length[2]) / (C_04[2] * posx[1])) + C_07[2])"
+                ]
+            ]
+        }
+    },
+    "celestial_2_yz": {
+        "exp_name": "celestial_2_yz",
+        "conclusions": {
+            "conclusion": {
+                "P1": "(dist[1, 2] - dist[2, 1]) is zero",
+                "P2": "(((dist[1, 2] ** 2) - ((posz[1] - posz[2]) ** 2)) - ((posy[1] - posy[2]) ** 2)) is zero",
+                "P3": "posx[1] is zero",
+                "P4": "posx[2] is zero",
+                "P5": "((C_05[2] * C_34[2]) + (C_05[1] * C_34[1])) is zero",
+                "P6": "C_90 is conserved",
+                "P7": "(C_16[2] / C_16[1]) is conserved",
+                "P8": "((C_05[1] * C_16[1]) + (C_05[2] * C_16[2])) is zero",
+                "P13": "((5 * (C_19 * C_28[2])) - (-49 * C_28[2])) is conserved"
+            },
+            "conclusion_id": 14,
+            "conserved_list": [
+                [
+                    "celestial_2_yz",
+                    "P6",
+                    "C_90",
+                    false,
+                    []
+                ],
+                [
+                    "celestial_2_yz",
+                    "P7",
+                    "(C_16[2] / C_16[1])",
+                    true,
+                    [
+                        1,
+                        2
+                    ]
+                ],
+                [
+                    "celestial_2_yz",
+                    "P13",
+                    "((5 * (C_19 * C_28[2])) - (-49 * C_28[2]))",
+                    true,
+                    []
+                ]
+            ],
+            "zero_list": [
+                [
+                    "celestial_2_yz",
+                    "P1",
+                    "(dist[1, 2] - dist[2, 1])"
+                ],
+                [
+                    "celestial_2_yz",
+                    "P2",
+                    "(((dist[1, 2] ** 2) - ((posz[1] - posz[2]) ** 2)) - ((posy[1] - posy[2]) ** 2))"
+                ],
+                [
+                    "celestial_2_yz",
+                    "P3",
+                    "posx[1]"
+                ],
+                [
+                    "celestial_2_yz",
+                    "P4",
+                    "posx[2]"
+                ],
+                [
+                    "celestial_2_yz",
+                    "P5",
+                    "((C_05[2] * C_34[2]) + (C_05[1] * C_34[1]))"
+                ],
+                [
+                    "celestial_2_yz",
+                    "P8",
+                    "((C_05[1] * C_16[1]) + (C_05[2] * C_16[2]))"
+                ]
+            ]
+        }
+    },
+    "oscillation_x_2": {
+        "exp_name": "oscillation_x_2",
+        "conclusions": {
+            "conclusion": {
+                "P1": "((posx[2] - posx[1]) - length[4]) is zero",
+                "P2": "((posx[3] - posx[2]) - length[5]) is zero",
+                "P3": "((posx[2] - posx[1]) - dist[1, 2]) is zero",
+                "P4": "(dist[1, 2] - dist[2, 1]) is zero",
+                "P5": "((posx[3] - posx[1]) - dist[1, 3]) is zero",
+                "P6": "(dist[1, 3] - dist[3, 1]) is zero",
+                "P7": "((posx[3] - posx[2]) - dist[2, 3]) is zero",
+                "P8": "(dist[2, 3] - dist[3, 2]) is zero",
+                "P9": "posy[1] is zero",
+                "P10": "posy[2] is zero",
+                "P11": "posy[3] is zero",
+                "P12": "posz[1] is zero",
+                "P13": "posz[2] is zero",
+                "P14": "posz[3] is zero",
+                "P15": "(C_13[3, 4] + (C_83[1] + C_13[2, 5])) is conserved",
+                "P16": "(C_85[3] + C_1609[1, 2]) is conserved"
+            },
+            "conclusion_id": 73,
+            "conserved_list": [
+                [
+                    "oscillation_x_2",
+                    "P15",
+                    "(C_13[3, 4] + (C_83[1] + C_13[2, 5]))",
+                    false,
+                    []
+                ],
+                [
+                    "oscillation_x_2",
+                    "P16",
+                    "(C_85[3] + C_1609[1, 2])",
+                    false,
+                    []
+                ]
+            ],
+            "zero_list": [
+                [
+                    "oscillation_x_2",
+                    "P1",
+                    "((posx[2] - posx[1]) - length[4])"
+                ],
+                [
+                    "oscillation_x_2",
+                    "P2",
+                    "((posx[3] - posx[2]) - length[5])"
+                ],
+                [
+                    "oscillation_x_2",
+                    "P3",
+                    "((posx[2] - posx[1]) - dist[1, 2])"
+                ],
+                [
+                    "oscillation_x_2",
+                    "P4",
+                    "(dist[1, 2] - dist[2, 1])"
+                ],
+                [
+                    "oscillation_x_2",
+                    "P5",
+                    "((posx[3] - posx[1]) - dist[1, 3])"
+                ],
+                [
+                    "oscillation_x_2",
+                    "P6",
+                    "(dist[1, 3] - dist[3, 1])"
+                ],
+                [
+                    "oscillation_x_2",
+                    "P7",
+                    "((posx[3] - posx[2]) - dist[2, 3])"
+                ],
+                [
+                    "oscillation_x_2",
+                    "P8",
+                    "(dist[2, 3] - dist[3, 2])"
+                ],
+                [
+                    "oscillation_x_2",
+                    "P9",
+                    "posy[1]"
+                ],
+                [
+                    "oscillation_x_2",
+                    "P10",
+                    "posy[2]"
+                ],
+                [
+                    "oscillation_x_2",
+                    "P11",
+                    "posy[3]"
+                ],
+                [
+                    "oscillation_x_2",
+                    "P12",
+                    "posz[1]"
+                ],
+                [
+                    "oscillation_x_2",
+                    "P13",
+                    "posz[2]"
+                ],
+                [
+                    "oscillation_x_2",
+                    "P14",
+                    "posz[3]"
+                ]
+            ]
+        }
+    },
+    "oblique_projectile_y": {
+        "exp_name": "oblique_projectile_y",
+        "conclusions": {
+            "conclusion": {
+                "P1": "posx[1] is zero",
+                "P2": "D[C_02[1]]/D[t[0]] is zero",
+                "P3": "(C_16[1] - C_19) is zero",
+                "P4": "D[posy[1]]/D[t[0]] is conserved",
+                "P5": "C_101[1] is conserved",
+                "P10": "C_102[1] is conserved",
+                "P12": "((t[0] * C_02[1]) - posy[1]) is conserved"
+            },
+            "conclusion_id": 14,
+            "conserved_list": [
+                [
+                    "oblique_projectile_y",
+                    "P4",
+                    "D[posy[1]]/D[t[0]]",
+                    false,
+                    []
+                ],
+                [
+                    "oblique_projectile_y",
+                    "P5",
+                    "C_101[1]",
+                    false,
+                    []
+                ],
+                [
+                    "oblique_projectile_y",
+                    "P10",
+                    "C_102[1]",
+                    false,
+                    []
+                ],
+                [
+                    "oblique_projectile_y",
+                    "P12",
+                    "((t[0] * C_02[1]) - posy[1])",
+                    false,
+                    []
+                ]
+            ],
+            "zero_list": [
+                [
+                    "oblique_projectile_y",
+                    "P1",
+                    "posx[1]"
+                ],
+                [
+                    "oblique_projectile_y",
+                    "P2",
+                    "D[C_02[1]]/D[t[0]]"
+                ],
+                [
+                    "oblique_projectile_y",
+                    "P3",
+                    "(C_16[1] - C_19)"
+                ]
+            ]
+        }
+    },
+    "collision_elastic_3body": {
+        "exp_name": "collision_elastic_3body",
+        "conclusions": {
+            "conclusion": {
+                "P1": "((posx[2] - posx[1]) - dist[2, 1]) is zero",
+                "P2": "(dist[2, 1] - dist[1, 2]) is zero",
+                "P3": "((posx[3] - posx[1]) - dist[1, 3]) is zero",
+                "P4": "(dist[1, 3] - dist[3, 1]) is zero",
+                "P5": "((posx[3] - posx[2]) - dist[2, 3]) is zero",
+                "P7": "posz[1] is zero",
+                "P8": "posz[2] is zero",
+                "P9": "posz[3] is zero",
+                "P13": "C_25 is conserved",
+                "P16": "C_78 is conserved",
+                "P26": "D[C_01[3]]/D[t[0]] is zero",
+                "P27": "D[C_01[1]]/D[t[0]] is zero",
+                "P28": "D[C_01[2]]/D[t[0]] is zero",
+                "P32": "(dist[2, 3] - dist[3, 2]) is zero",
+                "P34": "((2 * C_1609[1, 3]) + (C_1826 + (-2 * C_1609[3, 1]))) is zero"
+            },
+            "conclusion_id": 48,
+            "conserved_list": [
+                [
+                    "collision_elastic_3body",
+                    "P13",
+                    "C_25",
+                    false,
+                    []
+                ],
+                [
+                    "collision_elastic_3body",
+                    "P16",
+                    "C_78",
+                    false,
+                    []
+                ]
+            ],
+            "zero_list": [
+                [
+                    "collision_elastic_3body",
+                    "P1",
+                    "((posx[2] - posx[1]) - dist[2, 1])"
+                ],
+                [
+                    "collision_elastic_3body",
+                    "P2",
+                    "(dist[2, 1] - dist[1, 2])"
+                ],
+                [
+                    "collision_elastic_3body",
+                    "P3",
+                    "((posx[3] - posx[1]) - dist[1, 3])"
+                ],
+                [
+                    "collision_elastic_3body",
+                    "P4",
+                    "(dist[1, 3] - dist[3, 1])"
+                ],
+                [
+                    "collision_elastic_3body",
+                    "P5",
+                    "((posx[3] - posx[2]) - dist[2, 3])"
+                ],
+                [
+                    "collision_elastic_3body",
+                    "P7",
+                    "posz[1]"
+                ],
+                [
+                    "collision_elastic_3body",
+                    "P8",
+                    "posz[2]"
+                ],
+                [
+                    "collision_elastic_3body",
+                    "P9",
+                    "posz[3]"
+                ],
+                [
+                    "collision_elastic_3body",
+                    "P26",
+                    "D[C_01[3]]/D[t[0]]"
+                ],
+                [
+                    "collision_elastic_3body",
+                    "P27",
+                    "D[C_01[1]]/D[t[0]]"
+                ],
+                [
+                    "collision_elastic_3body",
+                    "P28",
+                    "D[C_01[2]]/D[t[0]]"
+                ],
+                [
+                    "collision_elastic_3body",
+                    "P32",
+                    "(dist[2, 3] - dist[3, 2])"
+                ],
+                [
+                    "collision_elastic_3body",
+                    "P34",
+                    "((2 * C_1609[1, 3]) + (C_1826 + (-2 * C_1609[3, 1])))"
+                ]
+            ]
+        }
+    },
+    "pendulum_oscillation_2": {
+        "exp_name": "pendulum_oscillation_2",
+        "conclusions": {
+            "conclusion": {
+                "P1": "(((posz[1] ** 2) + (posx[1] ** 2)) - (length[3] ** 2)) is zero",
+                "P2": "((((posz[1] - posz[2]) ** 2) + ((posx[1] - posx[2]) ** 2)) - (length[4] ** 2)) is zero",
+                "P3": "posy[1] is zero",
+                "P4": "posy[2] is zero",
+                "P5": "(dist[1, 2] - dist[2, 1]) is zero",
+                "P6": "(dist[1, 2] - length[4]) is zero"
+            },
+            "conclusion_id": 6,
+            "conserved_list": [],
+            "zero_list": [
+                [
+                    "pendulum_oscillation_2",
+                    "P1",
+                    "(((posz[1] ** 2) + (posx[1] ** 2)) - (length[3] ** 2))"
+                ],
+                [
+                    "pendulum_oscillation_2",
+                    "P2",
+                    "((((posz[1] - posz[2]) ** 2) + ((posx[1] - posx[2]) ** 2)) - (length[4] ** 2))"
+                ],
+                [
+                    "pendulum_oscillation_2",
+                    "P3",
+                    "posy[1]"
+                ],
+                [
+                    "pendulum_oscillation_2",
+                    "P4",
+                    "posy[2]"
+                ],
+                [
+                    "pendulum_oscillation_2",
+                    "P5",
+                    "(dist[1, 2] - dist[2, 1])"
+                ],
+                [
+                    "pendulum_oscillation_2",
+                    "P6",
+                    "(dist[1, 2] - length[4])"
+                ]
+            ]
+        }
+    },
+    "projectile_oscillation_2": {
+        "exp_name": "projectile_oscillation_2",
+        "conclusions": {
+            "conclusion": {
+                "P1": "(dist[1, 2] - dist[2, 1]) is zero",
+                "P2": "((((dist[1, 2] ** 2) - ((posx[1] - posx[2]) ** 2)) - ((posy[1] - posy[2]) ** 2)) - ((posz[1] - posz[2]) ** 2)) is zero",
+                "P3": "(dist[1, 2] - length[4]) is zero",
+                "P4": "(dist[2, 3] - dist[3, 2]) is zero",
+                "P5": "((((dist[2, 3] ** 2) - ((posx[2] - posx[3]) ** 2)) - ((posy[2] - posy[3]) ** 2)) - ((posz[2] - posz[3]) ** 2)) is zero",
+                "P6": "(dist[2, 3] - length[5]) is zero",
+                "P7": "(dist[1, 3] - dist[3, 1]) is zero",
+                "P8": "((((dist[1, 3] ** 2) - ((posx[1] - posx[3]) ** 2)) - ((posy[1] - posy[3]) ** 2)) - ((posz[1] - posz[3]) ** 2)) is zero"
+            },
+            "conclusion_id": 8,
+            "conserved_list": [],
+            "zero_list": [
+                [
+                    "projectile_oscillation_2",
+                    "P1",
+                    "(dist[1, 2] - dist[2, 1])"
+                ],
+                [
+                    "projectile_oscillation_2",
+                    "P2",
+                    "((((dist[1, 2] ** 2) - ((posx[1] - posx[2]) ** 2)) - ((posy[1] - posy[2]) ** 2)) - ((posz[1] - posz[2]) ** 2))"
+                ],
+                [
+                    "projectile_oscillation_2",
+                    "P3",
+                    "(dist[1, 2] - length[4])"
+                ],
+                [
+                    "projectile_oscillation_2",
+                    "P4",
+                    "(dist[2, 3] - dist[3, 2])"
+                ],
+                [
+                    "projectile_oscillation_2",
+                    "P5",
+                    "((((dist[2, 3] ** 2) - ((posx[2] - posx[3]) ** 2)) - ((posy[2] - posy[3]) ** 2)) - ((posz[2] - posz[3]) ** 2))"
+                ],
+                [
+                    "projectile_oscillation_2",
+                    "P6",
+                    "(dist[2, 3] - length[5])"
+                ],
+                [
+                    "projectile_oscillation_2",
+                    "P7",
+                    "(dist[1, 3] - dist[3, 1])"
+                ],
+                [
+                    "projectile_oscillation_2",
+                    "P8",
+                    "((((dist[1, 3] ** 2) - ((posx[1] - posx[3]) ** 2)) - ((posy[1] - posy[3]) ** 2)) - ((posz[1] - posz[3]) ** 2))"
+                ]
+            ]
+        }
+    },
+    "celestial_3": {
+        "exp_name": "celestial_3",
+        "conclusions": {
+            "conclusion": {
+                "P1": "(dist[1, 2] - dist[2, 1]) is zero",
+                "P2": "(((dist[1, 2] ** 2) - ((posx[1] - posx[2]) ** 2)) - ((posy[1] - posy[2]) ** 2)) is zero",
+                "P3": "(dist[3, 2] - dist[2, 3]) is zero",
+                "P4": "(((dist[3, 2] ** 2) - ((posx[3] - posx[2]) ** 2)) - ((posy[3] - posy[2]) ** 2)) is zero",
+                "P5": "(dist[1, 3] - dist[3, 1]) is zero",
+                "P6": "(((dist[1, 3] ** 2) - ((posx[1] - posx[3]) ** 2)) - ((posy[1] - posy[3]) ** 2)) is zero",
+                "P7": "posz[1] is zero",
+                "P8": "posz[2] is zero",
+                "P9": "posz[3] is zero"
+            },
+            "conclusion_id": 9,
+            "conserved_list": [],
+            "zero_list": [
+                [
+                    "celestial_3",
+                    "P1",
+                    "(dist[1, 2] - dist[2, 1])"
+                ],
+                [
+                    "celestial_3",
+                    "P2",
+                    "(((dist[1, 2] ** 2) - ((posx[1] - posx[2]) ** 2)) - ((posy[1] - posy[2]) ** 2))"
+                ],
+                [
+                    "celestial_3",
+                    "P3",
+                    "(dist[3, 2] - dist[2, 3])"
+                ],
+                [
+                    "celestial_3",
+                    "P4",
+                    "(((dist[3, 2] ** 2) - ((posx[3] - posx[2]) ** 2)) - ((posy[3] - posy[2]) ** 2))"
+                ],
+                [
+                    "celestial_3",
+                    "P5",
+                    "(dist[1, 3] - dist[3, 1])"
+                ],
+                [
+                    "celestial_3",
+                    "P6",
+                    "(((dist[1, 3] ** 2) - ((posx[1] - posx[3]) ** 2)) - ((posy[1] - posy[3]) ** 2))"
+                ],
+                [
+                    "celestial_3",
+                    "P7",
+                    "posz[1]"
+                ],
+                [
+                    "celestial_3",
+                    "P8",
+                    "posz[2]"
+                ],
+                [
+                    "celestial_3",
+                    "P9",
+                    "posz[3]"
+                ]
+            ]
+        }
+    },
+    "oblique_projectile": {
+        "exp_name": "oblique_projectile",
+        "conclusions": {
+            "conclusion": {
+                "P1": "D[C_01[1]]/D[t[0]] is zero",
+                "P2": "D[C_02[1]]/D[t[0]] is zero",
+                "P3": "(C_16[1] - C_19) is zero",
+                "P4": "C_01[1] is conserved",
+                "P6": "((t[0] * C_01[1]) - posx[1]) is conserved",
+                "P9": "C_102[1] is conserved",
+                "P11": "C_02[1] is conserved",
+                "P13": "C_101[1] is conserved",
+                "P19": "((t[0] * C_02[1]) - posy[1]) is conserved"
+            },
+            "conclusion_id": 19,
+            "conserved_list": [
+                [
+                    "oblique_projectile",
+                    "P4",
+                    "C_01[1]",
+                    false,
+                    []
+                ],
+                [
+                    "oblique_projectile",
+                    "P6",
+                    "((t[0] * C_01[1]) - posx[1])",
+                    false,
+                    []
+                ],
+                [
+                    "oblique_projectile",
+                    "P9",
+                    "C_102[1]",
+                    false,
+                    []
+                ],
+                [
+                    "oblique_projectile",
+                    "P11",
+                    "C_02[1]",
+                    false,
+                    []
+                ],
+                [
+                    "oblique_projectile",
+                    "P13",
+                    "C_101[1]",
+                    false,
+                    []
+                ],
+                [
+                    "oblique_projectile",
+                    "P19",
+                    "((t[0] * C_02[1]) - posy[1])",
+                    false,
+                    []
+                ]
+            ],
+            "zero_list": [
+                [
+                    "oblique_projectile",
+                    "P1",
+                    "D[C_01[1]]/D[t[0]]"
+                ],
+                [
+                    "oblique_projectile",
+                    "P2",
+                    "D[C_02[1]]/D[t[0]]"
+                ],
+                [
+                    "oblique_projectile",
+                    "P3",
+                    "(C_16[1] - C_19)"
+                ]
+            ]
+        }
+    },
+    "motion0y": {
+        "exp_name": "motion0y",
+        "conclusions": {
+            "conclusion": {
+                "P1": "posz[1] is zero",
+                "P2": "posx[1] is zero",
+                "P3": "D[posy[1]]/D[t[0]] is conserved",
+                "P4": "((t[0] * C_02[1]) - posy[1]) is conserved",
+                "P6": "D[C_02[1]]/D[t[0]] is zero"
+            },
+            "conclusion_id": 6,
+            "conserved_list": [
+                [
+                    "motion0y",
+                    "P3",
+                    "D[posy[1]]/D[t[0]]",
+                    false,
+                    []
+                ],
+                [
+                    "motion0y",
+                    "P4",
+                    "((t[0] * C_02[1]) - posy[1])",
+                    false,
+                    []
+                ]
+            ],
+            "zero_list": [
+                [
+                    "motion0y",
+                    "P1",
+                    "posz[1]"
+                ],
+                [
+                    "motion0y",
+                    "P2",
+                    "posx[1]"
+                ],
+                [
+                    "motion0y",
+                    "P6",
+                    "D[C_02[1]]/D[t[0]]"
+                ]
+            ]
+        }
+    },
+    "vertical_projectile": {
+        "exp_name": "vertical_projectile",
+        "conclusions": {
+            "conclusion": {
+                "P1": "posx[1] is zero",
+                "P2": "posy[1] is zero",
+                "P3": "(C_16[1] - C_19) is zero",
+                "P6": "((C_19 * t[0]) - C_15[1]) is conserved",
+                "P29": "((2 * (C_19 * posz[1])) - (C_15[1] * C_15[1])) is conserved"
+            },
+            "conclusion_id": 51,
+            "conserved_list": [
+                [
+                    "vertical_projectile",
+                    "P6",
+                    "((C_19 * t[0]) - C_15[1])",
+                    false,
+                    []
+                ],
+                [
+                    "vertical_projectile",
+                    "P29",
+                    "((2 * (C_19 * posz[1])) - (C_15[1] * C_15[1]))",
+                    false,
+                    []
+                ]
+            ],
+            "zero_list": [
+                [
+                    "vertical_projectile",
+                    "P1",
+                    "posx[1]"
+                ],
+                [
+                    "vertical_projectile",
+                    "P2",
+                    "posy[1]"
+                ],
+                [
+                    "vertical_projectile",
+                    "P3",
+                    "(C_16[1] - C_19)"
+                ]
+            ]
+        }
+    },
+    "projectile_oscillation_1": {
+        "exp_name": "projectile_oscillation_1",
+        "conclusions": {
+            "conclusion": {
+                "P1": "(dist[1, 2] - dist[2, 1]) is zero",
+                "P2": "((((dist[1, 2] ** 2) - ((posx[1] - posx[2]) ** 2)) - ((posy[1] - posy[2]) ** 2)) - ((posz[1] - posz[2]) ** 2)) is zero",
+                "P3": "(dist[1, 2] - length[3]) is zero"
+            },
+            "conclusion_id": 3,
+            "conserved_list": [],
+            "zero_list": [
+                [
+                    "projectile_oscillation_1",
+                    "P1",
+                    "(dist[1, 2] - dist[2, 1])"
+                ],
+                [
+                    "projectile_oscillation_1",
+                    "P2",
+                    "((((dist[1, 2] ** 2) - ((posx[1] - posx[2]) ** 2)) - ((posy[1] - posy[2]) ** 2)) - ((posz[1] - posz[2]) ** 2))"
+                ],
+                [
+                    "projectile_oscillation_1",
+                    "P3",
+                    "(dist[1, 2] - length[3])"
+                ]
+            ]
+        }
+    },
+    "motion0": {
+        "exp_name": "motion0",
+        "conclusions": {
+            "conclusion": {
+                "P1": "posz[1] is zero",
+                "P2": "posy[1] is zero",
+                "P3": "D[posx[1]]/D[t[0]] is conserved",
+                "P4": "((t[0] * C_01[1]) - posx[1]) is conserved",
+                "P6": "D[C_01[1]]/D[t[0]] is zero"
+            },
+            "conclusion_id": 6,
+            "conserved_list": [
+                [
+                    "motion0",
+                    "P3",
+                    "D[posx[1]]/D[t[0]]",
+                    false,
+                    []
+                ],
+                [
+                    "motion0",
+                    "P4",
+                    "((t[0] * C_01[1]) - posx[1])",
+                    false,
+                    []
+                ]
+            ],
+            "zero_list": [
+                [
+                    "motion0",
+                    "P1",
+                    "posz[1]"
+                ],
+                [
+                    "motion0",
+                    "P2",
+                    "posy[1]"
+                ],
+                [
+                    "motion0",
+                    "P6",
+                    "D[C_01[1]]/D[t[0]]"
+                ]
+            ]
+        }
+    },
+    "oscillation_rot_2": {
+        "exp_name": "oscillation_rot_2",
+        "conclusions": {
+            "conclusion": {
+                "P1": "(((length[3] ** 2) - (posx[1] ** 2)) - (posy[1] ** 2)) is zero",
+                "P2": "(dist[1, 2] - dist[2, 1]) is zero",
+                "P3": "(((dist[1, 2] ** 2) - ((posx[1] - posx[2]) ** 2)) - ((posy[1] - posy[2]) ** 2)) is zero",
+                "P4": "(dist[1, 2] - length[4]) is zero",
+                "P5": "posz[1] is zero",
+                "P6": "posz[2] is zero"
+            },
+            "conclusion_id": 6,
+            "conserved_list": [],
+            "zero_list": [
+                [
+                    "oscillation_rot_2",
+                    "P1",
+                    "(((length[3] ** 2) - (posx[1] ** 2)) - (posy[1] ** 2))"
+                ],
+                [
+                    "oscillation_rot_2",
+                    "P2",
+                    "(dist[1, 2] - dist[2, 1])"
+                ],
+                [
+                    "oscillation_rot_2",
+                    "P3",
+                    "(((dist[1, 2] ** 2) - ((posx[1] - posx[2]) ** 2)) - ((posy[1] - posy[2]) ** 2))"
+                ],
+                [
+                    "oscillation_rot_2",
+                    "P4",
+                    "(dist[1, 2] - length[4])"
+                ],
+                [
+                    "oscillation_rot_2",
+                    "P5",
+                    "posz[1]"
+                ],
+                [
+                    "oscillation_rot_2",
+                    "P6",
+                    "posz[2]"
+                ]
+            ]
+        }
+    },
+    "oscillation_rot_1": {
+        "exp_name": "oscillation_rot_1",
+        "conclusions": {
+            "conclusion": {
+                "P1": "(((length[2] ** 2) - (posx[1] ** 2)) - (posy[1] ** 2)) is zero",
+                "P2": "posz[1] is zero",
+                "P3": "((C_34[1] * length[2]) / (C_04[2] * posy[1])) is conserved",
+                "P4": "C_53[1] is conserved",
+                "P7": "(C_14[2, 1] - ((C_85[1] ** 2) / C_05[1])) is conserved",
+                "P17": "(((C_130[1] * length[2]) / (C_04[2] * posx[1])) + C_07[2]) is zero"
+            },
+            "conclusion_id": 17,
+            "conserved_list": [
+                [
+                    "oscillation_rot_1",
+                    "P3",
+                    "((C_34[1] * length[2]) / (C_04[2] * posy[1]))",
+                    true,
+                    [
+                        1,
+                        2
+                    ]
+                ],
+                [
+                    "oscillation_rot_1",
+                    "P4",
+                    "C_53[1]",
+                    false,
+                    []
+                ],
+                [
+                    "oscillation_rot_1",
+                    "P7",
+                    "(C_14[2, 1] - ((C_85[1] ** 2) / C_05[1]))",
+                    false,
+                    []
+                ]
+            ],
+            "zero_list": [
+                [
+                    "oscillation_rot_1",
+                    "P1",
+                    "(((length[2] ** 2) - (posx[1] ** 2)) - (posy[1] ** 2))"
+                ],
+                [
+                    "oscillation_rot_1",
+                    "P2",
+                    "posz[1]"
+                ],
+                [
+                    "oscillation_rot_1",
+                    "P17",
+                    "(((C_130[1] * length[2]) / (C_04[2] * posx[1])) + C_07[2])"
+                ]
+            ]
+        }
+    },
+    "celestial_4": {
+        "exp_name": "celestial_4",
+        "conclusions": {
+            "conclusion": {
+                "P1": "(dist[1, 2] - dist[2, 1]) is zero",
+                "P2": "(((dist[1, 2] ** 2) - ((posx[1] - posx[2]) ** 2)) - ((posy[1] - posy[2]) ** 2)) is zero",
+                "P3": "(dist[3, 2] - dist[2, 3]) is zero",
+                "P4": "(((dist[3, 2] ** 2) - ((posx[3] - posx[2]) ** 2)) - ((posy[3] - posy[2]) ** 2)) is zero",
+                "P5": "(dist[1, 3] - dist[3, 1]) is zero",
+                "P6": "(((dist[1, 3] ** 2) - ((posx[1] - posx[3]) ** 2)) - ((posy[1] - posy[3]) ** 2)) is zero",
+                "P7": "(dist[1, 4] - dist[4, 1]) is zero",
+                "P8": "(((dist[1, 4] ** 2) - ((posx[1] - posx[4]) ** 2)) - ((posy[1] - posy[4]) ** 2)) is zero",
+                "P9": "(dist[2, 4] - dist[4, 2]) is zero",
+                "P10": "(((dist[2, 4] ** 2) - ((posx[2] - posx[4]) ** 2)) - ((posy[2] - posy[4]) ** 2)) is zero",
+                "P11": "(dist[3, 4] - dist[4, 3]) is zero",
+                "P12": "(((dist[3, 4] ** 2) - ((posx[3] - posx[4]) ** 2)) - ((posy[3] - posy[4]) ** 2)) is zero",
+                "P13": "posz[1] is zero",
+                "P14": "posz[2] is zero",
+                "P15": "posz[3] is zero",
+                "P16": "posz[4] is zero"
+            },
+            "conclusion_id": 16,
+            "conserved_list": [],
+            "zero_list": [
+                [
+                    "celestial_4",
+                    "P1",
+                    "(dist[1, 2] - dist[2, 1])"
+                ],
+                [
+                    "celestial_4",
+                    "P2",
+                    "(((dist[1, 2] ** 2) - ((posx[1] - posx[2]) ** 2)) - ((posy[1] - posy[2]) ** 2))"
+                ],
+                [
+                    "celestial_4",
+                    "P3",
+                    "(dist[3, 2] - dist[2, 3])"
+                ],
+                [
+                    "celestial_4",
+                    "P4",
+                    "(((dist[3, 2] ** 2) - ((posx[3] - posx[2]) ** 2)) - ((posy[3] - posy[2]) ** 2))"
+                ],
+                [
+                    "celestial_4",
+                    "P5",
+                    "(dist[1, 3] - dist[3, 1])"
+                ],
+                [
+                    "celestial_4",
+                    "P6",
+                    "(((dist[1, 3] ** 2) - ((posx[1] - posx[3]) ** 2)) - ((posy[1] - posy[3]) ** 2))"
+                ],
+                [
+                    "celestial_4",
+                    "P7",
+                    "(dist[1, 4] - dist[4, 1])"
+                ],
+                [
+                    "celestial_4",
+                    "P8",
+                    "(((dist[1, 4] ** 2) - ((posx[1] - posx[4]) ** 2)) - ((posy[1] - posy[4]) ** 2))"
+                ],
+                [
+                    "celestial_4",
+                    "P9",
+                    "(dist[2, 4] - dist[4, 2])"
+                ],
+                [
+                    "celestial_4",
+                    "P10",
+                    "(((dist[2, 4] ** 2) - ((posx[2] - posx[4]) ** 2)) - ((posy[2] - posy[4]) ** 2))"
+                ],
+                [
+                    "celestial_4",
+                    "P11",
+                    "(dist[3, 4] - dist[4, 3])"
+                ],
+                [
+                    "celestial_4",
+                    "P12",
+                    "(((dist[3, 4] ** 2) - ((posx[3] - posx[4]) ** 2)) - ((posy[3] - posy[4]) ** 2))"
+                ],
+                [
+                    "celestial_4",
+                    "P13",
+                    "posz[1]"
+                ],
+                [
+                    "celestial_4",
+                    "P14",
+                    "posz[2]"
+                ],
+                [
+                    "celestial_4",
+                    "P15",
+                    "posz[3]"
+                ],
+                [
+                    "celestial_4",
+                    "P16",
+                    "posz[4]"
+                ]
+            ]
+        }
+    },
+    "slope_oscillation_1": {
+        "exp_name": "slope_oscillation_1",
+        "conclusions": {
+            "conclusion": {
+                "P1": "cx[3] is conserved",
+                "P2": "cy[3] is conserved",
+                "P3": "cz[3] is conserved",
+                "P4": "(((cx[3] * posx[1]) + (cy[3] * posy[1])) + (cz[3] * posz[1])) is conserved",
+                "P5": "((((posx[1] ** 2) + (posy[1] ** 2)) + (posz[1] ** 2)) - (length[2] ** 2)) is zero"
+            },
+            "conclusion_id": 5,
+            "conserved_list": [
+                [
+                    "slope_oscillation_1",
+                    "P1",
+                    "cx[3]",
+                    false,
+                    []
+                ],
+                [
+                    "slope_oscillation_1",
+                    "P2",
+                    "cy[3]",
+                    false,
+                    []
+                ],
+                [
+                    "slope_oscillation_1",
+                    "P3",
+                    "cz[3]",
+                    false,
+                    []
+                ],
+                [
+                    "slope_oscillation_1",
+                    "P4",
+                    "(((cx[3] * posx[1]) + (cy[3] * posy[1])) + (cz[3] * posz[1]))",
+                    false,
+                    []
+                ]
+            ],
+            "zero_list": [
+                [
+                    "slope_oscillation_1",
+                    "P5",
+                    "((((posx[1] ** 2) + (posy[1] ** 2)) + (posz[1] ** 2)) - (length[2] ** 2))"
+                ]
+            ]
+        }
+    },
+    "hanging_spring_1": {
+        "exp_name": "hanging_spring_1",
+        "conclusions": {
+            "conclusion": {
+                "P1": "(posz[1] + length[2]) is conserved",
+                "P2": "posx[1] is zero",
+                "P3": "posy[1] is zero",
+                "P4": "D[C_16[1]]/D[length[2]] is conserved",
+                "P10": "(C_04[2] / C_28[1]) is conserved",
+                "P12": "((5 * (C_19 * C_16[1])) - (49 * (posz[1] * C_23[1, 2]))) is conserved",
+                "P13": "((C_15[1] * C_15[1]) + ((C_16[1] ** 2) / C_23[1, 2])) is conserved",
+                "P15": "(C_07[2] + (-1 * D[C_664]/D[posz[1]])) is zero"
+            },
+            "conclusion_id": 15,
+            "conserved_list": [
+                [
+                    "hanging_spring_1",
+                    "P1",
+                    "(posz[1] + length[2])",
+                    false,
+                    []
+                ],
+                [
+                    "hanging_spring_1",
+                    "P4",
+                    "D[C_16[1]]/D[length[2]]",
+                    true,
+                    [
+                        1,
+                        2
+                    ]
+                ],
+                [
+                    "hanging_spring_1",
+                    "P10",
+                    "(C_04[2] / C_28[1])",
+                    true,
+                    [
+                        1,
+                        2
+                    ]
+                ],
+                [
+                    "hanging_spring_1",
+                    "P12",
+                    "((5 * (C_19 * C_16[1])) - (49 * (posz[1] * C_23[1, 2])))",
+                    false,
+                    []
+                ],
+                [
+                    "hanging_spring_1",
+                    "P13",
+                    "((C_15[1] * C_15[1]) + ((C_16[1] ** 2) / C_23[1, 2]))",
+                    false,
+                    []
+                ]
+            ],
+            "zero_list": [
+                [
+                    "hanging_spring_1",
+                    "P2",
+                    "posx[1]"
+                ],
+                [
+                    "hanging_spring_1",
+                    "P3",
+                    "posy[1]"
+                ],
+                [
+                    "hanging_spring_1",
+                    "P15",
+                    "(C_07[2] + (-1 * D[C_664]/D[posz[1]]))"
+                ]
+            ]
+        }
+    },
+    "free_fall": {
+        "exp_name": "free_fall",
+        "conclusions": {
+            "conclusion": {
+                "P1": "posx[1] is zero",
+                "P2": "posy[1] is zero",
+                "P6": "(C_16[1] - C_19) is zero",
+                "P7": "((C_19 * t[0]) - C_15[1]) is zero",
+                "P9": "((t[0] * C_15[1]) - (2 * posz[1])) is conserved"
+            },
+            "conclusion_id": 20,
+            "conserved_list": [
+                [
+                    "free_fall",
+                    "P9",
+                    "((t[0] * C_15[1]) - (2 * posz[1]))",
+                    false,
+                    []
+                ]
+            ],
+            "zero_list": [
+                [
+                    "free_fall",
+                    "P1",
+                    "posx[1]"
+                ],
+                [
+                    "free_fall",
+                    "P2",
+                    "posy[1]"
+                ],
+                [
+                    "free_fall",
+                    "P6",
+                    "(C_16[1] - C_19)"
+                ],
+                [
+                    "free_fall",
+                    "P7",
+                    "((C_19 * t[0]) - C_15[1])"
+                ]
+            ]
+        }
+    },
+    "projectile": {
+        "exp_name": "projectile",
+        "conclusions": {
+            "conclusion": {
+                "P1": "D[C_02[1]]/D[t[0]] is zero",
+                "P2": "D[C_01[1]]/D[t[0]] is zero",
+                "P3": "(C_16[1] - C_19) is zero",
+                "P4": "C_01[1] is conserved",
+                "P5": "C_02[1] is conserved",
+                "P6": "C_18[1] is conserved",
+                "P7": "((C_02[1] * posx[1]) - (C_01[1] * posy[1])) is conserved"
+            },
+            "conclusion_id": 7,
+            "conserved_list": [
+                [
+                    "projectile",
+                    "P4",
+                    "C_01[1]",
+                    false,
+                    []
+                ],
+                [
+                    "projectile",
+                    "P5",
+                    "C_02[1]",
+                    false,
+                    []
+                ],
+                [
+                    "projectile",
+                    "P6",
+                    "C_18[1]",
+                    true,
+                    []
+                ],
+                [
+                    "projectile",
+                    "P7",
+                    "((C_02[1] * posx[1]) - (C_01[1] * posy[1]))",
+                    false,
+                    []
+                ]
+            ],
+            "zero_list": [
+                [
+                    "projectile",
+                    "P1",
+                    "D[C_02[1]]/D[t[0]]"
+                ],
+                [
+                    "projectile",
+                    "P2",
+                    "D[C_01[1]]/D[t[0]]"
+                ],
+                [
+                    "projectile",
+                    "P3",
+                    "(C_16[1] - C_19)"
+                ]
+            ]
+        }
+    },
+    "celestial_2_xy": {
+        "exp_name": "celestial_2_xy",
+        "conclusions": {
+            "conclusion": {
+                "P1": "(dist[1, 2] - dist[2, 1]) is zero",
+                "P2": "(((dist[1, 2] ** 2) - ((posx[1] - posx[2]) ** 2)) - ((posy[1] - posy[2]) ** 2)) is zero",
+                "P3": "posz[1] is zero",
+                "P4": "posz[2] is zero"
+            },
+            "conclusion_id": 4,
+            "conserved_list": [],
+            "zero_list": [
+                [
+                    "celestial_2_xy",
+                    "P1",
+                    "(dist[1, 2] - dist[2, 1])"
+                ],
+                [
+                    "celestial_2_xy",
+                    "P2",
+                    "(((dist[1, 2] ** 2) - ((posx[1] - posx[2]) ** 2)) - ((posy[1] - posy[2]) ** 2))"
+                ],
+                [
+                    "celestial_2_xy",
+                    "P3",
+                    "posz[1]"
+                ],
+                [
+                    "celestial_2_xy",
+                    "P4",
+                    "posz[2]"
+                ]
+            ]
+        }
+    },
+    "oscillation_2d_2": {
+        "exp_name": "oscillation_2d_2",
+        "conclusions": {
+            "conclusion": {
+                "P1": "(dist[1, 2] - length[4]) is zero",
+                "P2": "(((dist[1, 2] ** 2) - ((posx[1] - posx[2]) ** 2)) - ((posy[1] - posy[2]) ** 2)) is zero",
+                "P3": "(dist[1, 2] - dist[2, 1]) is zero",
+                "P4": "(dist[2, 3] - length[5]) is zero",
+                "P5": "(((dist[2, 3] ** 2) - ((posx[2] - posx[3]) ** 2)) - ((posy[2] - posy[3]) ** 2)) is zero",
+                "P6": "(dist[2, 3] - dist[3, 2]) is zero",
+                "P7": "(((dist[1, 3] ** 2) - ((posx[1] - posx[3]) ** 2)) - ((posy[1] - posy[3]) ** 2)) is zero",
+                "P8": "(dist[1, 3] - dist[3, 1]) is zero",
+                "P9": "posz[1] is zero",
+                "P10": "posz[2] is zero",
+                "P11": "posz[3] is zero"
+            },
+            "conclusion_id": 11,
+            "conserved_list": [],
+            "zero_list": [
+                [
+                    "oscillation_2d_2",
+                    "P1",
+                    "(dist[1, 2] - length[4])"
+                ],
+                [
+                    "oscillation_2d_2",
+                    "P2",
+                    "(((dist[1, 2] ** 2) - ((posx[1] - posx[2]) ** 2)) - ((posy[1] - posy[2]) ** 2))"
+                ],
+                [
+                    "oscillation_2d_2",
+                    "P3",
+                    "(dist[1, 2] - dist[2, 1])"
+                ],
+                [
+                    "oscillation_2d_2",
+                    "P4",
+                    "(dist[2, 3] - length[5])"
+                ],
+                [
+                    "oscillation_2d_2",
+                    "P5",
+                    "(((dist[2, 3] ** 2) - ((posx[2] - posx[3]) ** 2)) - ((posy[2] - posy[3]) ** 2))"
+                ],
+                [
+                    "oscillation_2d_2",
+                    "P6",
+                    "(dist[2, 3] - dist[3, 2])"
+                ],
+                [
+                    "oscillation_2d_2",
+                    "P7",
+                    "(((dist[1, 3] ** 2) - ((posx[1] - posx[3]) ** 2)) - ((posy[1] - posy[3]) ** 2))"
+                ],
+                [
+                    "oscillation_2d_2",
+                    "P8",
+                    "(dist[1, 3] - dist[3, 1])"
+                ],
+                [
+                    "oscillation_2d_2",
+                    "P9",
+                    "posz[1]"
+                ],
+                [
+                    "oscillation_2d_2",
+                    "P10",
+                    "posz[2]"
+                ],
+                [
+                    "oscillation_2d_2",
+                    "P11",
+                    "posz[3]"
+                ]
+            ]
+        }
+    },
+    "oscillation_2d_1": {
+        "exp_name": "oscillation_2d_1",
+        "conclusions": {
+            "conclusion": {
+                "P1": "(dist[1, 2] - length[3]) is zero",
+                "P2": "(((dist[1, 2] ** 2) - ((posx[1] - posx[2]) ** 2)) - ((posy[1] - posy[2]) ** 2)) is zero",
+                "P3": "(dist[1, 2] - dist[2, 1]) is zero",
+                "P4": "posz[1] is zero",
+                "P5": "posz[2] is zero",
+                "P6": "(posy[2] / posx[2]) is conserved",
+                "P7": "(posy[1] / posx[1]) is conserved",
+                "P8": "((posx[2] * posy[1]) - (posx[1] * posy[2])) is zero",
+                "P18": "((C_05[2] * C_42[2]) + (C_05[1] * C_42[1])) is zero",
+                "P20": "C_25 is conserved",
+                "P39": "(C_42[2] / C_42[1]) is conserved",
+                "P41": "C_237[1, 3] is conserved",
+                "P42": "C_237[2, 3] is conserved",
+                "P93": "D[(C_236[3, 1] * C_236[3, 1])]/D[C_78] is conserved"
+            },
+            "conclusion_id": 98,
+            "conserved_list": [
+                [
+                    "oscillation_2d_1",
+                    "P6",
+                    "(posy[2] / posx[2])",
+                    false,
+                    []
+                ],
+                [
+                    "oscillation_2d_1",
+                    "P7",
+                    "(posy[1] / posx[1])",
+                    false,
+                    []
+                ],
+                [
+                    "oscillation_2d_1",
+                    "P20",
+                    "C_25",
+                    false,
+                    []
+                ],
+                [
+                    "oscillation_2d_1",
+                    "P39",
+                    "(C_42[2] / C_42[1])",
+                    true,
+                    [
+                        1,
+                        2
+                    ]
+                ],
+                [
+                    "oscillation_2d_1",
+                    "P41",
+                    "C_237[1, 3]",
+                    false,
+                    []
+                ],
+                [
+                    "oscillation_2d_1",
+                    "P42",
+                    "C_237[2, 3]",
+                    false,
+                    []
+                ],
+                [
+                    "oscillation_2d_1",
+                    "P93",
+                    "D[(C_236[3, 1] * C_236[3, 1])]/D[C_78]",
+                    false,
+                    []
+                ]
+            ],
+            "zero_list": [
+                [
+                    "oscillation_2d_1",
+                    "P1",
+                    "(dist[1, 2] - length[3])"
+                ],
+                [
+                    "oscillation_2d_1",
+                    "P2",
+                    "(((dist[1, 2] ** 2) - ((posx[1] - posx[2]) ** 2)) - ((posy[1] - posy[2]) ** 2))"
+                ],
+                [
+                    "oscillation_2d_1",
+                    "P3",
+                    "(dist[1, 2] - dist[2, 1])"
+                ],
+                [
+                    "oscillation_2d_1",
+                    "P4",
+                    "posz[1]"
+                ],
+                [
+                    "oscillation_2d_1",
+                    "P5",
+                    "posz[2]"
+                ],
+                [
+                    "oscillation_2d_1",
+                    "P8",
+                    "((posx[2] * posy[1]) - (posx[1] * posy[2]))"
+                ],
+                [
+                    "oscillation_2d_1",
+                    "P18",
+                    "((C_05[2] * C_42[2]) + (C_05[1] * C_42[1]))"
+                ]
+            ]
+        }
+    },
+    "collision_y": {
+        "exp_name": "collision_y",
+        "conclusions": {
+            "conclusion": {
+                "P1": "(dist[1, 2] - dist[2, 1]) is zero",
+                "P3": "posx[1] is zero",
+                "P4": "posx[2] is zero",
+                "P5": "posz[1] is zero",
+                "P6": "posz[2] is zero",
+                "P7": "D[C_02[1]]/D[t[0]] is zero",
+                "P8": "D[C_02[2]]/D[t[0]] is zero",
+                "P12": "((C_02[1] * C_05[1]) + (C_02[2] * C_05[2])) is conserved",
+                "P18": "((C_05[1] * (C_02[1] ** 2)) + (C_05[2] * (C_02[2] ** 2))) is conserved",
+                "P22": "((-1 * posy[2]) + (posy[1] + dist[1, 2])) is zero"
+            },
+            "conclusion_id": 38,
+            "conserved_list": [
+                [
+                    "collision_y",
+                    "P12",
+                    "((C_02[1] * C_05[1]) + (C_02[2] * C_05[2]))",
+                    false,
+                    []
+                ],
+                [
+                    "collision_y",
+                    "P18",
+                    "((C_05[1] * (C_02[1] ** 2)) + (C_05[2] * (C_02[2] ** 2)))",
+                    false,
+                    []
+                ]
+            ],
+            "zero_list": [
+                [
+                    "collision_y",
+                    "P1",
+                    "(dist[1, 2] - dist[2, 1])"
+                ],
+                [
+                    "collision_y",
+                    "P3",
+                    "posx[1]"
+                ],
+                [
+                    "collision_y",
+                    "P4",
+                    "posx[2]"
+                ],
+                [
+                    "collision_y",
+                    "P5",
+                    "posz[1]"
+                ],
+                [
+                    "collision_y",
+                    "P6",
+                    "posz[2]"
+                ],
+                [
+                    "collision_y",
+                    "P7",
+                    "D[C_02[1]]/D[t[0]]"
+                ],
+                [
+                    "collision_y",
+                    "P8",
+                    "D[C_02[2]]/D[t[0]]"
+                ],
+                [
+                    "collision_y",
+                    "P22",
+                    "((-1 * posy[2]) + (posy[1] + dist[1, 2]))"
+                ]
+            ]
+        }
+    },
+    "stringmotion0": {
+        "exp_name": "stringmotion0",
+        "conclusions": {
+            "conclusion": {
+                "P2": "(C_03[1] - length[1]) is zero"
+            },
+            "conclusion_id": 11,
+            "conserved_list": [],
+            "zero_list": [
+                [
+                    "stringmotion0",
+                    "P2",
+                    "(C_03[1] - length[1])"
+                ]
+            ]
+        }
+    }
+}

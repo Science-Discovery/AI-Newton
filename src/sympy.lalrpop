@@ -1,0 +1,140 @@
+grammar;
+use crate::language::*;
+
+pub Exp: Box<Exp> = <addexp: AddExp> => <>;
+
+pub AtomExp: Box<AtomExp> = {
+  <name: Ident> => {
+    let mut iter = name.split('_');
+    let mut name = iter.next().unwrap().to_string();
+    if name == "C".to_string() {
+        let suffix = iter.next().unwrap().to_string();
+        name = format!("C_{}", suffix);
+    }
+    let mut ids = vec![];
+    loop {
+        match iter.next() {
+            Some(arg) => {
+                ids.push(arg.parse::<i32>().unwrap());
+            },
+            None => break,
+        }
+    }
+    Box::new(AtomExp::VariableIds { name, ids })
+  },
+  <atomexp: AtomExp> "(" <identvec: IdentVec> ")" => {
+    atomexp
+  }
+}
+PrimaryExp: Box<Exp> = {
+  <num: Number> => Box::new(Exp::Number{ <> }),
+  <atom: AtomExp> => Box::new(Exp::Atom{ <> }),
+  "(" <exp: Exp> ")" => <>,
+}
+
+PowExp: Box<Exp> = {
+  <primaryexp: PrimaryExp> => <>,
+  <powexp: PowExp> "**" <primaryexp: PrimaryExp> =>
+    Box::new(Exp::BinaryExp{ left: powexp, op: BinaryOp::Pow, right: primaryexp }),
+  "Derivative(" <left: Exp> "," <right: Exp> ")" =>
+    Box::new(Exp::DiffExp{ left: left, right: right, ord: 1 }),
+  "Derivative(" <left: Exp> "," "(" <right: Exp> "," <ord: Number> ")" ")" => {
+    Box::new(Exp::DiffExp{ left: left, right: right, ord: ord })
+  },
+}
+
+UnaryExp: Box<Exp> = {
+  <powexp: PowExp> => <>,
+  "-" <unaryexp: UnaryExp> =>
+    Box::new(Exp::UnaryExp{ op: UnaryOp::Neg, exp: unaryexp }),
+}
+
+MulExp: Box<Exp> = {
+  <unaryexp: UnaryExp> => <>,
+  <mulexp: MulExp> "*" <unaryexp: UnaryExp> =>
+    Box::new(Exp::BinaryExp{ left: mulexp, op: BinaryOp::Mul, right: unaryexp }),
+  <mulexp: MulExp> "/" <unaryexp: UnaryExp> =>
+    Box::new(Exp::BinaryExp{ left: mulexp, op: BinaryOp::Div, right: unaryexp }),
+}
+
+AddExp: Box<Exp> = {
+  <mulexp: MulExp> => <>,
+  <addexp: AddExp> "+" <mulexp: MulExp> =>
+    Box::new(Exp::BinaryExp{ left: addexp, op: BinaryOp::Add, right: mulexp }),
+  <addexp: AddExp> "-" <mulexp: MulExp> =>
+    Box::new(Exp::BinaryExp{ left: addexp, op: BinaryOp::Sub, right: mulexp }),
+}
+
+// Basic!
+
+pub Number: i32 = <num: IntConst> => <>;
+
+
+pub VecIdent: Vec<String> = {
+  => vec![],
+  <ident: Ident> => vec![<>],
+  <identlist: VecIdent> "," <ident: Ident> => {
+    let mut identlist = identlist;
+    identlist.push(ident);
+    identlist
+  },
+}
+
+// 如果匹配到标识符, 就返回这个字符串
+// 一对尖括号在此处指代的是正则表达式匹配到的字符串 (&str)
+pub Ident: String = r"[_a-zA-Z][_a-zA-Z0-9]*" => <>.to_string();
+
+pub IdentVec: Vec<String> = {
+  <ident: Ident> => vec![<>],
+  <identvec: IdentVec> "," <ident: Ident> => {
+    let mut identvec = identvec;
+    identvec.push(ident);
+    identvec
+  },
+}
+
+pub IntToIdent: (i32, String) = {
+  "(" <id:IntConst> "->" <objtype:Ident> ")" => (id, objtype),
+}
+
+pub IntToIdentVec: Vec<(i32, String)> = {
+  <inttoident: IntToIdent> => vec![<>],
+  <inttoidentvec: IntToIdentVec> <inttoident: IntToIdent> => {
+    let mut inttoidentvec = inttoidentvec;
+    inttoidentvec.push(inttoident);
+    inttoidentvec
+  },
+}
+
+pub IntVecConst: Vec<i32> = {
+  <num: IntConst> => vec![<>],
+  <numlist: IntVecConst> "," <num: IntConst> => {
+    let mut numlist = numlist;
+    numlist.push(num);
+    numlist
+  },
+}
+
+// 对整数字面量的处理方式: 把匹配到的字符串按对应进制转换成数字
+pub IntConst: i32 = {
+  r"0" => 0,
+  r"-0" => 0,
+  r"[1-9][0-9]*" => i32::from_str_radix(<>, 10).unwrap(),
+  r"\-[1-9][0-9]*" => -i32::from_str_radix(&<>[1..], 10).unwrap(),
+}
+
+pub OptionFloatConst: Option<f64> = {
+    "Some(" <float: FloatConst> ")" => Some(float),
+    "None" => None
+}
+
+pub FloatConst: f64 = {
+  r"[0-9]*\.[0-9]+" => (&<>).parse().unwrap(),
+  r"[1-9][0-9]*[eE][+-]?[0-9]+" => (&<>).parse().unwrap(),
+  r"[0-9]*\.[0-9]+[eE][+-]?[0-9]+" => (&<>).parse().unwrap(),
+  // 解析负数
+  r"\-[0-9]*\.[0-9]+" => (&<>).parse().unwrap(),
+  r"\-[1-9][0-9]*[eE][+-]?[0-9]+" => (&<>).parse().unwrap(),
+  r"\-[0-9]*\.[0-9]+[eE][+-]?[0-9]+" => (&<>).parse().unwrap(),
+  <intconst: IntConst> => intconst as f64,
+}

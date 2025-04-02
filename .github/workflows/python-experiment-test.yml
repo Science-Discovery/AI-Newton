@@ -1,0 +1,83 @@
+name: Python Package Experiment Test
+
+on: [push]
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -l {0}
+    strategy:
+      max-parallel: 5
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.10'
+    - uses: conda-incubator/setup-miniconda@v2
+      with:
+        miniconda-version: "latest"
+        channels: bioconda, conda-forge, defaults
+        use-only-tar-bz2: true  # IMPORTANT: This needs to be set for caching to work properly!
+        auto-update-conda: true
+        auto-activate-base: true
+    - name: Add conda to system path
+      run: |
+        # $CONDA is an environment variable pointing to the root of the miniconda directory
+        echo $CONDA/bin >> $GITHUB_PATH
+    - name: Lint with flake8
+      run: |
+        conda install flake8
+        # stop the build if there are Python syntax errors or undefined names
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+
+    - name: Set up Rust
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: stable
+        override: true
+
+    - name: Cache dependencies
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.cargo/bin/
+          ~/.cargo/registry/index/
+          ~/.cargo/registry/cache/
+          ~/.cargo/git/db/
+          target/
+        key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-cargo-
+
+    - name: Build `ai_physicist` library
+      uses: actions-rs/cargo@v1
+      with:
+        command: build
+        args: --release
+
+    - name: Install dependencies
+      run: |
+        cp target/release/libcore.so aiphy/core.so
+        conda activate base
+        pip install -r requirements.txt
+
+    - name: Test customized experiment 'test/test_experiment'
+      run: |
+        conda activate base
+        python -m test.test_experiment.test_collision_elastic_3body
+        python -m test.test_experiment.test_motion_3d
+        python -m test.test_experiment.test_motion0_3d
+        python -m test.test_experiment.test_cosmos1
+        python -m test.test_experiment.test_cosmos2
+        python -m test.test_experiment.test_cosmos3
+        python -m test.test_experiment.test_pendulum
+        python -m test.test_experiment.test_collision_nh        
+        python -m test.test_experiment.test_oscillation_1s2o
+        python -m test.test_experiment.test_oscillation_r
+        python -m test.test_experiment.test_oscillation_rot

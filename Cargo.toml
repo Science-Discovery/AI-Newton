@@ -1,0 +1,38 @@
+[package]
+name = "core"
+version = "0.1.0"
+edition = "2021"
+
+[build-dependencies]
+lalrpop = "0.20.2"
+
+[lib]
+name = "core"
+crate-type = ["cdylib"]
+
+[dependencies]
+fraction = "0.15.3"
+itertools = "0.13.0"
+lalrpop-util = { version = "0.20.2", features = ["lexer"] }
+ndarray = "0.15.6"
+ndarray-linalg = { version = "0.16.0", features = ["intel-mkl-static"] }
+num = "0.4.3"
+num-integer = "0.1.46"
+num-traits = "0.2.19"
+plotly = "0.9.0"
+rayon = "1.5"
+rand = "0.8.5"
+rand_distr = "0.4.3"
+serde = { version = "1.0", features = ["derive"] }
+serde_yaml = "0.9.33"
+statrs = "0.17.1"
+symbolica = "0.8.0"
+regex = "1.11.1"
+
+[dependencies.pyo3]
+version = "0.22.5"
+features = ["auto-initialize"]
+
+[dependencies.pyo3-ffi]
+version = "0.22.5"
+features = ["extension-module"]
