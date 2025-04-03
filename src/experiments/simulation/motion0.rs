@@ -1,10 +1,15 @@
-use pyo3::prelude::*;
-use crate::r;
 use crate::experiments::*;
+use crate::r;
 use ndarray::Array1;
+use pyo3::prelude::*;
 use std::collections::HashMap;
 
-pub fn builtin_motion0(t_end: f64, t_num: usize, error: f64, exp_config: &ExpConfig) -> DataStructOfDoExperiment {
+pub fn builtin_motion0(
+    t_end: f64,
+    t_num: usize,
+    error: f64,
+    exp_config: &ExpConfig,
+) -> DataStructOfDoExperiment {
     let x0 = exp_config.para("x0");
     let v0 = exp_config.para("v0");
     let step = (t_end - 0.0) / (t_num as f64);
@@ -14,10 +19,22 @@ pub fn builtin_motion0(t_end: f64, t_num: usize, error: f64, exp_config: &ExpCon
     let y: Array1<f64> = Array1::zeros(t_num);
     let z: Array1<f64> = Array1::zeros(t_num);
     let mut data_struct = exp_config.create_data_struct_of_do_experiment(t_num);
-    data_struct.add_data((DATA::time(), vec![r!("Clock")]), &add_errors(&t, error).unwrap());
-    data_struct.add_data((DATA::posx(), vec![r!("MPa")]), &add_errors(&x, error).unwrap());
-    data_struct.add_data((DATA::posy(), vec![r!("MPa")]), &add_errors(&y, error).unwrap());
-    data_struct.add_data((DATA::posz(), vec![r!("MPa")]), &add_errors(&z, error).unwrap());
+    data_struct.add_data(
+        (DATA::time(), vec![r!("Clock")]),
+        &add_errors(&t, error).unwrap(),
+    );
+    data_struct.add_data(
+        (DATA::posx(), vec![r!("MPa")]),
+        &add_errors(&x, error).unwrap(),
+    );
+    data_struct.add_data(
+        (DATA::posy(), vec![r!("MPa")]),
+        &add_errors(&y, error).unwrap(),
+    );
+    data_struct.add_data(
+        (DATA::posz(), vec![r!("MPa")]),
+        &add_errors(&z, error).unwrap(),
+    );
     data_struct
 }
 
@@ -43,9 +60,6 @@ pub fn struct_motion0() -> ExpStructure {
     let mut exp_config = ExpConfig::new(name, spdim, exp_para, obj_info, data_info);
     exp_config.register_geometry_info(exp_config.gen_prop(r!("posz[MPa] is zero")));
     exp_config.register_geometry_info(exp_config.gen_prop(r!("posy[MPa] is zero")));
-    let do_experiment: DoExpType = DoExpType::new(
-        r!("<builtin_motion0>"),
-        builtin_motion0
-    );
+    let do_experiment: DoExpType = DoExpType::new(r!("<builtin_motion0>"), builtin_motion0);
     ExpStructure::new(exp_config, do_experiment)
 }

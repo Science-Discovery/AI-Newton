@@ -1,21 +1,21 @@
-use pyo3::exceptions::PyValueError;
-use pyo3::prelude::*;
-use itertools::Itertools;
-use std::{collections::HashSet, fs};
-use serde::{Deserialize, Serialize};
-use rand::Rng;
-use rand_distr::{Distribution, Normal};
-use std::{fmt, collections::HashMap};
-use ndarray::{ArrayBase, Array1, Array2, Dimension, OwnedRepr};
-use crate::r;
 use crate::expdata::ExpData;
 use crate::experiments::{ObjType, ATTR};
 use crate::language::{AtomExp, Concept, MeasureType, Proposition};
+use crate::r;
+use itertools::Itertools;
+use ndarray::{Array1, Array2, ArrayBase, Dimension, OwnedRepr};
+use pyo3::exceptions::PyValueError;
+use pyo3::prelude::*;
+use rand::Rng;
+use rand_distr::{Distribution, Normal};
+use serde::{Deserialize, Serialize};
+use std::{collections::HashMap, fmt};
+use std::{collections::HashSet, fs};
 
 #[pyclass]
 #[derive(Clone)]
 pub struct DoExpType {
-    pub fun: Option<fn(f64,usize,f64,&ExpConfig) -> DataStructOfDoExperiment>,
+    pub fun: Option<fn(f64, usize, f64, &ExpConfig) -> DataStructOfDoExperiment>,
     pub name: String,
 }
 
@@ -24,7 +24,10 @@ fn get_relative_path(target_path: &std::path::Path) -> Option<std::path::PathBuf
     let base_abs = std::env::current_dir().ok()?;
     let target_abs = target_path.canonicalize().ok()?;
     // 计算相对路径
-    target_abs.strip_prefix(base_abs).ok().map(std::path::PathBuf::from)
+    target_abs
+        .strip_prefix(base_abs)
+        .ok()
+        .map(std::path::PathBuf::from)
 }
 fn get_relative_path_string(path: &str) -> Option<String> {
     let path = std::path::Path::new(path);
@@ -46,7 +49,10 @@ impl DoExpType {
             name: "".to_string(),
         }
     }
-    pub fn new(builtin_name: String, builtin_fun: fn(f64,usize,f64,&ExpConfig) -> DataStructOfDoExperiment) -> Self {
+    pub fn new(
+        builtin_name: String,
+        builtin_fun: fn(f64, usize, f64, &ExpConfig) -> DataStructOfDoExperiment,
+    ) -> Self {
         DoExpType {
             fun: Some(builtin_fun),
             name: builtin_name,
@@ -54,14 +60,9 @@ impl DoExpType {
     }
     pub fn new_with_name(name: String) -> Result<Self, String> {
         use super::simulation::{
-            oscillation::builtin_oscillation,
-            collision::builtin_collision,
-            stringmotion0::builtin_stringmotion0,
-            motion0::builtin_motion0,
-            motion::builtin_motion,
-            oscillationy::builtin_oscillationy,
-            motion0y::builtin_motion0y,
-            motiony::builtin_motiony
+            collision::builtin_collision, motion::builtin_motion, motion0::builtin_motion0,
+            motion0y::builtin_motion0y, motiony::builtin_motiony, oscillation::builtin_oscillation,
+            oscillationy::builtin_oscillationy, stringmotion0::builtin_stringmotion0,
         };
         if name == r!("<builtin_oscillation>") {
             Ok(DoExpType::new(name, builtin_oscillation))
@@ -85,19 +86,23 @@ impl DoExpType {
     }
     pub fn new_with_filename(filename: String) -> Result<Self, String> {
         get_relative_path_string(&filename).map_or(
-            Err(format!("DoExpType: Failed to get relative path of {}", filename)),
-            |x| {
-            Ok(DoExpType {
-                fun: None,
-                name: x,
-            })
-        })
+            Err(format!(
+                "DoExpType: Failed to get relative path of {}",
+                filename
+            )),
+            |x| Ok(DoExpType { fun: None, name: x }),
+        )
     }
-    pub fn do_experiment(&self, t_end: f64, t_num: usize, error: f64, exp_config: &ExpConfig) -> Result<DataStructOfDoExperiment, String> {
+    pub fn do_experiment(
+        &self,
+        t_end: f64,
+        t_num: usize,
+        error: f64,
+        exp_config: &ExpConfig,
+    ) -> Result<DataStructOfDoExperiment, String> {
         if let Some(fun) = self.fun {
             Ok(fun(t_end, t_num, error, exp_config))
-        }
-        else {
+        } else {
             let py_app = fs::read_to_string(self.name.clone()).unwrap();
             let res = Python::with_gil(|py| -> Result<DataStructOfDoExperiment, PyErr> {
                 let app: Py<PyAny> = PyModule::from_code_bound(py, &py_app, "", "")?
@@ -110,7 +115,10 @@ impl DoExpType {
             // println!("DoExpType: Call Python function done.");
             match res {
                 Ok(data) => Ok(data),
-                Err(err) => Err(format!("DoExpType in experiment <{}>, Error in Python function: {}", self.name, err)),
+                Err(err) => Err(format!(
+                    "DoExpType in experiment <{}>, Error in Python function: {}",
+                    self.name, err
+                )),
             }
         }
     }
@@ -133,10 +141,7 @@ impl Parastructure {
         }
     }
     pub fn new_with_value(value: Option<f64>, range: (f64, f64)) -> Self {
-        Parastructure {
-            value,
-            range,
-        }
+        Parastructure { value, range }
     }
     fn random_sample(&mut self) {
         let mut rng = rand::thread_rng();
@@ -156,8 +161,12 @@ impl Parastructure {
 
 impl fmt::Display for Parastructure {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "[Parastructure] value: {:?}, range: {:?}",
-               self.value, self.range).unwrap();
+        write!(
+            f,
+            "[Parastructure] value: {:?}, range: {:?}",
+            self.value, self.range
+        )
+        .unwrap();
         Result::Ok(())
     }
 }
@@ -169,8 +178,7 @@ pub struct Objstructure {
     attribute: HashMap<ATTR, Parastructure>,
 }
 impl Objstructure {
-    pub fn new(obj_type: ObjType,
-           attribute: HashMap<ATTR, Parastructure>) -> Self {
+    pub fn new(obj_type: ObjType, attribute: HashMap<ATTR, Parastructure>) -> Self {
         Objstructure {
             obj_type,
             attribute,
@@ -189,9 +197,11 @@ impl Objstructure {
     //     result
     // }
     pub fn get_para_real_value(&self, para_name: &ATTR) -> Result<f64, String> {
-        self.attribute.get(para_name).unwrap().real_value().map_err(|x| {
-            format!("Error in get para of `{}`: {}", para_name, x)
-        })
+        self.attribute
+            .get(para_name)
+            .unwrap()
+            .real_value()
+            .map_err(|x| format!("Error in get para of `{}`: {}", para_name, x))
     }
     // fn set_value(&mut self, value_dict: HashMap<ATTR, f64>) {
     //     for (name, value) in value_dict.iter() {
@@ -215,8 +225,11 @@ impl fmt::Display for ListATTR {
 impl fmt::Display for Objstructure {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         let attr_list = ListATTR(self.attribute.keys().cloned().collect());
-        write!(f, "[Objstructure] obj_type: {}, attribute: {}",
-               self.obj_type, attr_list)?;
+        write!(
+            f,
+            "[Objstructure] obj_type: {}, attribute: {}",
+            self.obj_type, attr_list
+        )?;
         write!(f, "\nAttribute:")?;
         for (name, para) in self.attribute.iter() {
             write!(f, "\n| {}: {}", name, para)?;
@@ -233,9 +246,7 @@ pub struct DataStructOfDoExperiment {
     data: HashMap<AtomExp, Vec<f64>>,
 }
 impl DataStructOfDoExperiment {
-    fn new(n: usize,
-           obj_id_map: HashMap<String, (ObjType, i32)>,
-        ) -> Self {
+    fn new(n: usize, obj_id_map: HashMap<String, (ObjType, i32)>) -> Self {
         DataStructOfDoExperiment {
             n,
             obj_id_map,
@@ -249,7 +260,8 @@ impl DataStructOfDoExperiment {
             let id = self.obj_id_map.get(obj_name).unwrap().1;
             obj_ids.push(id);
         }
-        self.data.insert(key.0.to_atomexp(obj_ids).unwrap(), data.to_vec());
+        self.data
+            .insert(key.0.to_atomexp(obj_ids).unwrap(), data.to_vec());
     }
 }
 
@@ -280,19 +292,23 @@ impl DataStructOfDoExperiment {
 
 #[pymethods]
 impl MeasureType {
-    #[getter]#[inline]
+    #[getter]
+    #[inline]
     pub fn n(&self) -> usize {
         self.n
     }
-    #[getter]#[inline]
+    #[getter]
+    #[inline]
     pub fn repeat_time(&self) -> usize {
         self.repeat_time
     }
-    #[getter]#[inline]
+    #[getter]
+    #[inline]
     pub fn error(&self) -> f64 {
         self.error
     }
-    #[getter]#[inline]
+    #[getter]
+    #[inline]
     pub fn t_end(&self) -> f64 {
         self.t_end
     }
@@ -314,9 +330,7 @@ pub struct DataStruct {
 }
 impl DataStruct {
     pub fn new(data: HashMap<AtomExp, ExpData>) -> Self {
-        DataStruct {
-            data
-        }
+        DataStruct { data }
     }
     #[inline]
     pub fn set_data(&mut self, atom: AtomExp, expdata: ExpData) {
@@ -373,7 +387,7 @@ impl DataStructOfExpData {
         DataStructOfExpData {
             name,
             measuretype,
-            data
+            data,
         }
     }
     #[inline]
@@ -396,7 +410,7 @@ impl DataStructOfExpData {
         let t = self.get_t().to_normal_data(n, repeat_time);
         let repeat_time = t.repeat_time;
         for ith in 0..repeat_time {
-            let t= t.data.row(ith).to_vec();
+            let t = t.data.row(ith).to_vec();
             for (key, value) in self.data.iter() {
                 if key.get_name() == "t" {
                     continue;
@@ -445,10 +459,13 @@ impl ExpConfig {
             geometry_info: vec![],
         }
     }
-    pub fn new(name: String, spdim: usize,
-           exp_para: HashMap<String, Parastructure>,
-           obj_info: HashMap<String, Objstructure>,
-           data_info: Vec<(Concept, Vec<String>)>) -> Self {
+    pub fn new(
+        name: String,
+        spdim: usize,
+        exp_para: HashMap<String, Parastructure>,
+        obj_info: HashMap<String, Objstructure>,
+        data_info: Vec<(Concept, Vec<String>)>,
+    ) -> Self {
         let mut obj_id_map: HashMap<String, (ObjType, i32)> = HashMap::new();
         let mut obj_info_dict: HashMap<ObjType, HashMap<i32, String>> = HashMap::new();
         let mut obj_name_map: HashMap<i32, (ObjType, String)> = HashMap::new();
@@ -473,11 +490,17 @@ impl ExpConfig {
             if !obj_info_dict.contains_key(&obj.obj_type) {
                 obj_info_dict.insert(obj_type, HashMap::new());
             }
-            obj_info_dict.get_mut(&obj.obj_type).unwrap().insert(obj_id, (*name).clone());
+            obj_info_dict
+                .get_mut(&obj.obj_type)
+                .unwrap()
+                .insert(obj_id, (*name).clone());
         }
         let mut data_atomexp = HashSet::new();
         for (concept, obj_list) in data_info.iter() {
-            let id_list = obj_list.iter().map(|x| obj_id_map.get(x).unwrap().1).collect();
+            let id_list = obj_list
+                .iter()
+                .map(|x| obj_id_map.get(x).unwrap().1)
+                .collect();
             data_atomexp.insert(concept.to_atomexp(id_list).unwrap());
         }
         ExpConfig {
@@ -515,7 +538,12 @@ impl ExpConfig {
     }
     #[inline]
     fn set_obj(&mut self, id: i32, obj: Objstructure) {
-        let name = self.obj_info_dict.get(&obj.obj_type).unwrap().get(&id).unwrap();
+        let name = self
+            .obj_info_dict
+            .get(&obj.obj_type)
+            .unwrap()
+            .get(&id)
+            .unwrap();
         self.obj_info.insert(name.clone(), obj);
     }
     #[inline]
@@ -551,10 +579,7 @@ impl ExpConfig {
                 }
             }
         }
-        DataStructOfDoExperiment::new(
-            t_num,
-            self.obj_id_map.clone()
-        )
+        DataStructOfDoExperiment::new(t_num, self.obj_id_map.clone())
     }
     #[inline]
     pub fn original_data(&self) -> Vec<(Concept, Vec<i32>)> {
@@ -571,7 +596,6 @@ impl ExpConfig {
     }
 }
 
-
 #[pyclass]
 #[derive(Clone)]
 pub struct ExpStructure {
@@ -581,10 +605,7 @@ pub struct ExpStructure {
 }
 impl ExpStructure {
     pub fn empty() -> Self {
-        ExpStructure::new(
-            ExpConfig::empty(),
-            DoExpType::empty(),
-        )
+        ExpStructure::new(ExpConfig::empty(), DoExpType::empty())
     }
     pub fn new(exp_config: ExpConfig, do_experiment: DoExpType) -> Self {
         ExpStructure {
@@ -644,7 +665,9 @@ impl ExpStructure {
         let t_num = measuretype.n();
         let repeat_time = measuretype.repeat_time();
         let error = measuretype.error();
-        let data_struct = self.do_experiment.do_experiment(t_end, t_num, 0.0, &self.exp_config)?;
+        let data_struct = self
+            .do_experiment
+            .do_experiment(t_end, t_num, 0.0, &self.exp_config)?;
         let data = data_struct.get_data();
         let mut multi_data: HashMap<AtomExp, ExpData> = HashMap::new();
         for (name, data) in data.iter() {
@@ -657,12 +680,16 @@ impl ExpStructure {
             multi_data.insert(name.clone(), ExpData::from_arr2(idata));
         }
         self.datastructofdata = Some(DataStructOfExpData::new(
-            self.exp_config.name.clone(), measuretype,
-            DataStruct::new(multi_data))
-        );
+            self.exp_config.name.clone(),
+            measuretype,
+            DataStruct::new(multi_data),
+        ));
         Ok(())
     }
-    pub fn get_expdata(&mut self, measuretype: MeasureType) -> Result<&DataStructOfExpData, String> {
+    pub fn get_expdata(
+        &mut self,
+        measuretype: MeasureType,
+    ) -> Result<&DataStructOfExpData, String> {
         match self.datastructofdata.as_ref() {
             None => self.calc_expdata(measuretype)?,
             Some(datastructofdata) => {
@@ -693,7 +720,10 @@ impl ExpStructure {
     fn get_mut_expconfig(&mut self) -> &mut ExpConfig {
         &mut self.exp_config
     }
-    pub fn get_all_possible_map(&self, objtype_id_map: &HashMap<String, HashSet<i32>>) -> Vec<HashMap<i32, i32>> {
+    pub fn get_all_possible_map(
+        &self,
+        objtype_id_map: &HashMap<String, HashSet<i32>>,
+    ) -> Vec<HashMap<i32, i32>> {
         for (objtype, ids) in objtype_id_map.iter() {
             if self.get_obj_ids(objtype.parse().unwrap()).len() < ids.len() {
                 return vec![];
@@ -706,7 +736,8 @@ impl ExpStructure {
             let perm = choose_ids.iter().permutations(ids.len());
             let mut vec_map_of_objtype = vec![];
             for p in perm {
-                let dict: HashMap<i32, i32> = ids.iter().zip(p).map(|(a, b)| (*a, *b as i32)).collect();
+                let dict: HashMap<i32, i32> =
+                    ids.iter().zip(p).map(|(a, b)| (*a, *b as i32)).collect();
                 vec_map_of_objtype.push(dict);
             }
             let mut vec_map_new: Vec<HashMap<i32, i32>> = vec![];
@@ -723,11 +754,13 @@ impl ExpStructure {
     }
 }
 
-pub fn add_errors<D: Dimension>(array: &ArrayBase<OwnedRepr<f64>, D>, error: f64)
-        -> Result<ArrayBase<OwnedRepr<f64>, D>, String> {
+pub fn add_errors<D: Dimension>(
+    array: &ArrayBase<OwnedRepr<f64>, D>,
+    error: f64,
+) -> Result<ArrayBase<OwnedRepr<f64>, D>, String> {
     let mut rng = rand::thread_rng();
     let normal = Normal::new(0.0, error);
-    normal.map(
-        |normal| array.mapv(|x| normal.sample(&mut rng) + x)
-    ).map_err(|err| format!("Error in add_errors: {}", err))
+    normal
+        .map(|normal| array.mapv(|x| normal.sample(&mut rng) + x))
+        .map_err(|err| format!("Error in add_errors: {}", err))
 }

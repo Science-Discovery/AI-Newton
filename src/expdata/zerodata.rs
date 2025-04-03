@@ -3,7 +3,6 @@ use std::ops::{Add, Div, Mul, Sub};
 use num_traits::Pow;
 use pyo3::prelude::*;
 
-
 /// ZeroData is a struct that represents a value of zero with uncertainty.
 /// The uncertainty is estimated by `err`.
 #[pyclass]
@@ -38,7 +37,7 @@ impl Add for &ZeroData {
     type Output = ZeroData;
     fn add(self, other: Self) -> ZeroData {
         ZeroData {
-            err: (self.err.powi(2) + other.err.powi(2)).sqrt()
+            err: (self.err.powi(2) + other.err.powi(2)).sqrt(),
         }
     }
 }

@@ -1,3 +1,4 @@
+use super::evaluation::_raw_definition_exp;
 /// This file defines the specialization functions that transform a Concept object into an Exp object, given a context.
 /// The context contains the experiment configuration and the concepts that are already defined.
 /// The specialization functions are used to generate the possible Exp object
@@ -5,15 +6,17 @@
 /// For example,
 /// `[Sum: Particle] (1->Particle) |- m[1] * v[1]` can be specialized into `m[1] * v[1] + m[2] * v[2]` in collision experiment.
 /// `(1->Particle) |- posx[1]` can be specialized into `posx[1], posx[2]` in collision experiment.
-
 use std::collections::HashMap;
-use super::evaluation::_raw_definition_exp;
 
-use crate::language::{AtomExp, BinaryOp, Concept, Exp, Expression};
 use crate::experiments::ExpStructure;
+use crate::language::{AtomExp, BinaryOp, Concept, Exp, Expression};
 
 impl ExpStructure {
-    pub fn _specialize(&self, concept: &Concept, context: &HashMap<String, Expression>) -> Vec<Exp> {
+    pub fn _specialize(
+        &self,
+        concept: &Concept,
+        context: &HashMap<String, Expression>,
+    ) -> Vec<Exp> {
         let objtype_id_map = concept.get_objtype_id_map();
         let vec_map = self.get_all_possible_map(&objtype_id_map);
         match concept {
@@ -36,7 +39,11 @@ impl ExpStructure {
                     let res = result.get_mut(&tmp);
                     if let Some(x) = res {
                         let w = x.clone();
-                        *x = Exp::BinaryExp { left: Box::new(w), op: BinaryOp::Add, right: Box::new(new_exp) };
+                        *x = Exp::BinaryExp {
+                            left: Box::new(w),
+                            op: BinaryOp::Add,
+                            right: Box::new(new_exp),
+                        };
                     } else {
                         result.insert(tmp, new_exp);
                     }
@@ -48,7 +55,7 @@ impl ExpStructure {
                     }
                 }
                 res
-            },
+            }
             _ => {
                 let mut res: Vec<Exp> = vec![];
                 for dict in vec_map.iter() {
@@ -61,7 +68,11 @@ impl ExpStructure {
             }
         }
     }
-    pub fn _specialize_concept(&self, concept_name: String, context: &HashMap<String, Expression>) -> Vec<AtomExp> {
+    pub fn _specialize_concept(
+        &self,
+        concept_name: String,
+        context: &HashMap<String, Expression>,
+    ) -> Vec<AtomExp> {
         let res = context.get(&concept_name);
         if res.is_none() {
             return vec![];
@@ -81,45 +92,56 @@ impl ExpStructure {
                 }
                 exp_list
             }
-            Expression::Concept { concept } => {
-                match concept.as_ref() {
-                    Concept::Mksum { objtype, concept: _ } => {
-                        let mut objtype_id_map = concept.get_objtype_id_map();
-                        objtype_id_map.remove(objtype);
-                        let vec_map = self.get_all_possible_map(&objtype_id_map);
-                        let preids = concept.get_preids();
-                        let mut exp_list = vec![];
-                        for dict in vec_map.iter() {
-                            let mut ids = vec![];
-                            for id in preids.iter() {
-                                ids.push(*dict.get(id).unwrap());
-                            }
-                            let atom_exp = AtomExp::new_variable_ids(concept_name.clone(), ids);
-                            if self._has_data_in_exp(&Exp::Atom{ atom: Box::new(atom_exp.clone()) }, context) {
-                                exp_list.push(atom_exp);
-                            }
+            Expression::Concept { concept } => match concept.as_ref() {
+                Concept::Mksum {
+                    objtype,
+                    concept: _,
+                } => {
+                    let mut objtype_id_map = concept.get_objtype_id_map();
+                    objtype_id_map.remove(objtype);
+                    let vec_map = self.get_all_possible_map(&objtype_id_map);
+                    let preids = concept.get_preids();
+                    let mut exp_list = vec![];
+                    for dict in vec_map.iter() {
+                        let mut ids = vec![];
+                        for id in preids.iter() {
+                            ids.push(*dict.get(id).unwrap());
                         }
-                        exp_list
-                    },
-                    _ => {
-                        let vec_map = self.get_all_possible_map(&concept.get_objtype_id_map());
-                        let preids = concept.get_preids();
-                        let mut exp_list = vec![];
-                        for dict in vec_map.iter() {
-                            let mut ids = vec![];
-                            for id in preids.iter() {
-                                ids.push(*dict.get(id).unwrap());
-                            }
-                            let atom_exp = AtomExp::new_variable_ids(concept_name.clone(), ids);
-                            if self._has_data_in_exp(&Exp::Atom{ atom: Box::new(atom_exp.clone()) }, context) {
-                                exp_list.push(atom_exp);
-                            }
+                        let atom_exp = AtomExp::new_variable_ids(concept_name.clone(), ids);
+                        if self._has_data_in_exp(
+                            &Exp::Atom {
+                                atom: Box::new(atom_exp.clone()),
+                            },
+                            context,
+                        ) {
+                            exp_list.push(atom_exp);
                         }
-                        exp_list
                     }
+                    exp_list
                 }
-            }
-            _ => unimplemented!()
+                _ => {
+                    let vec_map = self.get_all_possible_map(&concept.get_objtype_id_map());
+                    let preids = concept.get_preids();
+                    let mut exp_list = vec![];
+                    for dict in vec_map.iter() {
+                        let mut ids = vec![];
+                        for id in preids.iter() {
+                            ids.push(*dict.get(id).unwrap());
+                        }
+                        let atom_exp = AtomExp::new_variable_ids(concept_name.clone(), ids);
+                        if self._has_data_in_exp(
+                            &Exp::Atom {
+                                atom: Box::new(atom_exp.clone()),
+                            },
+                            context,
+                        ) {
+                            exp_list.push(atom_exp);
+                        }
+                    }
+                    exp_list
+                }
+            },
+            _ => unimplemented!(),
         }
     }
     pub fn _has_data_in_exp(&self, exp: &Exp, context: &HashMap<String, Expression>) -> bool {

@@ -1,6 +1,8 @@
-use crate::language::{Exp, IExpConfig, SExp, Concept, AtomExp, Proposition, Intrinsic, MeasureType};
-use pyo3::prelude::*;
+use crate::language::{
+    AtomExp, Concept, Exp, IExpConfig, Intrinsic, MeasureType, Proposition, SExp,
+};
 use pyo3::callback::IntoPyCallbackOutput;
+use pyo3::prelude::*;
 
 impl FromPyObject<'_> for Box<Exp> {
     fn extract_bound(ob: &Bound<'_, PyAny>) -> PyResult<Self> {
@@ -9,8 +11,7 @@ impl FromPyObject<'_> for Box<Exp> {
         Ok(Box::new(x))
     }
 }
-impl IntoPyCallbackOutput<*mut pyo3::ffi::PyObject> for Box<Exp>
-{
+impl IntoPyCallbackOutput<*mut pyo3::ffi::PyObject> for Box<Exp> {
     #[inline]
     fn convert(self, py: Python<'_>) -> PyResult<*mut pyo3::ffi::PyObject> {
         Ok(self.into_py(py).as_ptr())
@@ -23,8 +24,7 @@ impl FromPyObject<'_> for Box<Proposition> {
         Ok(Box::new(x))
     }
 }
-impl IntoPyCallbackOutput<*mut pyo3::ffi::PyObject> for Box<Proposition>
-{
+impl IntoPyCallbackOutput<*mut pyo3::ffi::PyObject> for Box<Proposition> {
     #[inline]
     fn convert(self, py: Python<'_>) -> PyResult<*mut pyo3::ffi::PyObject> {
         Ok(self.into_py(py).as_ptr())
@@ -37,8 +37,7 @@ impl FromPyObject<'_> for Box<IExpConfig> {
         Ok(Box::new(x))
     }
 }
-impl IntoPyCallbackOutput<*mut pyo3::ffi::PyObject> for Box<IExpConfig>
-{
+impl IntoPyCallbackOutput<*mut pyo3::ffi::PyObject> for Box<IExpConfig> {
     #[inline]
     fn convert(self, py: Python<'_>) -> PyResult<*mut pyo3::ffi::PyObject> {
         Ok(self.into_py(py).as_ptr())
@@ -51,8 +50,7 @@ impl FromPyObject<'_> for Box<SExp> {
         Ok(Box::new(x))
     }
 }
-impl IntoPyCallbackOutput<*mut pyo3::ffi::PyObject> for Box<SExp>
-{
+impl IntoPyCallbackOutput<*mut pyo3::ffi::PyObject> for Box<SExp> {
     #[inline]
     fn convert(self, py: Python<'_>) -> PyResult<*mut pyo3::ffi::PyObject> {
         Ok(self.into_py(py).as_ptr())
@@ -66,8 +64,7 @@ impl FromPyObject<'_> for Box<Intrinsic> {
         Ok(Box::new(x))
     }
 }
-impl IntoPyCallbackOutput<*mut pyo3::ffi::PyObject> for Box<Intrinsic>
-{
+impl IntoPyCallbackOutput<*mut pyo3::ffi::PyObject> for Box<Intrinsic> {
     #[inline]
     fn convert(self, py: Python<'_>) -> PyResult<*mut pyo3::ffi::PyObject> {
         Ok(self.into_py(py).as_ptr())
@@ -81,8 +78,7 @@ impl FromPyObject<'_> for Box<MeasureType> {
         Ok(Box::new(x))
     }
 }
-impl IntoPyCallbackOutput<*mut pyo3::ffi::PyObject> for Box<MeasureType>
-{
+impl IntoPyCallbackOutput<*mut pyo3::ffi::PyObject> for Box<MeasureType> {
     #[inline]
     fn convert(self, py: Python<'_>) -> PyResult<*mut pyo3::ffi::PyObject> {
         Ok(self.into_py(py).as_ptr())
@@ -95,8 +91,7 @@ impl FromPyObject<'_> for Box<Concept> {
         Ok(Box::new(x))
     }
 }
-impl IntoPyCallbackOutput<*mut pyo3::ffi::PyObject> for Box<Concept>
-{
+impl IntoPyCallbackOutput<*mut pyo3::ffi::PyObject> for Box<Concept> {
     #[inline]
     fn convert(self, py: Python<'_>) -> PyResult<*mut pyo3::ffi::PyObject> {
         Ok(self.into_py(py).as_ptr())
@@ -111,8 +106,7 @@ impl FromPyObject<'_> for Box<AtomExp> {
     }
 }
 
-impl IntoPyCallbackOutput<*mut pyo3::ffi::PyObject> for Box<AtomExp>
-{
+impl IntoPyCallbackOutput<*mut pyo3::ffi::PyObject> for Box<AtomExp> {
     #[inline]
     fn convert(self, py: Python<'_>) -> PyResult<*mut pyo3::ffi::PyObject> {
         Ok(self.into_py(py).as_ptr())

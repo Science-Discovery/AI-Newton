@@ -1,15 +1,14 @@
-/// This file contains the conversion functions between different types of data.
-
-use ndarray::Array2;
 use crate::r;
+/// This file contains the conversion functions between different types of data.
+use ndarray::Array2;
 
-use super::{ConstData, ExpData, ZeroData, NormalData};
+use super::{ConstData, ExpData, NormalData, ZeroData};
 
 impl From<ZeroData> for ExpData {
     fn from(content: ZeroData) -> Self {
         match content.err {
-            f64::INFINITY => ExpData::Err { },
-            _ => ExpData::Zero { content }
+            f64::INFINITY => ExpData::Err {},
+            _ => ExpData::Zero { content },
         }
     }
 }
@@ -19,11 +18,12 @@ impl From<ConstData> for ExpData {
         match content {
             ConstData::Data { mean, std } => {
                 if mean == f64::INFINITY || std == f64::INFINITY {
-                    ExpData::Err { }
-                }
-                else if std > mean.abs() * 1.61344 {
+                    ExpData::Err {}
+                } else if std > mean.abs() * 1.61344 {
                     // 等于 0 的置信度非常高
-                    ExpData::Zero { content: content.to_zero_data() }
+                    ExpData::Zero {
+                        content: content.to_zero_data(),
+                    }
                 }
                 // else
                 // if std > mean.abs() / 10.0 {
@@ -33,30 +33,38 @@ impl From<ConstData> for ExpData {
                 else {
                     ExpData::Const { content }
                 }
-            },
+            }
             ConstData::Exact { value } => {
                 if value == 0 {
-                    ExpData::Zero { content: ZeroData::new(0.) }
-                }
-                else {
+                    ExpData::Zero {
+                        content: ZeroData::new(0.),
+                    }
+                } else {
                     ExpData::Const { content }
                 }
             }
         }
-    }   
+    }
 }
 
 impl From<i32> for ExpData {
     fn from(value: i32) -> Self {
-        ExpData::Const { content: ConstData::Exact { value } }
+        ExpData::Const {
+            content: ConstData::Exact { value },
+        }
     }
 }
 
 impl From<f64> for ExpData {
     fn from(value: f64) -> Self {
         match value {
-            f64::INFINITY => ExpData::Err { },
-            value => ExpData::Const { content: ConstData::Data { mean: value, std: 0. } }
+            f64::INFINITY => ExpData::Err {},
+            value => ExpData::Const {
+                content: ConstData::Data {
+                    mean: value,
+                    std: 0.,
+                },
+            },
         }
     }
 }
@@ -64,17 +72,16 @@ impl From<f64> for ExpData {
 impl From<NormalData> for ExpData {
     fn from(content: NormalData) -> Self {
         if content.badpts.len() > content.n / 4 {
-            ExpData::Err { }
-        }
-        else
-        if content.is_zero() {
-            ExpData::Zero { content: content.to_zero_data() }
-        }
-        else
-        if content.is_conserved() {
-            ExpData::Const { content: content.to_const_data() }
-        }
-        else {
+            ExpData::Err {}
+        } else if content.is_zero() {
+            ExpData::Zero {
+                content: content.to_zero_data(),
+            }
+        } else if content.is_conserved() {
+            ExpData::Const {
+                content: content.to_const_data(),
+            }
+        } else {
             ExpData::Normal { content }
         }
     }
@@ -92,7 +99,6 @@ impl From<Array2<f64>> for NormalData {
     }
 }
 
-
 impl From<i32> for ConstData {
     fn from(value: i32) -> Self {
         ConstData::Exact { value }
@@ -101,11 +107,12 @@ impl From<i32> for ConstData {
 
 impl From<f64> for ConstData {
     fn from(value: f64) -> Self {
-        ConstData::Data { mean: value, std: 0. }
+        ConstData::Data {
+            mean: value,
+            std: 0.,
+        }
     }
 }
-
-
 
 impl TryFrom<ExpData> for ZeroData {
     type Error = String;
@@ -139,4 +146,3 @@ impl TryFrom<ExpData> for NormalData {
         }
     }
 }
-

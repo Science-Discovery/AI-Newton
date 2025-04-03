@@ -1,5 +1,5 @@
 struct Foo {
-    a: i32
+    a: i32,
 }
 impl std::fmt::Display for Foo {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {

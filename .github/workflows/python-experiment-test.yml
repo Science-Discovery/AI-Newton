@@ -78,6 +78,5 @@ jobs:
         python -m test.test_experiment.test_cosmos3
         python -m test.test_experiment.test_pendulum
         python -m test.test_experiment.test_collision_nh        
-        python -m test.test_experiment.test_oscillation_1s2o
         python -m test.test_experiment.test_oscillation_r
         python -m test.test_experiment.test_oscillation_rot

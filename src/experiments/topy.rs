@@ -1,18 +1,17 @@
+use super::expstructure::{
+    DataStruct, DataStructOfDoExperiment, DataStructOfExpData, DoExpType, ExpConfig, ExpStructure,
+    Objstructure, Parastructure,
+};
+use super::objects::obj::{ObjType, ATTR, DATA};
+use super::simulation::collision::do_collision;
+use crate::expdata::expdata::ExpData;
+use crate::language::{AtomExp, Concept, Exp, MeasureType, Proposition};
+use crate::parser::FromStr;
 use pyo3::exceptions::PyValueError;
 use pyo3::prelude::*;
+use regex::Regex;
 use std::collections::{HashMap, HashSet};
 use std::hash::{DefaultHasher, Hash, Hasher};
-use regex::Regex;
-use crate::parser::FromStr;
-use crate::language::{AtomExp, Concept, Exp, MeasureType, Proposition};
-use super::objects::obj::{ObjType, DATA, ATTR};
-use crate::expdata::expdata::ExpData;
-use super::simulation::collision::do_collision;
-use super::expstructure::{
-    ExpStructure, Parastructure, Objstructure,
-    DataStructOfDoExperiment,
-    ExpConfig, DataStructOfExpData, DataStruct, DoExpType
-};
 
 #[pymethods]
 impl ObjType {
@@ -22,7 +21,8 @@ impl ObjType {
     fn __repr__(&self) -> String {
         format!("{}", self)
     }
-    #[new]#[inline]
+    #[new]
+    #[inline]
     pub fn from_string(obj: String) -> PyResult<Self> {
         obj.parse().map_err(|x| PyValueError::new_err(x))
     }
@@ -71,10 +71,7 @@ impl Objstructure {
     }
     #[staticmethod]
     pub fn clock() -> Self {
-        Objstructure::new(
-            ObjType::clock(),
-            HashMap::from([]),
-        )
+        Objstructure::new(ObjType::clock(), HashMap::from([]))
     }
     #[staticmethod]
     fn make_slope() -> Self {
@@ -99,25 +96,37 @@ impl ExpStructure {
     fn __setstate__(&mut self, state: String) {
         *self = serde_yaml::from_str(&state).unwrap();
     }
-    #[getter]#[inline]
+    #[getter]
+    #[inline]
     fn get_all_ids(&self) -> HashSet<i32> {
-        self.get_ref_expconfig().obj_name_map.keys().cloned().collect()
+        self.get_ref_expconfig()
+            .obj_name_map
+            .keys()
+            .cloned()
+            .collect()
     }
     #[inline]
     fn get_obj_type(&self, id: i32) -> ObjType {
-        self.get_ref_expconfig().obj_name_map.get(&id).unwrap().0.clone()
+        self.get_ref_expconfig()
+            .obj_name_map
+            .get(&id)
+            .unwrap()
+            .0
+            .clone()
     }
     #[inline]
     pub fn get_obj(&self, id: i32) -> Objstructure {
         self.get_ref_expconfig().get_obj(id).clone()
     }
-    #[getter]#[inline]
-    fn obj_info(&self) -> HashMap<String, (ObjType, i32)>{
+    #[getter]
+    #[inline]
+    fn obj_info(&self) -> HashMap<String, (ObjType, i32)> {
         let expdata = self.get_ref_expconfig();
         expdata.obj_id_map.clone()
     }
-    #[getter]#[inline]
-    fn data_info(&self) -> DataStruct{
+    #[getter]
+    #[inline]
+    fn data_info(&self) -> DataStruct {
         if self.expdata_is_none() {
             panic!("The expdata has not been collected yet.");
         }
@@ -127,19 +136,23 @@ impl ExpStructure {
         // }
         expdata.data.clone()
     }
-    #[getter]#[inline]
+    #[getter]
+    #[inline]
     fn get_exp_name(&self) -> String {
         self.get_ref_expconfig().name.clone()
     }
-    #[getter]#[inline]
+    #[getter]
+    #[inline]
     fn get_spdim(&self) -> usize {
         self.get_ref_expconfig().spdim
     }
-    #[getter]#[inline]
+    #[getter]
+    #[inline]
     fn get_original_data(&self) -> Vec<AtomExp> {
         self.get_ref_expconfig().get_original_data()
     }
-    #[getter]#[inline]
+    #[getter]
+    #[inline]
     fn get_original_concept(&self) -> HashSet<Concept> {
         self.get_ref_expconfig().get_original_concept()
     }
@@ -159,7 +172,7 @@ impl ExpStructure {
         let res = self.get_expdata(measuretype);
         match res {
             Ok(data) => Ok(data.clone()),
-            Err(e) => Err(PyValueError::new_err(e))
+            Err(e) => Err(PyValueError::new_err(e)),
         }
     }
     fn copy(&self) -> Self {
@@ -182,13 +195,16 @@ impl DataStruct {
     fn __repr__(&self) -> String {
         format!("{}", self)
     }
-    #[getter]#[inline]
+    #[getter]
+    #[inline]
     fn get_data_keys(&self) -> HashSet<AtomExp> {
         self.get_data().keys().cloned().collect()
     }
     #[inline]
     fn fetch_data_by_name_ids(&self, name: &str, ids: Vec<i32>) -> Option<ExpData> {
-        self.get_data().get(&AtomExp::new_variable_ids(name.to_string(), ids)).cloned()
+        self.get_data()
+            .get(&AtomExp::new_variable_ids(name.to_string(), ids))
+            .cloned()
     }
     #[inline]
     fn fetch_data_by_key(&self, atom: AtomExp) -> Option<ExpData> {
@@ -196,7 +212,9 @@ impl DataStruct {
     }
     #[inline]
     fn fetch_data_by_str(&self, atom_name: &str) -> Option<ExpData> {
-        self.get_data().get(&AtomExp::from_str(atom_name).unwrap()).cloned()
+        self.get_data()
+            .get(&AtomExp::from_str(atom_name).unwrap())
+            .cloned()
     }
     #[staticmethod]
     fn empty() -> Self {
@@ -212,7 +230,8 @@ impl DataStruct {
 
 #[pymethods]
 impl DataStructOfExpData {
-    #[getter]#[inline]
+    #[getter]
+    #[inline]
     fn get_datastruct(&self) -> DataStruct {
         self.data.clone()
     }
@@ -222,7 +241,10 @@ impl DataStructOfExpData {
 impl DATA {
     #[new]
     fn __new__(obj: ObjType, name: &str) -> Self {
-        DATA::Mk { obj, name: name.to_string() }
+        DATA::Mk {
+            obj,
+            name: name.to_string(),
+        }
     }
     fn __hash__(&self) -> u64 {
         let mut s = DefaultHasher::new();
@@ -237,30 +259,52 @@ impl DATA {
     }
 
     #[staticmethod]
-    fn particle_posx() -> Concept { DATA::posx() }
+    fn particle_posx() -> Concept {
+        DATA::posx()
+    }
     #[staticmethod]
-    fn particle_posy() -> Concept { DATA::posy() }
+    fn particle_posy() -> Concept {
+        DATA::posy()
+    }
     #[staticmethod]
-    fn particle_posz() -> Concept { DATA::posz() }
+    fn particle_posz() -> Concept {
+        DATA::posz()
+    }
     #[staticmethod]
-    fn particle_dist() -> Concept { DATA::dist() }
+    fn particle_dist() -> Concept {
+        DATA::dist()
+    }
     #[staticmethod]
-    fn spring_length() -> Concept { DATA::length() }
+    fn spring_length() -> Concept {
+        DATA::length()
+    }
     #[staticmethod]
-    fn clock_time() -> Concept { DATA::time() }
+    fn clock_time() -> Concept {
+        DATA::time()
+    }
     #[staticmethod]
-    fn slope_cx() -> Concept { DATA::cx() }
+    fn slope_cx() -> Concept {
+        DATA::cx()
+    }
     #[staticmethod]
-    fn slope_cy() -> Concept { DATA::cy() }
+    fn slope_cy() -> Concept {
+        DATA::cy()
+    }
     #[staticmethod]
-    fn slope_cz() -> Concept { DATA::cz() }
+    fn slope_cz() -> Concept {
+        DATA::cz()
+    }
 }
 
 #[pymethods]
 impl ATTR {
-    #[new]#[inline]
+    #[new]
+    #[inline]
     fn __new__(obj: ObjType, name: &str) -> Self {
-        ATTR::Mk { obj, name: name.to_string() }
+        ATTR::Mk {
+            obj,
+            name: name.to_string(),
+        }
     }
     /// print name
     fn __str__(&self) -> String {
@@ -273,36 +317,55 @@ impl ATTR {
 
 #[pymethods]
 impl ExpConfig {
-    #[new]#[inline]
-    fn __new__(name: &str, spdim: usize, exp_para: HashMap<String, Parastructure>,
-               obj_info: HashMap<String, Objstructure>,
-               data_info: Vec<(Concept, Vec<String>)>) -> Self {
+    #[new]
+    #[inline]
+    fn __new__(
+        name: &str,
+        spdim: usize,
+        exp_para: HashMap<String, Parastructure>,
+        obj_info: HashMap<String, Objstructure>,
+        data_info: Vec<(Concept, Vec<String>)>,
+    ) -> Self {
         ExpConfig::new(name.to_string(), spdim, exp_para, obj_info, data_info)
     }
     #[inline]
     pub fn para(&self, para_name: &str) -> f64 {
-        self.exp_para.get(para_name).unwrap().real_value()
-            .map_err(|e| {format!("Error in getting para `{}`: {}", para_name, e)})
+        self.exp_para
+            .get(para_name)
+            .unwrap()
+            .real_value()
+            .map_err(|e| format!("Error in getting para `{}`: {}", para_name, e))
             .unwrap()
     }
     #[inline]
     pub fn obj_para(&self, obj_name: &str, para_name: &ATTR) -> f64 {
-        self.obj_info.get(obj_name).unwrap().get_para_real_value(para_name).unwrap()
+        self.obj_info
+            .get(obj_name)
+            .unwrap()
+            .get_para_real_value(para_name)
+            .unwrap()
     }
     #[inline]
     pub fn get_obj_para(&self, obj_name: &str, para_name: &str) -> f64 {
         let obj_type = self.obj_info.get(obj_name).unwrap().obj_type.clone();
         let para_attr = ATTR::new(obj_type, para_name);
-        self.obj_info.get(obj_name).unwrap().get_para_real_value(&para_attr).unwrap()
+        self.obj_info
+            .get(obj_name)
+            .unwrap()
+            .get_para_real_value(&para_attr)
+            .unwrap()
     }
-    #[getter]#[inline]
+    #[getter]
+    #[inline]
     fn get_original_data(&self) -> Vec<AtomExp> {
         let original_data = self.original_data();
-        original_data.iter().map(|(concept, obj_ids)| {
-            concept.to_atomexp(obj_ids.clone()).unwrap()
-        }).collect()
+        original_data
+            .iter()
+            .map(|(concept, obj_ids)| concept.to_atomexp(obj_ids.clone()).unwrap())
+            .collect()
     }
-    #[getter]#[inline]
+    #[getter]
+    #[inline]
     fn get_original_concept(&self) -> HashSet<Concept> {
         let original_data = self.original_data();
         let mut res = HashSet::new();
@@ -339,21 +402,27 @@ impl ExpConfig {
     fn _gen_exp_string(&self, content: String) -> String {
         let re = Regex::new(r"\[([a-zA-Z0-9, ]+)\]").unwrap();
         // find all positions of re in content
-        let res: Vec<(usize, usize)> = re.find_iter(&content).map(|m| (m.start(), m.end())).collect();
+        let res: Vec<(usize, usize)> = re
+            .find_iter(&content)
+            .map(|m| (m.start(), m.end()))
+            .collect();
         if res.len() == 0 {
             return content;
         }
         let mut new_content = String::new();
         let mut last = 0;
-        let subst_dict = self.obj_id_map.iter().map(|(key, value)| {
-            (key.clone(), value.1)
-        }).collect::<HashMap<String, i32>>();
+        let subst_dict = self
+            .obj_id_map
+            .iter()
+            .map(|(key, value)| (key.clone(), value.1))
+            .collect::<HashMap<String, i32>>();
         for i in 0..res.len() {
             new_content.push_str(&content[last..res[i].0]);
             // '[a1, a2, b, c]', transform it to ['a1', 'a2', 'b', 'c'], and do the substitution
-            let vec_ids = &content[(res[i].0+1)..(res[i].1-1)].split(", ").map(|x| {
-                subst_dict.get(x).unwrap().to_string()
-            }).collect::<Vec<String>>();
+            let vec_ids = &content[(res[i].0 + 1)..(res[i].1 - 1)]
+                .split(", ")
+                .map(|x| subst_dict.get(x).unwrap().to_string())
+                .collect::<Vec<String>>();
             // transform vec_ids to a string
             let slice_str = format!("[{}]", vec_ids.join(", "));
             new_content.push_str(&slice_str);

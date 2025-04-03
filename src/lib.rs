@@ -1,42 +1,39 @@
+pub mod knowledge;
 pub mod macros;
 pub mod parser;
-pub mod knowledge;
 pub mod regression;
 pub mod serialize;
-pub mod semantic{
+pub mod semantic {
     pub mod evaluation;
-    pub mod specialize;
-    pub mod generalize;
     pub mod exprcharacter;
+    pub mod generalize;
+    pub mod specialize;
 }
-pub mod language;
 pub mod expdata;
 pub mod experiments;
+pub mod language;
 
 mod impl_for_pyo3;
-use expdata::register_data;
-use experiments::register_experiment;
-use parser::parsing::register_sentence;
-use knowledge::Knowledge;
-use semantic::exprcharacter::KeyValueHashed;
-use regression::{
-    search_relations_ver1,
-    search_relations_ver2,
-    search_binary_relations,
-    search_trivial_relations,
-    search_relations_ver3
-};
 use crate::experiments::simulation::{
-    oscillation::struct_oscillation,
-    collision::{struct_collision, do_collision},
+    collision::{do_collision, struct_collision},
     motion::struct_motion,
     motion0::struct_motion0,
-    stringmotion0::struct_stringmotion0,
-    oscillationy::struct_oscillationy,
     motion0y::struct_motion0y,
-    motiony::struct_motiony
+    motiony::struct_motiony,
+    oscillation::struct_oscillation,
+    oscillationy::struct_oscillationy,
+    stringmotion0::struct_stringmotion0,
 };
+use expdata::register_data;
+use experiments::register_experiment;
+use knowledge::Knowledge;
+use parser::parsing::register_sentence;
 use pyo3::prelude::*;
+use regression::{
+    search_binary_relations, search_relations_ver1, search_relations_ver2, search_relations_ver3,
+    search_trivial_relations,
+};
+use semantic::exprcharacter::KeyValueHashed;
 #[pymodule]
 fn core(m: &Bound<'_, PyModule>) -> PyResult<()> {
     register_sentence(m)?;

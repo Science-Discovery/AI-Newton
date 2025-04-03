@@ -1,11 +1,11 @@
+use crate::expdata::{ConstData, ExpData};
+use crate::experiments::builtin_experiment;
+use crate::experiments::{ExpStructure, Objstructure};
+use crate::language::*;
+use crate::semantic::exprcharacter::{KeyState, KeyValue, KeyValueHashed};
 use pyo3::exceptions::PyValueError;
 use pyo3::prelude::*;
 use std::collections::{HashMap, HashSet};
-use crate::semantic::exprcharacter::{KeyState, KeyValue, KeyValueHashed};
-use crate::language::*;
-use crate::experiments::builtin_experiment;
-use crate::expdata::{ExpData, ConstData};
-use crate::experiments::{ExpStructure, Objstructure};
 
 /// A knowledge base about the concepts and theory of a set of experiments.
 ///
@@ -18,14 +18,14 @@ use crate::experiments::{ExpStructure, Objstructure};
 /// `concepts`:
 ///     only support two kinds of Expression:
 ///     `Intrinsic` and `Concept`.
-/// 
+///
 /// `key`:
 ///     used to calculate the Concept's characteristic value.
 ///     to classify wheather two Concepts are the same.
 ///     for example, 1 + x and 2x + 1 - x are the same (under simplification).
 ///     for example, v[1] - x[2] and v[2] - x[1] are the same (under permutation of index).
 ///     for example, sum (m[i] + k[i]) and (sum m[i]) + (sum k[i]) are the same (under distribution).
-/// 
+///
 /// `conclusions`:
 ///     used to store the conclusions that hold in some experiments.
 ///
@@ -111,7 +111,8 @@ impl Knowledge {
             println!("{}: {}", name, prop);
         }
     }
-    #[getter]#[inline]
+    #[getter]
+    #[inline]
     fn fetch_experiments(&self) -> Vec<String> {
         let mut res = vec![];
         for (name, _) in self.experiments.iter() {
@@ -119,24 +120,30 @@ impl Knowledge {
         }
         res
     }
-    #[getter]#[inline]
+    #[getter]
+    #[inline]
     fn fetch_concepts(&self) -> HashMap<String, Expression> {
         self.concepts.clone()
     }
-    #[getter]#[inline]
+    #[getter]
+    #[inline]
     fn fetch_intrinsic_concepts(&self) -> HashMap<String, Intrinsic> {
-        self.concepts.iter().filter_map(|(name, exp)| {
-            match exp {
-                Expression::Intrinsic { intrinsic } => Some((name.clone(), intrinsic.as_ref().clone())),
-                _ => None
-            }
-        }).collect()
+        self.concepts
+            .iter()
+            .filter_map(|(name, exp)| match exp {
+                Expression::Intrinsic { intrinsic } => {
+                    Some((name.clone(), intrinsic.as_ref().clone()))
+                }
+                _ => None,
+            })
+            .collect()
     }
     #[inline]
     fn fetch_concept_by_name(&self, name: String) -> Expression {
         self.concepts.get(&name).unwrap().clone()
     }
-    #[getter]#[inline]
+    #[getter]
+    #[inline]
     fn fetch_conclusions(&self) -> HashMap<String, Proposition> {
         self.conclusions.clone()
     }
@@ -144,7 +151,8 @@ impl Knowledge {
     fn fetch_conclusion_by_name(&self, name: String) -> Proposition {
         self.conclusions.get(&name).unwrap().clone()
     }
-    #[getter]#[inline]
+    #[getter]
+    #[inline]
     fn fetch_object_keys(&self) -> Vec<String> {
         self.objects.keys().cloned().collect()
     }
@@ -190,7 +198,12 @@ impl Knowledge {
         }
         let (kv, kvh, _subs_dict) = self.eval_concept_keyvaluehashed(&concept).unwrap();
         self.key.insert_concept(name.clone(), kv, kvh);
-        self.concepts.insert(name, Expression::Concept { concept: Box::new(concept) });
+        self.concepts.insert(
+            name,
+            Expression::Concept {
+                concept: Box::new(concept),
+            },
+        );
         true
     }
     /// This function is used to register a new concept to the Knowledge object.
@@ -198,12 +211,14 @@ impl Knowledge {
     #[inline]
     #[pyo3(signature = (name, exp))]
     pub fn register_expression(&mut self, name: String, exp: Expression) -> PyResult<bool> {
-        self._register_expression(name, exp).map_err(|x| PyValueError::new_err(x))
+        self._register_expression(name, exp)
+            .map_err(|x| PyValueError::new_err(x))
     }
     #[inline]
     #[pyo3(signature = (name, prop))]
     pub fn register_conclusion(&mut self, name: String, prop: Proposition) -> PyResult<bool> {
-        self._register_conclusion(name, prop).map_err(|x| PyValueError::new_err(x))
+        self._register_conclusion(name, prop)
+            .map_err(|x| PyValueError::new_err(x))
     }
     #[inline]
     fn remove_conclusion(&mut self, name: String) {
@@ -227,13 +242,22 @@ impl Knowledge {
     fn fetch_objstructure_in_expstruct(&self, expname: String, objid: i32) -> Objstructure {
         self.experiments.get(&expname).unwrap().get_obj(objid)
     }
-    fn get_expstructure(&self, expconfig: &IExpConfig, objsettings: Vec<Objstructure> ) -> PyResult<ExpStructure> {
-        self._get_expstructure(expconfig, objsettings).map_err(|x| PyValueError::new_err(x))
+    fn get_expstructure(
+        &self,
+        expconfig: &IExpConfig,
+        objsettings: Vec<Objstructure>,
+    ) -> PyResult<ExpStructure> {
+        self._get_expstructure(expconfig, objsettings)
+            .map_err(|x| PyValueError::new_err(x))
     }
-    pub fn eval_intrinsic(&self, intrinsic: &Intrinsic, objsettings: Vec<Objstructure>) -> Option<ConstData> {
+    pub fn eval_intrinsic(
+        &self,
+        intrinsic: &Intrinsic,
+        objsettings: Vec<Objstructure>,
+    ) -> Option<ConstData> {
         match self._eval_intrinsic(intrinsic, objsettings) {
             Ok(x) => Some(x),
-            Err(_) => None
+            Err(_) => None,
         }
     }
     pub fn eval_prop(&self, prop: Proposition, context: &mut ExpStructure) -> PyResult<bool> {
@@ -246,9 +270,7 @@ impl Knowledge {
     }
     pub fn generalize_sexp(&self, sexp: &SExp) -> Option<Concept> {
         match sexp {
-            SExp::Mk { expconfig, exp } => {
-                self.generalize(exp.as_ref(), expconfig.get_expname())
-            }
+            SExp::Mk { expconfig, exp } => self.generalize(exp.as_ref(), expconfig.get_expname()),
         }
     }
     pub fn generalize(&self, expr: &Exp, exp_name: String) -> Option<Concept> {
@@ -285,8 +307,7 @@ impl Knowledge {
         let (_kv, kvh, _subs_dict) = self.eval_concept_keyvaluehashed(&concept).unwrap();
         if kvh.is_none() || kvh.is_const() {
             None
-        } else
-        if self.key.contains_key_concept(&kvh) {
+        } else if self.key.contains_key_concept(&kvh) {
             return Some(self.key.get_key_concept(&kvh).unwrap());
         } else {
             None
@@ -296,8 +317,7 @@ impl Knowledge {
         let (_kv, kvh) = self.eval_intrinsic_keyvaluehashed(&intrinsic).unwrap();
         if kvh.is_none() || kvh.is_const() {
             None
-        } else
-        if self.key.contains_key_concept(&kvh) {
+        } else if self.key.contains_key_concept(&kvh) {
             return Some(self.key.get_key_concept(&kvh).unwrap());
         } else {
             None
@@ -307,8 +327,7 @@ impl Knowledge {
         let (_kv, kvh) = self.eval_proposition_keyvaluehashed(&prop).unwrap();
         if kvh.is_none() || kvh.is_const() {
             None
-        } else
-        if self.key.contains_key_concept(&kvh) {
+        } else if self.key.contains_key_concept(&kvh) {
             return Some(self.key.get_key_concept(&kvh).unwrap());
         } else {
             None
@@ -329,33 +348,38 @@ impl Knowledge {
     #[pyo3(signature = (expr))]
     fn eval_expr_key(&mut self, expr: &Expression) -> KeyValueHashed {
         match expr {
-            Expression::Exp { exp } => {
-                self.eval_keyvalue(exp.as_ref(), None).unwrap().to_hashed()
-            }
+            Expression::Exp { exp } => self.eval_keyvalue(exp.as_ref(), None).unwrap().to_hashed(),
             Expression::Proposition { prop } => {
-                self.eval_proposition_keyvaluehashed(prop.as_ref()).unwrap().1
+                self.eval_proposition_keyvaluehashed(prop.as_ref())
+                    .unwrap()
+                    .1
             }
             Expression::Concept { concept } => {
-                self.eval_concept_keyvaluehashed(concept.as_ref()).unwrap().1
+                self.eval_concept_keyvaluehashed(concept.as_ref())
+                    .unwrap()
+                    .1
             }
             Expression::Intrinsic { intrinsic } => {
-                self.eval_intrinsic_keyvaluehashed(intrinsic.as_ref()).unwrap().1
+                self.eval_intrinsic_keyvaluehashed(intrinsic.as_ref())
+                    .unwrap()
+                    .1
             }
-            _ => unimplemented!()
+            _ => unimplemented!(),
         }
     }
     #[pyo3(signature = (concept))]
     fn dependence_of_concept(&self, concept: &Concept) -> HashSet<String> {
         match concept {
-            Concept::Mksum { objtype: _, concept } => {
-                self.dependence_of_concept(concept.as_ref())
-            }
-            Concept::Mksucc { objtype: _, concept, id: _ } => {
-                self.dependence_of_concept(concept.as_ref())
-            }
-            Concept::Mk0 { exp } => {
-                self.dependence_of_exp(exp.as_ref())
-            }
+            Concept::Mksum {
+                objtype: _,
+                concept,
+            } => self.dependence_of_concept(concept.as_ref()),
+            Concept::Mksucc {
+                objtype: _,
+                concept,
+                id: _,
+            } => self.dependence_of_concept(concept.as_ref()),
+            Concept::Mk0 { exp } => self.dependence_of_exp(exp.as_ref()),
         }
     }
     #[pyo3(signature = (atom))]
@@ -376,7 +400,7 @@ impl Knowledge {
                         res
                     }
                 }
-                _ => unimplemented!()
+                _ => unimplemented!(),
             }
         } else {
             panic!("Atom not found in concepts")
@@ -385,28 +409,27 @@ impl Knowledge {
     #[pyo3(signature = (exp))]
     fn dependence_of_exp(&self, exp: &Exp) -> HashSet<String> {
         match exp {
-            Exp::Atom { atom } => {
-                self.dependence_of_atomexp(atom.as_ref())
-            },
-            Exp::Number { num: _ } => {
-                HashSet::new()
-            },
+            Exp::Atom { atom } => self.dependence_of_atomexp(atom.as_ref()),
+            Exp::Number { num: _ } => HashSet::new(),
             Exp::BinaryExp { left, op: _, right } => {
                 let mut res = self.dependence_of_exp(left.as_ref());
                 res.extend(self.dependence_of_exp(right.as_ref()));
                 res
-            },
-            Exp::UnaryExp { op: _, exp } => {
-                self.dependence_of_exp(exp.as_ref())
-            },
-            Exp::DiffExp { left, right, ord: _ } => {
+            }
+            Exp::UnaryExp { op: _, exp } => self.dependence_of_exp(exp.as_ref()),
+            Exp::DiffExp {
+                left,
+                right,
+                ord: _,
+            } => {
                 let mut res = self.dependence_of_exp(left.as_ref());
                 res.extend(self.dependence_of_exp(right.as_ref()));
                 res
-            },
-            Exp::ExpWithMeasureType { exp, measuretype: _ } => {
-                self.dependence_of_exp(exp.as_ref())
-            },
+            }
+            Exp::ExpWithMeasureType {
+                exp,
+                measuretype: _,
+            } => self.dependence_of_exp(exp.as_ref()),
             Exp::Partial { left, right } => {
                 let mut res = self.dependence_of_exp(left.as_ref());
                 res.extend(self.dependence_of_atomexp(right.as_ref()));
@@ -432,13 +455,17 @@ impl Knowledge {
     #[pyo3(signature = (expconfig))]
     fn dependence_of_expconfig(&self, expconfig: &IExpConfig) -> HashSet<String> {
         match expconfig {
-            IExpConfig::From { name: _ } => {
-                HashSet::new()
-            },
-            IExpConfig::Mk { objtype: _, expconfig, id: _ } => {
-                self.dependence_of_expconfig(expconfig)
-            },
-            IExpConfig::Mkfix { object, expconfig, id: _ } => {
+            IExpConfig::From { name: _ } => HashSet::new(),
+            IExpConfig::Mk {
+                objtype: _,
+                expconfig,
+                id: _,
+            } => self.dependence_of_expconfig(expconfig),
+            IExpConfig::Mkfix {
+                object,
+                expconfig,
+                id: _,
+            } => {
                 let mut res = self.dependence_of_expconfig(expconfig);
                 res.insert(object.clone());
                 res
@@ -448,45 +475,35 @@ impl Knowledge {
     #[pyo3(signature = (prop))]
     fn dependence_of_proposition(&self, prop: &Proposition) -> HashSet<String> {
         match prop {
-            Proposition::Conserved { concept } => {
-                self.dependence_of_concept(concept.as_ref())
-            },
-            Proposition::Zero { concept } => {
-                self.dependence_of_concept(concept.as_ref())
-            },
-            Proposition::IsConserved { exp } => {
-                self.dependence_of_exp(exp.as_ref())
-            },
-            Proposition::IsZero { exp } => {
-                self.dependence_of_exp(exp.as_ref())
-            },
+            Proposition::Conserved { concept } => self.dependence_of_concept(concept.as_ref()),
+            Proposition::Zero { concept } => self.dependence_of_concept(concept.as_ref()),
+            Proposition::IsConserved { exp } => self.dependence_of_exp(exp.as_ref()),
+            Proposition::IsZero { exp } => self.dependence_of_exp(exp.as_ref()),
             Proposition::Eq { left, right } => {
                 let mut res = self.dependence_of_exp(left.as_ref());
                 res.extend(self.dependence_of_exp(right.as_ref()));
                 res
-            },
-            Proposition::Not { prop } => {
-                self.dependence_of_proposition(prop.as_ref())
-            },
+            }
+            Proposition::Not { prop } => self.dependence_of_proposition(prop.as_ref()),
         }
     }
 
     #[pyo3(signature = (expression, exp_name=None))]
     fn raw_definition(&self, expression: &Expression, exp_name: Option<String>) -> Expression {
         match expression {
-            Expression::Exp { exp } => {
-                Expression::Exp { exp: Box::new(self.raw_definition_exp(exp, exp_name)) }
-            }
-            Expression::Proposition { prop } => {
-                Expression::Proposition { prop: Box::new(self.raw_definition_prop(prop, exp_name)) }
-            }
-            Expression::Concept { concept } => {
-                Expression::Concept { concept: Box::new(self.raw_definition_concept(concept, exp_name)) }
-            }
-            Expression::Intrinsic { intrinsic } => {
-                Expression::Intrinsic { intrinsic: Box::new(self.raw_definition_intrinsic(intrinsic)) }
-            }
-            _ => unimplemented!()
+            Expression::Exp { exp } => Expression::Exp {
+                exp: Box::new(self.raw_definition_exp(exp, exp_name)),
+            },
+            Expression::Proposition { prop } => Expression::Proposition {
+                prop: Box::new(self.raw_definition_prop(prop, exp_name)),
+            },
+            Expression::Concept { concept } => Expression::Concept {
+                concept: Box::new(self.raw_definition_concept(concept, exp_name)),
+            },
+            Expression::Intrinsic { intrinsic } => Expression::Intrinsic {
+                intrinsic: Box::new(self.raw_definition_intrinsic(intrinsic)),
+            },
+            _ => unimplemented!(),
         }
     }
     #[pyo3(signature = (prop, exp_name=None))]
@@ -551,39 +568,47 @@ impl Knowledge {
         match self.concepts.get(&name).unwrap() {
             Expression::Concept { concept } => {
                 let preobjs = concept.get_pre_objtype_id_vec();
-                let ids: Vec<i32> = (1..(preobjs.len()+1) as i32).collect();
+                let ids: Vec<i32> = (1..(preobjs.len() + 1) as i32).collect();
                 let atomexp = AtomExp::new_variable_ids(name, ids);
-                let mut concept_new = Concept::Mk0 { exp: Box::new(Exp::from_atom(&atomexp)) };
-                for i in 1..(preobjs.len()+1) {
+                let mut concept_new = Concept::Mk0 {
+                    exp: Box::new(Exp::from_atom(&atomexp)),
+                };
+                for i in 1..(preobjs.len() + 1) {
                     concept_new = Concept::Mksucc {
-                        objtype: preobjs[i-1].0.clone(),
+                        objtype: preobjs[i - 1].0.clone(),
                         concept: Box::new(concept_new),
                         id: i as i32,
                     };
                 }
                 Ok(concept_new)
-            },
+            }
             Expression::Intrinsic { intrinsic } => {
                 let preobjs = intrinsic.get_input_objtypes();
-                let ids: Vec<i32> = (1..(preobjs.len()+1) as i32).collect();
+                let ids: Vec<i32> = (1..(preobjs.len() + 1) as i32).collect();
                 let atomexp = AtomExp::new_variable_ids(name, ids);
-                let mut concept_new = Concept::Mk0 { exp: Box::new(Exp::from_atom(&atomexp)) };
-                for i in 1..(preobjs.len()+1) {
+                let mut concept_new = Concept::Mk0 {
+                    exp: Box::new(Exp::from_atom(&atomexp)),
+                };
+                for i in 1..(preobjs.len() + 1) {
                     concept_new = Concept::Mksucc {
-                        objtype: preobjs[i-1].obj.clone(),
+                        objtype: preobjs[i - 1].obj.clone(),
                         concept: Box::new(concept_new),
                         id: i as i32,
                     };
                 }
                 Ok(concept_new)
-            },
-            _ => Err(format!("Cannot generate a atom_concept for {}", name))
+            }
+            _ => Err(format!("Cannot generate a atom_concept for {}", name)),
         }
     }
 }
 
 impl Knowledge {
-    pub fn _register_conclusion(&mut self, name: String, prop: Proposition) -> Result<bool, String> {
+    pub fn _register_conclusion(
+        &mut self,
+        name: String,
+        prop: Proposition,
+    ) -> Result<bool, String> {
         let (kv, kvh) = self.eval_proposition_keyvaluehashed(&prop)?;
         // 不注册形如 1, m * k, m * (1 / m + 1) 这样显然守恒的结论
         if kvh.is_none() || kvh.is_const() {
@@ -606,11 +631,12 @@ impl Knowledge {
                     return Ok(false);
                 }
                 // 不重复注册概念
-                if self.key.contains_key_concept(&kvh) || self.key.contains_key_concept(&kvh.neg()) {
+                if self.key.contains_key_concept(&kvh) || self.key.contains_key_concept(&kvh.neg())
+                {
                     return Ok(false);
                 }
                 self.key.insert_concept(name.clone(), kv, kvh);
-            },
+            }
             Expression::Intrinsic { intrinsic } => {
                 let (kv, kvh) = self.eval_intrinsic_keyvaluehashed(&intrinsic)?;
                 // 不注册形如 1, m * k, m * (1 / m + 1) 这样的内秉概念
@@ -618,12 +644,13 @@ impl Knowledge {
                     return Ok(false);
                 }
                 // 不重复注册概念
-                if self.key.contains_key_concept(&kvh) || self.key.contains_key_concept(&kvh.neg()) {
+                if self.key.contains_key_concept(&kvh) || self.key.contains_key_concept(&kvh.neg())
+                {
                     return Ok(false);
                 }
                 self.key.insert_concept(name.clone(), kv, kvh);
             }
-            _ => ()
+            _ => (),
         };
         self.concepts.insert(name, exp);
         Ok(true)

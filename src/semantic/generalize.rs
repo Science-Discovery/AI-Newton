@@ -1,17 +1,16 @@
 /// This file defines the generalization functions that transform an Exp object into a Concept object.
-
 use itertools::Itertools;
 use std::collections::{HashMap, HashSet};
 
-use crate::language::{Concept, Exp};
 use crate::experiments::{ExpStructure, ObjType};
 use crate::knowledge::Knowledge;
+use crate::language::{Concept, Exp};
 
 impl Knowledge {
     pub fn _generalize(&self, expr: &Exp, context: &ExpStructure) -> Option<Concept> {
         match self._generalize_to_mksum(expr, context) {
             Some(concept) => Some(concept),
-            None => self._generalize_to_normal_concept(expr, context)
+            None => self._generalize_to_normal_concept(expr, context),
         }
     }
     pub fn _extract_concepts(&self, expr: &Exp, context: &ExpStructure) -> HashSet<Concept> {
@@ -20,8 +19,10 @@ impl Knowledge {
         match self._generalize_to_mksum(expr, context) {
             Some(concept) => {
                 res.insert(Some(concept));
-                res.insert(self._generalize_to_normal_concept(&ordered_terms[0].remove_coeff(), context));
-            },
+                res.insert(
+                    self._generalize_to_normal_concept(&ordered_terms[0].remove_coeff(), context),
+                );
+            }
             None => {
                 res.insert(self._generalize_to_normal_concept(&expr.remove_coeff(), context));
                 // if ordered_terms.len() > 1 {
@@ -42,13 +43,17 @@ impl Knowledge {
         }
         res.into_iter().filter_map(|x| x).collect()
     }
-    pub fn _generalize_to_normal_concept(&self, expr: &Exp, context: &ExpStructure) -> Option<Concept> {
+    pub fn _generalize_to_normal_concept(
+        &self,
+        expr: &Exp,
+        context: &ExpStructure,
+    ) -> Option<Concept> {
         let vec = expr.get_allids_not_t();
         let n = vec.len();
         if n == 0 {
-            return None
+            return None;
         }
-        let perm = (1..(n+1)).permutations(n);
+        let perm = (1..(n + 1)).permutations(n);
         let mut nexp = expr.clone();
         let mut nexp_subs_dict: HashMap<i32, i32> = HashMap::new();
         for p in perm {
@@ -69,8 +74,10 @@ impl Knowledge {
             let obj = context.get_obj(*i);
             id_objtype_map.insert(*j, obj.obj_type.to_string());
         }
-        let mut concept_res = Concept::Mk0 { exp: Box::new(nexp) };
-        for i in 1..(n+1) {
+        let mut concept_res = Concept::Mk0 {
+            exp: Box::new(nexp),
+        };
+        for i in 1..(n + 1) {
             let objtype = id_objtype_map.get(&(i as i32)).unwrap();
             // println!("--({}->{}), ", i, objtype);
             concept_res = Concept::Mksucc {
@@ -110,7 +117,10 @@ impl Knowledge {
             if ids != context.get_obj_ids(ObjType::new(&objtype)) {
                 return None;
             }
-            Some(Concept::Mksum { objtype, concept: Box::new(concept0.clone()) })
+            Some(Concept::Mksum {
+                objtype,
+                concept: Box::new(concept0.clone()),
+            })
         } else {
             None
         }

@@ -1,10 +1,9 @@
 use num_traits::Pow;
 use pyo3::prelude::*;
 use std::fmt;
-use std::ops::{Add, Sub, Mul, Div, Neg};
+use std::ops::{Add, Div, Mul, Neg, Sub};
 
 use super::ZeroData;
-
 
 /// ConstData is a struct that represents a constant value (estimated by `mean`)
 /// with uncertainty (estimated by `std`).
@@ -77,14 +76,12 @@ impl ConstData {
     }
 }
 
-
 impl ConstData {
     #[inline]
     pub fn to_zero_data(&self) -> ZeroData {
         ZeroData::new(fold_gaussian(self.mean(), self.std()))
     }
 }
-
 
 impl fmt::Display for ConstData {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
@@ -120,9 +117,7 @@ impl Add for ConstData {
                     mean: v1 as f64 + m2,
                     std: s2,
                 },
-                ConstData::Exact { value: v2 } => ConstData::Exact {
-                    value: v1 + v2,
-                },
+                ConstData::Exact { value: v2 } => ConstData::Exact { value: v1 + v2 },
             },
         }
     }
@@ -164,9 +159,7 @@ impl Sub for ConstData {
                     mean: v1 as f64 - m2,
                     std: s2,
                 },
-                ConstData::Exact { value: v2 } => ConstData::Exact {
-                    value: v1 - v2,
-                },
+                ConstData::Exact { value: v2 } => ConstData::Exact { value: v1 - v2 },
             },
         }
     }
@@ -188,7 +181,6 @@ impl Sub<&ZeroData> for &ConstData {
     }
 }
 
-
 impl Mul for ConstData {
     type Output = Self;
 
@@ -209,9 +201,7 @@ impl Mul for ConstData {
                     mean: v1 as f64 * m2,
                     std: s2 * v1 as f64,
                 },
-                ConstData::Exact { value: v2 } => ConstData::Exact {
-                    value: v1 * v2,
-                },
+                ConstData::Exact { value: v2 } => ConstData::Exact { value: v1 * v2 },
             },
         }
     }
@@ -251,7 +241,7 @@ impl Div for ConstData {
                     //     // TODO: rational
                     //     value: v1 / v2,
                     // }
-                },
+                }
             },
         }
     }
@@ -270,13 +260,8 @@ impl Neg for ConstData {
 
     fn neg(self) -> Self {
         match self {
-            ConstData::Data { mean, std } => ConstData::Data {
-                mean: -mean,
-                std,
-            },
-            ConstData::Exact { value } => ConstData::Exact {
-                value: -value,
-            },
+            ConstData::Data { mean, std } => ConstData::Data { mean: -mean, std },
+            ConstData::Exact { value } => ConstData::Exact { value: -value },
         }
     }
 }
@@ -296,7 +281,6 @@ impl Pow<i32> for &ConstData {
         self.powi(n)
     }
 }
-
 
 impl ConstData {
     pub fn new(mean: f64, std: f64) -> Self {

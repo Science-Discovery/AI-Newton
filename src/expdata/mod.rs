@@ -1,3 +1,5 @@
+pub mod constdata;
+pub mod conversions;
 /// This module provides various data structures and functions for handling experimental data.
 ///
 /// # Modules
@@ -27,25 +29,19 @@
 /// - `is_conserved_const_list`
 /// - `is_conserved_mean_and_std`
 ///
-
 pub mod expdata;
 pub mod normaldata;
-pub mod constdata;
 pub mod zerodata;
-pub mod conversions;
 
-pub use expdata::ExpData;
-pub use expdata::Diff;
-pub use zerodata::ZeroData;
-pub use normaldata::NormalData;
 pub use constdata::ConstData;
-pub use normaldata::{
-    is_conserved,
-    is_conserved_mean_and_std
-};
+pub use expdata::Diff;
+pub use expdata::ExpData;
+pub use normaldata::NormalData;
+pub use normaldata::{is_conserved, is_conserved_mean_and_std};
+pub use zerodata::ZeroData;
 
-use pyo3::prelude::*;
 use ndarray::Array1;
+use pyo3::prelude::*;
 #[pyfunction]
 fn is_conserved_const_list(data: Vec<ConstData>) -> bool {
     let mut mean_vec = vec![];
@@ -55,8 +51,8 @@ fn is_conserved_const_list(data: Vec<ConstData>) -> bool {
             ConstData::Data { mean, std } => {
                 mean_vec.push(mean);
                 std_vec.push(std);
-            },
-            ConstData::Exact { value: _ } => {return false},
+            }
+            ConstData::Exact { value: _ } => return false,
         };
     }
     // vec to arr

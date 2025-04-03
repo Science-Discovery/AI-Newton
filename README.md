@@ -8,7 +8,7 @@ The program currently only supports Linux. CUDA is also currently required."
 **Pre-requisites:**
 ```
 Python 3.11.9 or higher
-Rust 1.82.0 or higher
+Rust 1.84.0
 Maple 2024
 ```
 Conda is strongly recommended for managing an independent python environment for AI-Newton.

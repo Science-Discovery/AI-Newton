@@ -1,12 +1,12 @@
-use crate::r;
+use crate::experiments::{ObjType, Objstructure, Parastructure, ATTR, DATA};
 use crate::language::Concept;
+use crate::r;
 use std::collections::HashMap;
-use crate::experiments::{
-    Parastructure, Objstructure, ObjType, DATA, ATTR
-};
 
 impl ObjType {
-    pub fn spring() -> Self { ObjType::new("Spring") }
+    pub fn spring() -> Self {
+        ObjType::new("Spring")
+    }
 }
 
 /// In an experiment, each spring object corresponds to two adjustable knobs,
@@ -19,20 +19,24 @@ impl Objstructure {
         Objstructure::new(
             ObjType::spring(),
             HashMap::from([
-                (ATTR::thickness(),
-                    Parastructure::new(Some(thickness_range))),
-                (ATTR::freel(),
-                    Parastructure::new(Some(freel_range))),
+                (ATTR::thickness(), Parastructure::new(Some(thickness_range))),
+                (ATTR::freel(), Parastructure::new(Some(freel_range))),
             ]),
         )
     }
 }
 impl ATTR {
     /// Attribute of a spring object (these attributes can be accessed by experimenters, but is not exposed to theorists).
-    pub fn thickness() -> Self { ATTR::new(ObjType::spring(), "thickness") }
-    pub fn freel() -> Self { ATTR::new(ObjType::spring(), "freel") }
+    pub fn thickness() -> Self {
+        ATTR::new(ObjType::spring(), "thickness")
+    }
+    pub fn freel() -> Self {
+        ATTR::new(ObjType::spring(), "freel")
+    }
 }
 impl DATA {
     /// Basic concept of a spring object.
-    pub fn length() -> Concept { DATA::data(vec![r!("Spring")], r!("length")) }
+    pub fn length() -> Concept {
+        DATA::data(vec![r!("Spring")], r!("length"))
+    }
 }

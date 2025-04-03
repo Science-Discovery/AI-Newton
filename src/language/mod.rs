@@ -1,16 +1,7 @@
-pub mod ast_arith;
 pub mod ast;
+pub mod ast_arith;
 pub mod complexity;
 pub use ast::{
-    BinaryOp,
-    Concept,
-    Exp,
-    IExpConfig,
-    Intrinsic,
-    MeasureType,
-    Proposition,
-    SExp,
-    UnaryOp,
-    AtomExp,
-    Expression,
+    AtomExp, BinaryOp, Concept, Exp, Expression, IExpConfig, Intrinsic, MeasureType, Proposition,
+    SExp, UnaryOp,
 };
