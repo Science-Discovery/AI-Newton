@@ -42,3 +42,14 @@ Some of our test results can be found in the `data/test_cases/example_1` directo
 
 
 ## Citation
+```
+@article{Fang:2025fmv,
+    author = "Fang, You-Le and Jian, Dong-Shan and Li, Xiang and Ma, Yan-Qing",
+    title = "{AI-Newton: A Concept-Driven Physical Law Discovery System without Prior Physical Knowledge}",
+    eprint = "2504.01538",
+    archivePrefix = "arXiv",
+    primaryClass = "cs.AI",
+    month = "4",
+    year = "2025"
+}
+```
