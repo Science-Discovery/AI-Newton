@@ -1,0 +1,5089 @@
+[Knowledge]
+dist := (1->Particle) (2->Particle) |- dist[1, 2]
+cz := (1->Slope) |- cz[1]
+cx := (1->Slope) |- cx[1]
+t := (1->Clock) |- t[1]
+cy := (1->Slope) |- cy[1]
+posz := (1->Particle) |- posz[1]
+posy := (1->Particle) |- posy[1]
+length := (1->Spring) |- length[1]
+posx := (1->Particle) |- posx[1]
+C_01 := [#stringmotion0 (1->Spring) |- length[1]]
+C_02 := (1->Spring) |- (length[1] - C_01[1])
+C_03 := (1->Particle) |- D[posy[1]]/D[t[0]]
+C_04 := (1->Particle) |- D[posx[1]]/D[t[0]]
+C_05 := (1->Particle) (2->Spring) |- D[(C_04[1] * C_04[1])]/D[(C_02[2] * C_02[2])]
+C_09 := [#gravity (1->Particle) |- (C_01[2] + (-1 * length[2]))]
+C_12 := [#oscillation (2->Spring) |- (D[(C_04[1] * C_04[1])]/D[(C_02[2] * C_02[2])] * C_09[1])]
+C_13 := (1->Spring) (2->Particle) |- ((C_12[1] * (C_02[1] ** 2)) - (C_09[2] * (C_03[2] ** 2)))
+C_14 := (1->Spring) (2->Particle) |- (C_02[1] + C_09[2])
+C_15 := (1->Spring) (2->Particle) |- ((C_02[1] * C_02[1]) - ((C_04[2] ** 2) / C_05[2, 1]))
+C_16 := (1->Particle) |- D[posz[1]]/D[t[0]]
+C_17 := (1->Particle) |- D[C_16[1]]/D[t[0]]
+C_21 := [#oblique_projectile_y |- D[C_16[1]]/D[t[0]]]
+C_22 := (1->Particle) |- ((C_21 * t[0]) - C_16[1])
+C_23 := (1->Particle) |- (C_17[1] - C_21)
+C_28 := (1->Spring) (2->Particle) |- ((C_12[1] * (C_02[1] ** 2)) - (C_09[2] * (C_04[2] ** 2)))
+C_35 := (1->Particle) |- D[C_17[1]]/D[posz[1]]
+C_36 := (1->Spring) (2->Particle) |- (C_02[1] / C_23[2])
+C_40 := (1->Particle) |- ((t[0] * C_16[1]) - (2 * posz[1]))
+C_48 := (1->Particle) |- ((C_16[1] * C_16[1]) - (2 * (C_21 * posz[1])))
+C_78 := (1->Particle) |- D[C_03[1]]/D[t[0]]
+C_84 := (1->Particle) (2->Slope) |- ((C_04[1] * cz[2]) + (C_22[1] * cx[2]))
+C_93 := (1->Particle) |- ((C_16[1] * C_23[1]) + (t[0] * (C_78[1] ** 2)))
+C_100 := (1->Particle) (2->Particle) |- D[C_04[1]]/D[C_04[2]]
+C_117 := (1->Particle) |- ((C_22[1] * posy[1]) - (C_03[1] * C_40[1]))
+C_123 := (1->Particle) (2->Spring) |- (C_78[1] / C_02[2])
+C_124 := (1->Particle) (2->Spring) |- ((C_09[1] * C_78[1]) - (C_02[2] * C_12[2]))
+C_128 := (1->Particle) (2->Particle) |- (C_78[1] / C_78[2])
+C_132 := (1->Particle) (2->Spring) |- D[C_48[1]]/D[C_28[2, 1]]
+C_139 := (1->Particle) |- D[C_04[1]]/D[t[0]]
+C_142 := [Sum:Particle] (1->Particle) |- (C_04[1] * C_09[1])
+C_144 := [Sum:Particle] (1->Particle) |- (C_03[1] * C_09[1])
+C_156 := [Sum:Particle] (1->Particle) |- (C_09[1] * (C_04[1] ** 2))
+C_163 := (1->Particle) (2->Spring) |- ((C_16[1] * C_16[1]) + (C_36[2, 1] * (C_17[1] ** 2)))
+C_176 := [Sum:Particle] (1->Particle) |- (C_09[1] * (C_03[1] ** 2))
+C_222 := [Sum:Particle] (1->Particle) |- (C_09[1] * (C_16[1] ** 2))
+C_284 := [Sum:Spring] (1->Spring) |- (C_12[1] * (C_02[1] ** 2))
+C_391 := (1->Particle) (2->Spring) |- D[C_139[1]]/D[length[2]]
+C_400 := [Sum:Particle] (1->Particle) |- (C_09[1] * C_48[1])
+C_636 := (1->Particle) |- (C_03[1] / C_04[1])
+C_640 := (1->Particle) |- (C_04[1] / C_03[1])
+C_673 := (1->Particle) (2->Spring) |- D[(posz[1] * C_36[2, 1])]/D[C_14[2, 1]]
+C_692 := (1->Particle) (2->Particle) |- (C_640[1] - C_640[2])
+C_700 := (1->Particle) (2->Particle) |- (C_03[1] / C_692[2, 1])
+C_704 := (1->Particle) |- ((C_176 * posx[1]) / posy[1])
+C_761 := (1->Particle) |- ((2 * (C_23[1] * posz[1])) - C_48[1])
+C_967 := (1->Particle) (2->Spring) |- (C_139[1] / C_02[2])
+C_1159 := [Sum:Particle] (1->Particle) |- (C_09[1] * C_17[1])
+C_1161 := (1->Particle) (2->Particle) |- (C_17[1] / C_17[2])
+C_1162 := (1->Particle) |- (C_09[1] * C_17[1])
+C_1313 := [Sum:Particle] (1->Particle) |- (C_1162[1] * posz[1])
+C_1430 := (1->Spring) (2->Particle) (3->Particle) |- ((C_15[1, 2] * C_391[2, 1]) - (C_15[1, 3] * C_391[3, 1]))
+C_1453 := [Sum:Particle] (1->Particle) |- (C_09[1] * C_139[1])
+C_1456 := (1->Spring) (2->Particle) |- ((C_12[1] * C_14[1, 2]) - (C_09[2] * C_139[2]))
+C_1552 := [#celestial_2_yz |- (D[(C_222 + (C_156 + C_176))]/D[((dist[1, 2] ** -1) + (dist[2, 1] ** -1))] / (C_09[1] * C_09[2]))]
+C_1553 := [Sum:Particle] (1->Particle) (2->Particle) |- ((dist[1, 2] ** -1) * (C_1552 * (C_09[2] * C_09[1])))
+C_1556 := [#celestial_2_yz |- ((8 * (C_17[1] / C_17[2])) + (9 * C_128[2, 1]))]
+C_1590 := (1->Spring) |- ((C_1556 * length[1]) - (-17 * length[1]))
+C_1705 := [#hanging_spring_1 (2->Spring) |- (C_09[1] / (C_1162[1] + (C_12[2] * C_14[2, 1])))]
+C_1715 := (1->Spring) (2->Particle) |- ((C_12[1] * posz[2]) - C_1162[2])
+C_1769 := (1->Particle) (2->Particle) |- ((C_23[1] * (C_100[1, 2] ** 2)) - (posx[2] * (C_100[1, 2] ** 2)))
+C_1770 := (1->Particle) (2->Particle) |- ((posx[1] * (C_100[2, 1] ** 2)) - (C_23[2] * (C_100[2, 1] ** 2)))
+C_1772 := (1->Particle) |- (C_09[1] * C_139[1])
+C_1773 := (1->Particle) (2->Particle) |- ((C_16[1] * C_100[2, 1]) - C_16[2])
+C_1844 := (1->Particle) |- (C_09[1] * C_78[1])
+C_1845 := [Sum:Particle] (1->Particle) |- (C_09[1] * C_78[1])
+C_1904 := (1->Particle) |- ((C_22[1] * posz[1]) / (C_09[1] * posz[1]))
+C_2001 := (1->Particle) |- (C_48[1] + (C_03[1] * C_03[1]))
+C_2078 := (1->Particle) (2->Particle) |- ((C_03[1] * C_128[2, 1]) - C_03[2])
+C_2295 := [Sum:Particle] (1->Particle) |- (C_09[1] * C_761[1])
+C_2375 := (1->Particle) (2->Particle) |- ((-10 * C_128[1, 2]) + (((C_03[1] * C_128[2, 1]) - C_03[2]) + (10 * (C_139[1] / C_139[2]))))
+C_2380 := (1->Particle) (2->Particle) |- ((9 * C_128[1, 2]) + ((-9 * (C_139[1] / C_139[2])) + (2 * ((C_03[1] * C_128[2, 1]) - C_03[2]))))
+C_2384 := (1->Particle) (2->Particle) |- ((C_04[1] * C_128[2, 1]) - C_04[2])
+C_2409 := (1->Particle) (2->Spring) |- (C_1162[1] + (C_02[2] * C_12[2]))
+C_2411 := (1->Spring) (2->Particle) (3->Spring) |- (D[C_1715[1, 2]]/D[C_14[3, 2]] + C_12[3])
+C_2478 := [Sum:Particle] (1->Particle) |- (C_1772[1] * posx[1])
+C_2878 := (1->Particle) (2->Spring) |- (C_156 - ((C_1772[1] ** 2) / C_12[2]))
+C_2975 := (1->Particle) |- (C_704[1] / C_176)
+C_3052 := [Sum:Particle] (1->Particle) (2->Particle) |- (C_09[1] * (C_1769[1, 2] ** 2))
+C_3053 := [Sum:Particle] (1->Particle) (2->Particle) |- (C_09[1] * C_1769[1, 2])
+C_3059 := (1->Particle) (2->Particle) |- ((C_142 * C_1904[1]) + (C_1769[1, 2] * C_1769[2, 1]))
+R_1474 := |- (C_156 + (-2 * C_2478)) is conserved
+R_112 := (1->Particle) |- ((2 * C_139[1]) + (-1 * (Partial[C_284]/Partial[posx[1]] * (C_09[1] ** -1)))) is zero
+R_1178 := (1->Particle) |- ((-1 * (Partial[C_284]/Partial[posz[1]] * (C_09[1] ** -1))) + ((2 * C_17[1]) + (-1 * (Partial[C_1553]/Partial[posz[1]] * (C_09[1] ** -1))))) is conserved
+R_292 := (1->Particle) |- ((2 * C_139[1]) + (Partial[C_400]/Partial[posx[1]] * (C_09[1] ** -1))) is zero
+R_03 := (1->Particle) |- C_22[1] is conserved
+R_17 := (1->Particle) |- C_117[1] is conserved
+R_737 := |- C_1159 is zero
+R_213 := (1->Particle) |- (Partial[C_48[1]]/Partial[posz[1]] + ((2 * C_17[1]) + (-1 * (Partial[C_284]/Partial[posz[1]] * (C_09[1] ** -1))))) is zero
+R_312 := (1->Particle) |- C_640[1] is conserved
+R_296 := (1->Particle) |- ((Partial[C_400]/Partial[posx[1]] * (C_09[1] ** -1)) + ((2 * C_139[1]) + (-1 * (Partial[C_284]/Partial[posx[1]] * (C_09[1] ** -1))))) is zero
+R_109 := |- (C_156 + (-1 * C_284)) is conserved
+R_1815 := |- (C_3052 + (C_2295 + (C_400 + ((-2 * C_1313) + ((-1 * C_284) + ((-1 * C_1553) + (C_222 + (C_156 + C_176)))))))) is conserved
+R_1377 := |- (C_400 + ((-2 * C_1313) + ((-1 * C_284) + ((-1 * C_1553) + (C_222 + (C_156 + C_176)))))) is conserved
+R_174 := (1->Particle) |- ((2 * C_23[1]) + (-1 * (Partial[C_284]/Partial[posz[1]] * (C_09[1] ** -1)))) is zero
+R_18 := (1->Particle) |- C_139[1] is zero
+R_311 := (1->Particle) |- C_636[1] is conserved
+R_1093 := (1->Particle) |- ((2 * C_17[1]) + (-1 * (Partial[C_1553]/Partial[posz[1]] * (C_09[1] ** -1)))) is conserved
+R_856 := |- ((-2 * C_1313) + (C_222 + (C_156 + C_176))) is conserved
+R_391 := (1->Particle) |- C_761[1] is conserved
+R_1106 := |- ((-1 * C_284) + ((-1 * C_1553) + (C_222 + (C_156 + C_176)))) is conserved
+R_01 := (1->Particle) |- C_17[1] is conserved
+R_20 := |- C_144 is conserved
+R_02 := (1->Particle) |- C_23[1] is zero
+R_19 := |- C_142 is conserved
+R_1810 := |- (C_156 + (-1 * C_3053)) is conserved
+R_1404 := (1->Particle) |- ((-2 * (Partial[C_1313]/Partial[posz[1]] * (C_09[1] ** -1))) + ((2 * C_17[1]) + (-1 * (Partial[C_1553]/Partial[posz[1]] * (C_09[1] ** -1))))) is conserved
+R_171 := |- (C_400 + ((C_156 + C_176) + (-1 * C_284))) is conserved
+R_22 := |- C_176 is conserved
+R_26 := |- (C_156 + C_176) is conserved
+R_1436 := |- (C_2295 + (C_400 + ((-2 * C_1313) + ((-1 * C_284) + ((-1 * C_1553) + (C_222 + (C_156 + C_176))))))) is conserved
+R_24 := (1->Particle) |- C_35[1] is zero
+R_1092 := |- ((-1 * C_1553) + (C_222 + (C_156 + C_176))) is conserved
+R_51 := |- (C_222 + (C_156 + C_176)) is conserved
+R_1437 := (1->Particle) |- ((-1 * (Partial[C_2295]/Partial[posz[1]] * (C_09[1] ** -1))) + ((2 * C_17[1]) + (-1 * (Partial[C_1553]/Partial[posz[1]] * (C_09[1] ** -1))))) is conserved
+R_1808 := (1->Particle) |- (Partial[C_761[1]]/Partial[posz[1]] + ((-2 * (Partial[C_1313]/Partial[posz[1]] * (C_09[1] ** -1))) + ((2 * C_17[1]) + (-1 * (Partial[C_1553]/Partial[posz[1]] * (C_09[1] ** -1)))))) is conserved
+R_12 := (1->Particle) |- C_78[1] is zero
+R_1806 := |- (C_3052 + (C_400 + ((C_156 + C_176) + (-1 * C_284)))) is conserved
+R_1096 := (1->Particle) |- ((-1 * (Partial[C_1553]/Partial[posy[1]] * (C_09[1] ** -1))) + ((Partial[C_400]/Partial[posy[1]] * (C_09[1] ** -1)) + ((2 * C_78[1]) + (-1 * (Partial[C_284]/Partial[posy[1]] * (C_09[1] ** -1)))))) is zero
+R_21 := |- C_156 is conserved
+R_1475 := |- ((-2 * C_2478) + (C_156 + (-1 * C_284))) is conserved
+R_1802 := (1->Particle) |- C_2975[1] is conserved
+R_996 := |- C_1453 is zero
+R_1824 := (1->Particle) |- ((-1 * (Partial[C_1553]/Partial[posx[1]] * (C_09[1] ** -1))) + ((Partial[C_400]/Partial[posx[1]] * (C_09[1] ** -1)) + ((2 * C_139[1]) + (-1 * (Partial[C_284]/Partial[posx[1]] * (C_09[1] ** -1)))))) is zero
+R_180 := |- (C_176 + (-1 * C_284)) is conserved
+R_1394 := |- C_1845 is zero
+R_1813 := (1->Particle) |- (C_761[1] + (-1 * (C_3052 * Partial[C_3053]/Partial[posx[1]]))) is conserved
+R_1809 := (1->Particle) |- (Partial[C_761[1]]/Partial[posz[1]] + ((-1 * (Partial[C_2295]/Partial[posz[1]] * (C_09[1] ** -1))) + ((2 * C_17[1]) + (-1 * (Partial[C_1553]/Partial[posz[1]] * (C_09[1] ** -1)))))) is conserved
+R_179 := (1->Particle) |- ((2 * C_78[1]) + (-1 * (Partial[C_284]/Partial[posy[1]] * (C_09[1] ** -1)))) is zero
+R_1807 := |- ((-2 * C_3053) + ((-2 * C_1313) + (C_222 + (C_156 + C_176)))) is conserved
+[end]
+[Experiments]
+celestial_4:
+  expconfig:
+    name: celestial_4
+    spdim: 2
+    exp_para:
+      r0: '[Parastructure] value: None, range: (0.022, 0.024)'
+      theta0: '[Parastructure] value: None, range: (0.0, 1.5707963)'
+      x0: '[Parastructure] value: None, range: (-0.1, 0.1)'
+      v40: '[Parastructure] value: None, range: (-5e-5, 5e-5)'
+      v20: '[Parastructure] value: None, range: (-5e-5, 5e-5)'
+      v30: '[Parastructure] value: None, range: (-5e-5, 5e-5)'
+      y0: '[Parastructure] value: None, range: (-0.1, 0.1)'
+      v10: '[Parastructure] value: None, range: (-5e-5, 5e-5)'
+      omega10: '[Parastructure] value: None, range: (1.8849555600000003, 2.51327408)'
+    obj_info:
+      clock: |-
+        [Objstructure] obj_type: Clock, attribute: []
+        Attribute:.
+      o1: |-
+        [Objstructure] obj_type: Particle, attribute: [m, e]
+        Attribute:
+        | m: [Parastructure] value: None, range: (500000.0, 600000.0)
+        | e: [Parastructure] value: None, range: (0.0, 0.0).
+      o3: |-
+        [Objstructure] obj_type: Particle, attribute: [e, m]
+        Attribute:
+        | e: [Parastructure] value: None, range: (0.0, 0.0)
+        | m: [Parastructure] value: None, range: (500000.0, 600000.0).
+      o4: |-
+        [Objstructure] obj_type: Particle, attribute: [m, e]
+        Attribute:
+        | m: [Parastructure] value: None, range: (500000.0, 600000.0)
+        | e: [Parastructure] value: None, range: (0.0, 0.0).
+      o2: |-
+        [Objstructure] obj_type: Particle, attribute: [e, m]
+        Attribute:
+        | e: [Parastructure] value: None, range: (0.0, 0.0)
+        | m: [Parastructure] value: None, range: (500000.0, 600000.0).
+    data_info:
+    - - (1->Particle) |- posx[1]
+      - - o1
+    - - (1->Particle) |- posy[1]
+      - - o1
+    - - (1->Particle) |- posz[1]
+      - - o1
+    - - (1->Particle) |- posx[1]
+      - - o2
+    - - (1->Particle) |- posy[1]
+      - - o2
+    - - (1->Particle) |- posz[1]
+      - - o2
+    - - (1->Particle) |- posx[1]
+      - - o3
+    - - (1->Particle) |- posy[1]
+      - - o3
+    - - (1->Particle) |- posz[1]
+      - - o3
+    - - (1->Particle) |- posx[1]
+      - - o4
+    - - (1->Particle) |- posy[1]
+      - - o4
+    - - (1->Particle) |- posz[1]
+      - - o4
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o1
+        - o2
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o2
+        - o1
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o1
+        - o3
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o3
+        - o1
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o3
+        - o2
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o2
+        - o3
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o1
+        - o4
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o4
+        - o1
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o2
+        - o4
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o4
+        - o2
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o3
+        - o4
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o4
+        - o3
+    - - (1->Clock) |- t[1]
+      - - clock
+    geometry_info:
+    - (dist[1, 2] - dist[2, 1]) is zero
+    - (((dist[1, 2] ** 2) - ((posx[1] - posx[2]) ** 2)) - ((posy[1] - posy[2]) ** 2)) is zero
+    - (dist[3, 2] - dist[2, 3]) is zero
+    - (((dist[3, 2] ** 2) - ((posx[3] - posx[2]) ** 2)) - ((posy[3] - posy[2]) ** 2)) is zero
+    - (dist[1, 3] - dist[3, 1]) is zero
+    - (((dist[1, 3] ** 2) - ((posx[1] - posx[3]) ** 2)) - ((posy[1] - posy[3]) ** 2)) is zero
+    - (dist[1, 4] - dist[4, 1]) is zero
+    - (((dist[1, 4] ** 2) - ((posx[1] - posx[4]) ** 2)) - ((posy[1] - posy[4]) ** 2)) is zero
+    - (dist[2, 4] - dist[4, 2]) is zero
+    - (((dist[2, 4] ** 2) - ((posx[2] - posx[4]) ** 2)) - ((posy[2] - posy[4]) ** 2)) is zero
+    - (dist[3, 4] - dist[4, 3]) is zero
+    - (((dist[3, 4] ** 2) - ((posx[3] - posx[4]) ** 2)) - ((posy[3] - posy[4]) ** 2)) is zero
+    - posz[1] is zero
+    - posz[2] is zero
+    - posz[3] is zero
+    - posz[4] is zero
+    obj_id_map:
+      o2:
+      - Particle
+      - 2
+      clock:
+      - Clock
+      - 0
+      o3:
+      - Particle
+      - 3
+      o1:
+      - Particle
+      - 1
+      o4:
+      - Particle
+      - 4
+    obj_name_map:
+      3:
+      - Particle
+      - o3
+      2:
+      - Particle
+      - o2
+      0:
+      - Clock
+      - clock
+      1:
+      - Particle
+      - o1
+      4:
+      - Particle
+      - o4
+    obj_info_dict:
+      Particle:
+        2: o2
+        3: o3
+        4: o4
+        1: o1
+      Clock:
+        0: clock
+    data_atomexp:
+    - posy[4]
+    - posz[3]
+    - dist[3, 1]
+    - dist[3, 2]
+    - posx[1]
+    - posy[2]
+    - dist[2, 3]
+    - dist[4, 3]
+    - posz[1]
+    - dist[3, 4]
+    - posx[2]
+    - t[0]
+    - posy[3]
+    - posx[3]
+    - posz[4]
+    - posy[1]
+    - dist[1, 4]
+    - posz[2]
+    - dist[4, 2]
+    - dist[1, 3]
+    - dist[1, 2]
+    - dist[2, 1]
+    - dist[2, 4]
+    - dist[4, 1]
+    - posx[4]
+  do_experiment: aiphy/experiment/cosmos/celestial_2d_4.py
+celestial_2_xz:
+  expconfig:
+    name: celestial_2_xz
+    spdim: 2
+    exp_para:
+      z0: '[Parastructure] value: None, range: (-0.1, 0.1)'
+      r0: '[Parastructure] value: None, range: (0.012, 0.015)'
+      theta0: '[Parastructure] value: None, range: (0.0, 1.5707963)'
+      v10: '[Parastructure] value: None, range: (-5e-5, 5e-5)'
+      x0: '[Parastructure] value: None, range: (-0.1, 0.1)'
+      omega10: '[Parastructure] value: None, range: (2.094395066666667, 3.1415926)'
+      v20: '[Parastructure] value: None, range: (-5e-5, 5e-5)'
+    obj_info:
+      o1: |-
+        [Objstructure] obj_type: Particle, attribute: [e, m]
+        Attribute:
+        | e: [Parastructure] value: None, range: (0.0, 0.0)
+        | m: [Parastructure] value: None, range: (500000.0, 600000.0).
+      clock: |-
+        [Objstructure] obj_type: Clock, attribute: []
+        Attribute:.
+      o2: |-
+        [Objstructure] obj_type: Particle, attribute: [m, e]
+        Attribute:
+        | m: [Parastructure] value: None, range: (500000.0, 600000.0)
+        | e: [Parastructure] value: None, range: (0.0, 0.0).
+    data_info:
+    - - (1->Particle) |- posx[1]
+      - - o1
+    - - (1->Particle) |- posy[1]
+      - - o1
+    - - (1->Particle) |- posz[1]
+      - - o1
+    - - (1->Particle) |- posx[1]
+      - - o2
+    - - (1->Particle) |- posy[1]
+      - - o2
+    - - (1->Particle) |- posz[1]
+      - - o2
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o1
+        - o2
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o2
+        - o1
+    - - (1->Clock) |- t[1]
+      - - clock
+    geometry_info:
+    - (dist[1, 2] - dist[2, 1]) is zero
+    - (((dist[1, 2] ** 2) - ((posx[1] - posx[2]) ** 2)) - ((posz[1] - posz[2]) ** 2)) is zero
+    - posy[1] is zero
+    - posy[2] is zero
+    obj_id_map:
+      clock:
+      - Clock
+      - 0
+      o2:
+      - Particle
+      - 2
+      o1:
+      - Particle
+      - 1
+    obj_name_map:
+      2:
+      - Particle
+      - o2
+      0:
+      - Clock
+      - clock
+      1:
+      - Particle
+      - o1
+    obj_info_dict:
+      Clock:
+        0: clock
+      Particle:
+        2: o2
+        1: o1
+    data_atomexp:
+    - posz[1]
+    - dist[2, 1]
+    - posy[1]
+    - posx[2]
+    - dist[1, 2]
+    - t[0]
+    - posx[1]
+    - posy[2]
+    - posz[2]
+  do_experiment: aiphy/experiment/cosmos/celestial_2d_2_xz.py
+oblique_projectile_y:
+  expconfig:
+    name: oblique_projectile_y
+    spdim: 2
+    exp_para:
+      vy0: '[Parastructure] value: None, range: (1.0, 2.0)'
+      vz0: '[Parastructure] value: None, range: (1.0, 2.0)'
+      z0: '[Parastructure] value: None, range: (-5.0, 5.0)'
+      y0: '[Parastructure] value: None, range: (-5.0, 5.0)'
+    obj_info:
+      o1: |-
+        [Objstructure] obj_type: Particle, attribute: [m, e]
+        Attribute:
+        | m: [Parastructure] value: None, range: (3.0, 6.0)
+        | e: [Parastructure] value: None, range: (0.0, 0.0).
+      clock: |-
+        [Objstructure] obj_type: Clock, attribute: []
+        Attribute:.
+    data_info:
+    - - (1->Particle) |- posx[1]
+      - - o1
+    - - (1->Particle) |- posy[1]
+      - - o1
+    - - (1->Particle) |- posz[1]
+      - - o1
+    - - (1->Clock) |- t[1]
+      - - clock
+    geometry_info:
+    - posx[1] is zero
+    obj_id_map:
+      clock:
+      - Clock
+      - 0
+      o1:
+      - Particle
+      - 1
+    obj_name_map:
+      0:
+      - Clock
+      - clock
+      1:
+      - Particle
+      - o1
+    obj_info_dict:
+      Clock:
+        0: clock
+      Particle:
+        1: o1
+    data_atomexp:
+    - posx[1]
+    - t[0]
+    - posy[1]
+    - posz[1]
+  do_experiment: aiphy/experiment/ground_laboratory/oblique_projectile_y.py
+motion:
+  expconfig:
+    name: motion
+    spdim: 2
+    exp_para:
+      theta: '[Parastructure] value: None, range: (0.2, 0.4)'
+      x0: '[Parastructure] value: None, range: (9.0, 11.0)'
+      v0: '[Parastructure] value: None, range: (-2.0, 2.0)'
+      z0: '[Parastructure] value: None, range: (9.0, 11.0)'
+    obj_info:
+      Slope: |-
+        [Objstructure] obj_type: Slope, attribute: []
+        Attribute:.
+      MPa: |-
+        [Objstructure] obj_type: Particle, attribute: [e, m]
+        Attribute:
+        | e: [Parastructure] value: None, range: (0.0, 0.0)
+        | m: [Parastructure] value: None, range: (1.0, 1000.0).
+      Clock: |-
+        [Objstructure] obj_type: Clock, attribute: []
+        Attribute:.
+    data_info:
+    - - (1->Particle) |- posx[1]
+      - - MPa
+    - - (1->Particle) |- posy[1]
+      - - MPa
+    - - (1->Particle) |- posz[1]
+      - - MPa
+    - - (1->Slope) |- cx[1]
+      - - Slope
+    - - (1->Slope) |- cz[1]
+      - - Slope
+    - - (1->Clock) |- t[1]
+      - - Clock
+    geometry_info:
+    - posy[1] is zero
+    - cx[2] is conserved
+    - cz[2] is conserved
+    - ((cx[2] * posx[1]) + (cz[2] * posz[1])) is conserved
+    obj_id_map:
+      Clock:
+      - Clock
+      - 0
+      MPa:
+      - Particle
+      - 1
+      Slope:
+      - Slope
+      - 2
+    obj_name_map:
+      1:
+      - Particle
+      - MPa
+      2:
+      - Slope
+      - Slope
+      0:
+      - Clock
+      - Clock
+    obj_info_dict:
+      Slope:
+        2: Slope
+      Particle:
+        1: MPa
+      Clock:
+        0: Clock
+    data_atomexp:
+    - posz[1]
+    - cx[2]
+    - t[0]
+    - cz[2]
+    - posy[1]
+    - posx[1]
+  do_experiment: <builtin_motion>
+hanging_spring_2:
+  expconfig:
+    name: hanging_spring_2
+    spdim: 1
+    exp_para:
+      z20: '[Parastructure] value: None, range: (-15.0, -10.0)'
+      z0: '[Parastructure] value: None, range: (10.0, 12.0)'
+      z10: '[Parastructure] value: None, range: (-5.0, 5.0)'
+    obj_info:
+      s1: |-
+        [Objstructure] obj_type: Spring, attribute: [thickness, freel]
+        Attribute:
+        | thickness: [Parastructure] value: None, range: (1.7, 1.9)
+        | freel: [Parastructure] value: None, range: (5.0, 10.0).
+      s2: |-
+        [Objstructure] obj_type: Spring, attribute: [thickness, freel]
+        Attribute:
+        | thickness: [Parastructure] value: None, range: (1.7, 1.9)
+        | freel: [Parastructure] value: None, range: (5.0, 10.0).
+      clock: |-
+        [Objstructure] obj_type: Clock, attribute: []
+        Attribute:.
+      o1: |-
+        [Objstructure] obj_type: Particle, attribute: [m, e]
+        Attribute:
+        | m: [Parastructure] value: None, range: (5.0, 6.0)
+        | e: [Parastructure] value: None, range: (0.0, 0.0).
+      o2: |-
+        [Objstructure] obj_type: Particle, attribute: [m, e]
+        Attribute:
+        | m: [Parastructure] value: None, range: (5.0, 6.0)
+        | e: [Parastructure] value: None, range: (0.0, 0.0).
+    data_info:
+    - - (1->Particle) |- posx[1]
+      - - o1
+    - - (1->Particle) |- posy[1]
+      - - o1
+    - - (1->Particle) |- posz[1]
+      - - o1
+    - - (1->Spring) |- length[1]
+      - - s1
+    - - (1->Particle) |- posx[1]
+      - - o2
+    - - (1->Particle) |- posy[1]
+      - - o2
+    - - (1->Particle) |- posz[1]
+      - - o2
+    - - (1->Spring) |- length[1]
+      - - s2
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o1
+        - o2
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o2
+        - o1
+    - - (1->Clock) |- t[1]
+      - - clock
+    geometry_info:
+    - (posz[1] + length[3]) is conserved
+    - ((posz[2] - posz[1]) + length[4]) is zero
+    - posx[1] is zero
+    - posy[1] is zero
+    - posx[2] is zero
+    - posy[2] is zero
+    - (dist[1, 2] - dist[2, 1]) is zero
+    - ((dist[1, 2] - posz[1]) + posz[2]) is zero
+    obj_id_map:
+      clock:
+      - Clock
+      - 0
+      s2:
+      - Spring
+      - 4
+      s1:
+      - Spring
+      - 3
+      o2:
+      - Particle
+      - 2
+      o1:
+      - Particle
+      - 1
+    obj_name_map:
+      4:
+      - Spring
+      - s2
+      3:
+      - Spring
+      - s1
+      2:
+      - Particle
+      - o2
+      0:
+      - Clock
+      - clock
+      1:
+      - Particle
+      - o1
+    obj_info_dict:
+      Spring:
+        3: s1
+        4: s2
+      Particle:
+        2: o2
+        1: o1
+      Clock:
+        0: clock
+    data_atomexp:
+    - t[0]
+    - length[4]
+    - posx[1]
+    - posy[1]
+    - dist[1, 2]
+    - posy[2]
+    - dist[2, 1]
+    - posz[2]
+    - length[3]
+    - posz[1]
+    - posx[2]
+  do_experiment: aiphy/experiment/ground_laboratory/hanging_spring_2.py
+oscillation_rot_3:
+  expconfig:
+    name: oscillation_rot_3
+    spdim: 2
+    exp_para:
+      r10: '[Parastructure] value: None, range: (4.0, 7.0)'
+      theta30: '[Parastructure] value: None, range: (0.0, 1.5707963)'
+      r20: '[Parastructure] value: None, range: (4.0, 7.0)'
+      r30: '[Parastructure] value: None, range: (4.0, 7.0)'
+      theta20: '[Parastructure] value: None, range: (0.0, 1.5707963)'
+      v30: '[Parastructure] value: None, range: (-2.0, 2.0)'
+      v10: '[Parastructure] value: None, range: (-2.0, 2.0)'
+      omega20: '[Parastructure] value: None, range: (-0.78539815, 0.78539815)'
+      v20: '[Parastructure] value: None, range: (-2.0, 2.0)'
+      omega10: '[Parastructure] value: None, range: (0.78539815, 1.5707963)'
+      theta10: '[Parastructure] value: None, range: (0.0, 1.5707963)'
+      omega30: '[Parastructure] value: None, range: (-0.78539815, 0.78539815)'
+    obj_info:
+      clock: |-
+        [Objstructure] obj_type: Clock, attribute: []
+        Attribute:.
+      o3: |-
+        [Objstructure] obj_type: Particle, attribute: [e, m]
+        Attribute:
+        | e: [Parastructure] value: None, range: (0.0, 0.0)
+        | m: [Parastructure] value: None, range: (3.0, 6.0).
+      s1: |-
+        [Objstructure] obj_type: Spring, attribute: [thickness, freel]
+        Attribute:
+        | thickness: [Parastructure] value: None, range: (1.5, 2.5)
+        | freel: [Parastructure] value: None, range: (4.0, 6.0).
+      o1: |-
+        [Objstructure] obj_type: Particle, attribute: [m, e]
+        Attribute:
+        | m: [Parastructure] value: None, range: (3.0, 6.0)
+        | e: [Parastructure] value: None, range: (0.0, 0.0).
+      s2: |-
+        [Objstructure] obj_type: Spring, attribute: [thickness, freel]
+        Attribute:
+        | thickness: [Parastructure] value: None, range: (1.5, 2.5)
+        | freel: [Parastructure] value: None, range: (4.0, 6.0).
+      o2: |-
+        [Objstructure] obj_type: Particle, attribute: [m, e]
+        Attribute:
+        | m: [Parastructure] value: None, range: (3.0, 6.0)
+        | e: [Parastructure] value: None, range: (0.0, 0.0).
+      s3: |-
+        [Objstructure] obj_type: Spring, attribute: [thickness, freel]
+        Attribute:
+        | thickness: [Parastructure] value: None, range: (1.5, 2.5)
+        | freel: [Parastructure] value: None, range: (4.0, 6.0).
+    data_info:
+    - - (1->Particle) |- posx[1]
+      - - o1
+    - - (1->Particle) |- posy[1]
+      - - o1
+    - - (1->Particle) |- posz[1]
+      - - o1
+    - - (1->Spring) |- length[1]
+      - - s1
+    - - (1->Particle) |- posx[1]
+      - - o2
+    - - (1->Particle) |- posy[1]
+      - - o2
+    - - (1->Particle) |- posz[1]
+      - - o2
+    - - (1->Spring) |- length[1]
+      - - s2
+    - - (1->Particle) |- posx[1]
+      - - o3
+    - - (1->Particle) |- posy[1]
+      - - o3
+    - - (1->Particle) |- posz[1]
+      - - o3
+    - - (1->Spring) |- length[1]
+      - - s3
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o1
+        - o2
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o2
+        - o1
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o1
+        - o3
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o3
+        - o1
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o3
+        - o2
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o2
+        - o3
+    - - (1->Clock) |- t[1]
+      - - clock
+    geometry_info:
+    - (((length[4] ** 2) - (posx[1] ** 2)) - (posy[1] ** 2)) is zero
+    - (dist[1, 2] - dist[2, 1]) is zero
+    - (((dist[1, 2] ** 2) - ((posx[1] - posx[2]) ** 2)) - ((posy[1] - posy[2]) ** 2)) is zero
+    - (dist[1, 2] - length[5]) is zero
+    - (dist[2, 3] - dist[3, 2]) is zero
+    - (((dist[2, 3] ** 2) - ((posx[3] - posx[2]) ** 2)) - ((posy[3] - posy[2]) ** 2)) is zero
+    - (dist[2, 3] - length[6]) is zero
+    - (((dist[1, 3] ** 2) - ((posx[1] - posx[3]) ** 2)) - ((posy[1] - posy[3]) ** 2)) is zero
+    - (dist[1, 3] - dist[3, 1]) is zero
+    - posz[1] is zero
+    - posz[2] is zero
+    - posz[3] is zero
+    obj_id_map:
+      o3:
+      - Particle
+      - 3
+      clock:
+      - Clock
+      - 0
+      o2:
+      - Particle
+      - 2
+      s1:
+      - Spring
+      - 4
+      s3:
+      - Spring
+      - 6
+      o1:
+      - Particle
+      - 1
+      s2:
+      - Spring
+      - 5
+    obj_name_map:
+      0:
+      - Clock
+      - clock
+      1:
+      - Particle
+      - o1
+      5:
+      - Spring
+      - s2
+      3:
+      - Particle
+      - o3
+      6:
+      - Spring
+      - s3
+      2:
+      - Particle
+      - o2
+      4:
+      - Spring
+      - s1
+    obj_info_dict:
+      Clock:
+        0: clock
+      Spring:
+        6: s3
+        5: s2
+        4: s1
+      Particle:
+        2: o2
+        1: o1
+        3: o3
+    data_atomexp:
+    - dist[2, 3]
+    - length[4]
+    - posx[1]
+    - posz[2]
+    - length[5]
+    - posx[3]
+    - posy[2]
+    - dist[1, 2]
+    - posy[1]
+    - dist[3, 2]
+    - length[6]
+    - dist[1, 3]
+    - posz[3]
+    - t[0]
+    - posx[2]
+    - dist[3, 1]
+    - posy[3]
+    - posz[1]
+    - dist[2, 1]
+  do_experiment: aiphy/experiment/oscillation/oscillation_rot_3.py
+motion0_3d:
+  expconfig:
+    name: motion0_3d
+    spdim: 2
+    exp_para:
+      vz0: '[Parastructure] value: None, range: (1.0, 2.0)'
+      y0: '[Parastructure] value: None, range: (1.0, 5.0)'
+      vx0: '[Parastructure] value: None, range: (1.0, 2.0)'
+      z0: '[Parastructure] value: None, range: (1.0, 5.0)'
+      vy0: '[Parastructure] value: None, range: (1.0, 2.0)'
+      x0: '[Parastructure] value: None, range: (1.0, 5.0)'
+    obj_info:
+      clock: |-
+        [Objstructure] obj_type: Clock, attribute: []
+        Attribute:.
+      o1: |-
+        [Objstructure] obj_type: Particle, attribute: [m, e]
+        Attribute:
+        | m: [Parastructure] value: None, range: (1.0, 2.0)
+        | e: [Parastructure] value: None, range: (0.0, 0.0).
+    data_info:
+    - - (1->Particle) |- posx[1]
+      - - o1
+    - - (1->Particle) |- posy[1]
+      - - o1
+    - - (1->Particle) |- posz[1]
+      - - o1
+    - - (1->Clock) |- t[1]
+      - - clock
+    geometry_info:
+    - posz[1] is zero
+    obj_id_map:
+      clock:
+      - Clock
+      - 0
+      o1:
+      - Particle
+      - 1
+    obj_name_map:
+      0:
+      - Clock
+      - clock
+      1:
+      - Particle
+      - o1
+    obj_info_dict:
+      Particle:
+        1: o1
+      Clock:
+        0: clock
+    data_atomexp:
+    - posx[1]
+    - posz[1]
+    - posy[1]
+    - t[0]
+  do_experiment: aiphy/experiment/basic/motion0.py
+collision_nh:
+  expconfig:
+    name: collision_nh
+    spdim: 2
+    exp_para:
+      x2: '[Parastructure] value: None, range: (3.0, 4.0)'
+      v2: '[Parastructure] value: None, range: (-5.0, -3.0)'
+      v1: '[Parastructure] value: None, range: (3.0, 5.0)'
+      theta: '[Parastructure] value: None, range: (0.0, 3.1415926)'
+      x1: '[Parastructure] value: None, range: (-4.0, -3.0)'
+      y0: '[Parastructure] value: None, range: (-2.0, 2.0)'
+      phi: '[Parastructure] value: None, range: (0.5235987666666667, 3.1415926)'
+    obj_info:
+      MPb: |-
+        [Objstructure] obj_type: Particle, attribute: [e, m]
+        Attribute:
+        | e: [Parastructure] value: None, range: (0.0, 0.0)
+        | m: [Parastructure] value: None, range: (2.0, 10.0).
+      MPa: |-
+        [Objstructure] obj_type: Particle, attribute: [e, m]
+        Attribute:
+        | e: [Parastructure] value: None, range: (0.0, 0.0)
+        | m: [Parastructure] value: None, range: (2.0, 10.0).
+      clock: |-
+        [Objstructure] obj_type: Clock, attribute: []
+        Attribute:.
+    data_info:
+    - - (1->Particle) |- posx[1]
+      - - MPa
+    - - (1->Particle) |- posx[1]
+      - - MPb
+    - - (1->Particle) |- posy[1]
+      - - MPa
+    - - (1->Particle) |- posy[1]
+      - - MPb
+    - - (1->Particle) |- posz[1]
+      - - MPa
+    - - (1->Particle) |- posz[1]
+      - - MPb
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - MPa
+        - MPb
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - MPb
+        - MPa
+    - - (1->Clock) |- t[1]
+      - - clock
+    geometry_info:
+    - posz[1] is zero
+    - posz[2] is zero
+    - (dist[1, 2] - dist[2, 1]) is zero
+    - (((dist[1, 2] ** 2) - ((posx[1] - posx[2]) ** 2)) - ((posy[1] - posy[2]) ** 2)) is zero
+    obj_id_map:
+      MPb:
+      - Particle
+      - 2
+      clock:
+      - Clock
+      - 0
+      MPa:
+      - Particle
+      - 1
+    obj_name_map:
+      0:
+      - Clock
+      - clock
+      1:
+      - Particle
+      - MPa
+      2:
+      - Particle
+      - MPb
+    obj_info_dict:
+      Particle:
+        1: MPa
+        2: MPb
+      Clock:
+        0: clock
+    data_atomexp:
+    - posz[2]
+    - posx[2]
+    - dist[1, 2]
+    - t[0]
+    - posz[1]
+    - posx[1]
+    - posy[1]
+    - posy[2]
+    - dist[2, 1]
+  do_experiment: aiphy/experiment/basic/collision_nh.py
+motion0:
+  expconfig:
+    name: motion0
+    spdim: 1
+    exp_para:
+      x0: '[Parastructure] value: None, range: (9.0, 11.0)'
+      v0: '[Parastructure] value: None, range: (-2.0, 2.0)'
+    obj_info:
+      Clock: |-
+        [Objstructure] obj_type: Clock, attribute: []
+        Attribute:.
+      MPa: |-
+        [Objstructure] obj_type: Particle, attribute: [m, e]
+        Attribute:
+        | m: [Parastructure] value: None, range: (1.0, 1000.0)
+        | e: [Parastructure] value: None, range: (0.0, 0.0).
+    data_info:
+    - - (1->Particle) |- posx[1]
+      - - MPa
+    - - (1->Particle) |- posy[1]
+      - - MPa
+    - - (1->Particle) |- posz[1]
+      - - MPa
+    - - (1->Clock) |- t[1]
+      - - Clock
+    geometry_info:
+    - posz[1] is zero
+    - posy[1] is zero
+    obj_id_map:
+      Clock:
+      - Clock
+      - 0
+      MPa:
+      - Particle
+      - 1
+    obj_name_map:
+      1:
+      - Particle
+      - MPa
+      0:
+      - Clock
+      - Clock
+    obj_info_dict:
+      Particle:
+        1: MPa
+      Clock:
+        0: Clock
+    data_atomexp:
+    - posz[1]
+    - t[0]
+    - posx[1]
+    - posy[1]
+  do_experiment: <builtin_motion0>
+hanging_spring_3:
+  expconfig:
+    name: hanging_spring_3
+    spdim: 1
+    exp_para:
+      z0: '[Parastructure] value: None, range: (10.0, 12.0)'
+      z30: '[Parastructure] value: None, range: (-25.0, -20.0)'
+      z10: '[Parastructure] value: None, range: (-5.0, 5.0)'
+      z20: '[Parastructure] value: None, range: (-15.0, -10.0)'
+    obj_info:
+      s2: |-
+        [Objstructure] obj_type: Spring, attribute: [thickness, freel]
+        Attribute:
+        | thickness: [Parastructure] value: None, range: (1.7, 1.9)
+        | freel: [Parastructure] value: None, range: (5.0, 10.0).
+      s1: |-
+        [Objstructure] obj_type: Spring, attribute: [freel, thickness]
+        Attribute:
+        | freel: [Parastructure] value: None, range: (5.0, 10.0)
+        | thickness: [Parastructure] value: None, range: (1.7, 1.9).
+      o2: |-
+        [Objstructure] obj_type: Particle, attribute: [m, e]
+        Attribute:
+        | m: [Parastructure] value: None, range: (5.0, 6.0)
+        | e: [Parastructure] value: None, range: (0.0, 0.0).
+      o3: |-
+        [Objstructure] obj_type: Particle, attribute: [m, e]
+        Attribute:
+        | m: [Parastructure] value: None, range: (5.0, 6.0)
+        | e: [Parastructure] value: None, range: (0.0, 0.0).
+      clock: |-
+        [Objstructure] obj_type: Clock, attribute: []
+        Attribute:.
+      s3: |-
+        [Objstructure] obj_type: Spring, attribute: [thickness, freel]
+        Attribute:
+        | thickness: [Parastructure] value: None, range: (1.7, 1.9)
+        | freel: [Parastructure] value: None, range: (5.0, 10.0).
+      o1: |-
+        [Objstructure] obj_type: Particle, attribute: [e, m]
+        Attribute:
+        | e: [Parastructure] value: None, range: (0.0, 0.0)
+        | m: [Parastructure] value: None, range: (5.0, 6.0).
+    data_info:
+    - - (1->Particle) |- posx[1]
+      - - o1
+    - - (1->Particle) |- posy[1]
+      - - o1
+    - - (1->Particle) |- posz[1]
+      - - o1
+    - - (1->Spring) |- length[1]
+      - - s1
+    - - (1->Particle) |- posx[1]
+      - - o2
+    - - (1->Particle) |- posy[1]
+      - - o2
+    - - (1->Particle) |- posz[1]
+      - - o2
+    - - (1->Spring) |- length[1]
+      - - s2
+    - - (1->Particle) |- posx[1]
+      - - o3
+    - - (1->Particle) |- posy[1]
+      - - o3
+    - - (1->Particle) |- posz[1]
+      - - o3
+    - - (1->Spring) |- length[1]
+      - - s3
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o1
+        - o2
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o2
+        - o1
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o1
+        - o3
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o3
+        - o1
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o2
+        - o3
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o3
+        - o2
+    - - (1->Clock) |- t[1]
+      - - clock
+    geometry_info:
+    - (posz[1] + length[4]) is conserved
+    - ((posz[2] - posz[1]) + length[5]) is zero
+    - ((posz[3] - posz[2]) + length[6]) is zero
+    - posx[1] is zero
+    - posy[1] is zero
+    - posx[2] is zero
+    - posy[2] is zero
+    - posx[3] is zero
+    - posy[3] is zero
+    - (dist[1, 2] - dist[2, 1]) is zero
+    - ((dist[1, 2] - posz[1]) + posz[2]) is zero
+    - (dist[1, 3] - dist[3, 1]) is zero
+    - ((dist[1, 3] - posz[1]) + posz[3]) is zero
+    - (dist[2, 3] - dist[3, 2]) is zero
+    - ((dist[2, 3] - posz[2]) + posz[3]) is zero
+    obj_id_map:
+      o3:
+      - Particle
+      - 3
+      s1:
+      - Spring
+      - 4
+      s2:
+      - Spring
+      - 5
+      clock:
+      - Clock
+      - 0
+      o2:
+      - Particle
+      - 2
+      o1:
+      - Particle
+      - 1
+      s3:
+      - Spring
+      - 6
+    obj_name_map:
+      0:
+      - Clock
+      - clock
+      3:
+      - Particle
+      - o3
+      1:
+      - Particle
+      - o1
+      2:
+      - Particle
+      - o2
+      5:
+      - Spring
+      - s2
+      6:
+      - Spring
+      - s3
+      4:
+      - Spring
+      - s1
+    obj_info_dict:
+      Spring:
+        4: s1
+        5: s2
+        6: s3
+      Clock:
+        0: clock
+      Particle:
+        2: o2
+        1: o1
+        3: o3
+    data_atomexp:
+    - posx[2]
+    - length[4]
+    - t[0]
+    - posy[3]
+    - dist[3, 1]
+    - dist[2, 1]
+    - dist[2, 3]
+    - dist[1, 2]
+    - posx[3]
+    - length[5]
+    - dist[3, 2]
+    - posy[1]
+    - posz[2]
+    - posy[2]
+    - dist[1, 3]
+    - length[6]
+    - posz[1]
+    - posx[1]
+    - posz[3]
+  do_experiment: aiphy/experiment/ground_laboratory/hanging_spring_3.py
+oscillation_2d_3:
+  expconfig:
+    name: oscillation_2d_3
+    spdim: 2
+    exp_para:
+      v1: '[Parastructure] value: None, range: (-2.0, 2.0)'
+      v3: '[Parastructure] value: None, range: (-2.0, 2.0)'
+      x4: '[Parastructure] value: None, range: (35.0, 40.0)'
+      v2: '[Parastructure] value: None, range: (-2.0, 2.0)'
+      x1: '[Parastructure] value: None, range: (-40.0, -35.0)'
+      x2: '[Parastructure] value: None, range: (-10.0, -5.0)'
+      v4: '[Parastructure] value: None, range: (-2.0, 2.0)'
+      theta: '[Parastructure] value: None, range: (0.0, 3.1415926)'
+      x3: '[Parastructure] value: None, range: (5.0, 10.0)'
+    obj_info:
+      o4: |-
+        [Objstructure] obj_type: Particle, attribute: [m, e]
+        Attribute:
+        | m: [Parastructure] value: None, range: (3.0, 6.0)
+        | e: [Parastructure] value: None, range: (0.0, 0.0).
+      clock: |-
+        [Objstructure] obj_type: Clock, attribute: []
+        Attribute:.
+      o1: |-
+        [Objstructure] obj_type: Particle, attribute: [e, m]
+        Attribute:
+        | e: [Parastructure] value: None, range: (0.0, 0.0)
+        | m: [Parastructure] value: None, range: (3.0, 6.0).
+      s3: |-
+        [Objstructure] obj_type: Spring, attribute: [thickness, freel]
+        Attribute:
+        | thickness: [Parastructure] value: None, range: (1.5, 2.5)
+        | freel: [Parastructure] value: None, range: (20.0, 30.0).
+      s2: |-
+        [Objstructure] obj_type: Spring, attribute: [freel, thickness]
+        Attribute:
+        | freel: [Parastructure] value: None, range: (20.0, 30.0)
+        | thickness: [Parastructure] value: None, range: (1.5, 2.5).
+      o3: |-
+        [Objstructure] obj_type: Particle, attribute: [m, e]
+        Attribute:
+        | m: [Parastructure] value: None, range: (3.0, 6.0)
+        | e: [Parastructure] value: None, range: (0.0, 0.0).
+      o2: |-
+        [Objstructure] obj_type: Particle, attribute: [e, m]
+        Attribute:
+        | e: [Parastructure] value: None, range: (0.0, 0.0)
+        | m: [Parastructure] value: None, range: (3.0, 6.0).
+      s1: |-
+        [Objstructure] obj_type: Spring, attribute: [thickness, freel]
+        Attribute:
+        | thickness: [Parastructure] value: None, range: (1.5, 2.5)
+        | freel: [Parastructure] value: None, range: (20.0, 30.0).
+    data_info:
+    - - (1->Particle) |- posx[1]
+      - - o1
+    - - (1->Particle) |- posx[1]
+      - - o2
+    - - (1->Particle) |- posx[1]
+      - - o3
+    - - (1->Particle) |- posx[1]
+      - - o4
+    - - (1->Particle) |- posy[1]
+      - - o1
+    - - (1->Particle) |- posy[1]
+      - - o2
+    - - (1->Particle) |- posy[1]
+      - - o3
+    - - (1->Particle) |- posy[1]
+      - - o4
+    - - (1->Particle) |- posz[1]
+      - - o1
+    - - (1->Particle) |- posz[1]
+      - - o2
+    - - (1->Particle) |- posz[1]
+      - - o3
+    - - (1->Particle) |- posz[1]
+      - - o4
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o1
+        - o2
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o2
+        - o1
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o1
+        - o3
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o3
+        - o1
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o3
+        - o2
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o2
+        - o3
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o1
+        - o4
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o4
+        - o1
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o4
+        - o3
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o3
+        - o4
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o4
+        - o2
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o2
+        - o4
+    - - (1->Spring) |- length[1]
+      - - s1
+    - - (1->Spring) |- length[1]
+      - - s2
+    - - (1->Spring) |- length[1]
+      - - s3
+    - - (1->Clock) |- t[1]
+      - - clock
+    geometry_info:
+    - (dist[1, 2] - length[5]) is zero
+    - (((dist[1, 2] ** 2) - ((posx[1] - posx[2]) ** 2)) - ((posy[1] - posy[2]) ** 2)) is zero
+    - (dist[1, 2] - dist[2, 1]) is zero
+    - (dist[2, 3] - length[6]) is zero
+    - (((dist[2, 3] ** 2) - ((posx[2] - posx[3]) ** 2)) - ((posy[2] - posy[3]) ** 2)) is zero
+    - (dist[2, 3] - dist[3, 2]) is zero
+    - (dist[3, 4] - length[7]) is zero
+    - (((dist[3, 4] ** 2) - ((posx[3] - posx[4]) ** 2)) - ((posy[3] - posy[4]) ** 2)) is zero
+    - (dist[3, 4] - dist[4, 3]) is zero
+    - (((dist[1, 3] ** 2) - ((posx[1] - posx[3]) ** 2)) - ((posy[1] - posy[3]) ** 2)) is zero
+    - (dist[1, 3] - dist[3, 1]) is zero
+    - (((dist[2, 4] ** 2) - ((posx[2] - posx[4]) ** 2)) - ((posy[2] - posy[4]) ** 2)) is zero
+    - (dist[2, 4] - dist[4, 2]) is zero
+    - (((dist[1, 4] ** 2) - ((posx[1] - posx[4]) ** 2)) - ((posy[1] - posy[4]) ** 2)) is zero
+    - (dist[1, 4] - dist[4, 1]) is zero
+    - posz[1] is zero
+    - posz[2] is zero
+    - posz[3] is zero
+    - posz[4] is zero
+    obj_id_map:
+      o1:
+      - Particle
+      - 1
+      s2:
+      - Spring
+      - 6
+      s3:
+      - Spring
+      - 7
+      o4:
+      - Particle
+      - 4
+      s1:
+      - Spring
+      - 5
+      o3:
+      - Particle
+      - 3
+      o2:
+      - Particle
+      - 2
+      clock:
+      - Clock
+      - 0
+    obj_name_map:
+      4:
+      - Particle
+      - o4
+      3:
+      - Particle
+      - o3
+      1:
+      - Particle
+      - o1
+      2:
+      - Particle
+      - o2
+      5:
+      - Spring
+      - s1
+      0:
+      - Clock
+      - clock
+      7:
+      - Spring
+      - s3
+      6:
+      - Spring
+      - s2
+    obj_info_dict:
+      Spring:
+        7: s3
+        6: s2
+        5: s1
+      Particle:
+        2: o2
+        1: o1
+        4: o4
+        3: o3
+      Clock:
+        0: clock
+    data_atomexp:
+    - dist[4, 3]
+    - posy[1]
+    - posz[2]
+    - dist[1, 2]
+    - posx[2]
+    - length[6]
+    - posx[4]
+    - dist[3, 4]
+    - posy[3]
+    - dist[3, 2]
+    - dist[2, 3]
+    - length[7]
+    - dist[1, 3]
+    - dist[2, 4]
+    - posy[4]
+    - posx[1]
+    - dist[1, 4]
+    - posy[2]
+    - posz[4]
+    - dist[4, 1]
+    - posx[3]
+    - length[5]
+    - dist[3, 1]
+    - posz[3]
+    - posz[1]
+    - dist[4, 2]
+    - t[0]
+    - dist[2, 1]
+  do_experiment: aiphy/experiment/oscillation/oscillation_2d_3.py
+oscillation_r_4:
+  expconfig:
+    name: oscillation_r_4
+    spdim: 1
+    exp_para:
+      omega40: '[Parastructure] value: None, range: (1.0, 1.2)'
+      v40: '[Parastructure] value: None, range: (-0.05, 0.05)'
+      omega30: '[Parastructure] value: None, range: (1.0, 1.2)'
+      v30: '[Parastructure] value: None, range: (-0.05, 0.05)'
+      v20: '[Parastructure] value: None, range: (-0.05, 0.05)'
+      theta0: '[Parastructure] value: None, range: (0.0, 2.094395066666667)'
+      r0: '[Parastructure] value: None, range: (5.0, 5.2)'
+      v10: '[Parastructure] value: None, range: (-0.05, 0.05)'
+      y0: '[Parastructure] value: None, range: (-1.0, -0.5)'
+      omega20: '[Parastructure] value: None, range: (1.0, 1.2)'
+      x0: '[Parastructure] value: None, range: (-1.0, -0.5)'
+      omega10: '[Parastructure] value: None, range: (1.0, 1.2)'
+    obj_info:
+      o4: |-
+        [Objstructure] obj_type: Particle, attribute: [m, e]
+        Attribute:
+        | m: [Parastructure] value: None, range: (1.4, 1.5)
+        | e: [Parastructure] value: None, range: (0.0, 0.0).
+      o1: |-
+        [Objstructure] obj_type: Particle, attribute: [e, m]
+        Attribute:
+        | e: [Parastructure] value: None, range: (0.0, 0.0)
+        | m: [Parastructure] value: None, range: (4.0, 4.2).
+      s3: |-
+        [Objstructure] obj_type: Spring, attribute: [thickness, freel]
+        Attribute:
+        | thickness: [Parastructure] value: None, range: (1.8, 2.2)
+        | freel: [Parastructure] value: None, range: (4.8, 5.0).
+      s1: |-
+        [Objstructure] obj_type: Spring, attribute: [thickness, freel]
+        Attribute:
+        | thickness: [Parastructure] value: None, range: (1.8, 2.2)
+        | freel: [Parastructure] value: None, range: (4.8, 5.0).
+      o3: |-
+        [Objstructure] obj_type: Particle, attribute: [m, e]
+        Attribute:
+        | m: [Parastructure] value: None, range: (4.0, 4.2)
+        | e: [Parastructure] value: None, range: (0.0, 0.0).
+      o2: |-
+        [Objstructure] obj_type: Particle, attribute: [m, e]
+        Attribute:
+        | m: [Parastructure] value: None, range: (4.0, 4.2)
+        | e: [Parastructure] value: None, range: (0.0, 0.0).
+      clock: |-
+        [Objstructure] obj_type: Clock, attribute: []
+        Attribute:.
+      s4: |-
+        [Objstructure] obj_type: Spring, attribute: [thickness, freel]
+        Attribute:
+        | thickness: [Parastructure] value: None, range: (1.8, 2.2)
+        | freel: [Parastructure] value: None, range: (4.8, 5.0).
+      s2: |-
+        [Objstructure] obj_type: Spring, attribute: [thickness, freel]
+        Attribute:
+        | thickness: [Parastructure] value: None, range: (1.8, 2.2)
+        | freel: [Parastructure] value: None, range: (4.8, 5.0).
+    data_info:
+    - - (1->Particle) |- posx[1]
+      - - o1
+    - - (1->Particle) |- posy[1]
+      - - o1
+    - - (1->Particle) |- posz[1]
+      - - o1
+    - - (1->Particle) |- posx[1]
+      - - o2
+    - - (1->Particle) |- posy[1]
+      - - o2
+    - - (1->Particle) |- posz[1]
+      - - o2
+    - - (1->Particle) |- posx[1]
+      - - o3
+    - - (1->Particle) |- posy[1]
+      - - o3
+    - - (1->Particle) |- posz[1]
+      - - o3
+    - - (1->Particle) |- posx[1]
+      - - o4
+    - - (1->Particle) |- posy[1]
+      - - o4
+    - - (1->Particle) |- posz[1]
+      - - o4
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o1
+        - o2
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o2
+        - o1
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o1
+        - o3
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o3
+        - o1
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o3
+        - o2
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o2
+        - o3
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o1
+        - o4
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o4
+        - o1
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o2
+        - o4
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o4
+        - o2
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o3
+        - o4
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o4
+        - o3
+    - - (1->Spring) |- length[1]
+      - - s1
+    - - (1->Spring) |- length[1]
+      - - s2
+    - - (1->Spring) |- length[1]
+      - - s3
+    - - (1->Spring) |- length[1]
+      - - s4
+    - - (1->Clock) |- t[1]
+      - - clock
+    geometry_info:
+    - (dist[1, 2] - length[5]) is zero
+    - (((dist[1, 2] ** 2) - ((posx[1] - posx[2]) ** 2)) - ((posy[1] - posy[2]) ** 2)) is zero
+    - (dist[1, 2] - dist[2, 1]) is zero
+    - (dist[2, 3] - length[6]) is zero
+    - (((dist[2, 3] ** 2) - ((posx[2] - posx[3]) ** 2)) - ((posy[2] - posy[3]) ** 2)) is zero
+    - (dist[2, 3] - dist[3, 2]) is zero
+    - (dist[3, 4] - length[7]) is zero
+    - (((dist[3, 4] ** 2) - ((posx[3] - posx[4]) ** 2)) - ((posy[3] - posy[4]) ** 2)) is zero
+    - (dist[3, 4] - dist[4, 3]) is zero
+    - (dist[4, 1] - length[8]) is zero
+    - (((dist[4, 1] ** 2) - ((posx[4] - posx[1]) ** 2)) - ((posy[4] - posy[1]) ** 2)) is zero
+    - (dist[4, 1] - dist[1, 4]) is zero
+    - (((dist[1, 3] ** 2) - ((posx[1] - posx[3]) ** 2)) - ((posy[1] - posy[3]) ** 2)) is zero
+    - (dist[1, 3] - dist[3, 1]) is zero
+    - (((dist[2, 4] ** 2) - ((posx[2] - posx[4]) ** 2)) - ((posy[2] - posy[4]) ** 2)) is zero
+    - (dist[2, 4] - dist[4, 2]) is zero
+    - posz[1] is zero
+    - posz[2] is zero
+    - posz[3] is zero
+    - posz[4] is zero
+    obj_id_map:
+      o4:
+      - Particle
+      - 4
+      clock:
+      - Clock
+      - 0
+      s2:
+      - Spring
+      - 6
+      s4:
+      - Spring
+      - 8
+      o1:
+      - Particle
+      - 1
+      o2:
+      - Particle
+      - 2
+      s3:
+      - Spring
+      - 7
+      o3:
+      - Particle
+      - 3
+      s1:
+      - Spring
+      - 5
+    obj_name_map:
+      1:
+      - Particle
+      - o1
+      8:
+      - Spring
+      - s4
+      6:
+      - Spring
+      - s2
+      2:
+      - Particle
+      - o2
+      4:
+      - Particle
+      - o4
+      3:
+      - Particle
+      - o3
+      7:
+      - Spring
+      - s3
+      0:
+      - Clock
+      - clock
+      5:
+      - Spring
+      - s1
+    obj_info_dict:
+      Particle:
+        3: o3
+        2: o2
+        4: o4
+        1: o1
+      Clock:
+        0: clock
+      Spring:
+        5: s1
+        8: s4
+        6: s2
+        7: s3
+    data_atomexp:
+    - length[5]
+    - dist[1, 3]
+    - posy[4]
+    - posz[3]
+    - posx[2]
+    - posy[2]
+    - posz[1]
+    - posy[1]
+    - dist[1, 2]
+    - dist[3, 1]
+    - posx[1]
+    - posy[3]
+    - length[8]
+    - dist[2, 4]
+    - dist[2, 1]
+    - posz[4]
+    - dist[4, 3]
+    - dist[1, 4]
+    - length[7]
+    - dist[4, 2]
+    - dist[3, 2]
+    - dist[2, 3]
+    - posz[2]
+    - posx[3]
+    - dist[3, 4]
+    - posx[4]
+    - dist[4, 1]
+    - length[6]
+    - t[0]
+  do_experiment: aiphy/experiment/oscillation/oscillation_r_4.py
+oscillation:
+  expconfig:
+    name: oscillation
+    spdim: 1
+    exp_para:
+      posl: '[Parastructure] value: None, range: (-1.0, 1.0)'
+      x2: '[Parastructure] value: None, range: (9.0, 11.0)'
+      v2: '[Parastructure] value: None, range: (-2.0, 2.0)'
+    obj_info:
+      Clock: |-
+        [Objstructure] obj_type: Clock, attribute: []
+        Attribute:.
+      SPb: |-
+        [Objstructure] obj_type: Spring, attribute: [freel, thickness]
+        Attribute:
+        | freel: [Parastructure] value: None, range: (9.0, 11.0)
+        | thickness: [Parastructure] value: None, range: (2.0, 2.2).
+      MPa: |-
+        [Objstructure] obj_type: Particle, attribute: [e, m]
+        Attribute:
+        | e: [Parastructure] value: None, range: (0.0, 0.0)
+        | m: [Parastructure] value: None, range: (1.2, 5.0).
+    data_info:
+    - - (1->Particle) |- posx[1]
+      - - MPa
+    - - (1->Particle) |- posy[1]
+      - - MPa
+    - - (1->Particle) |- posz[1]
+      - - MPa
+    - - (1->Spring) |- length[1]
+      - - SPb
+    - - (1->Clock) |- t[1]
+      - - Clock
+    geometry_info:
+    - posy[1] is zero
+    - posz[1] is zero
+    - (length[2] - posx[1]) is conserved
+    obj_id_map:
+      MPa:
+      - Particle
+      - 1
+      Clock:
+      - Clock
+      - 0
+      SPb:
+      - Spring
+      - 2
+    obj_name_map:
+      1:
+      - Particle
+      - MPa
+      2:
+      - Spring
+      - SPb
+      0:
+      - Clock
+      - Clock
+    obj_info_dict:
+      Particle:
+        1: MPa
+      Clock:
+        0: Clock
+      Spring:
+        2: SPb
+    data_atomexp:
+    - length[2]
+    - posx[1]
+    - posz[1]
+    - t[0]
+    - posy[1]
+  do_experiment: <builtin_oscillation>
+stringmotion0:
+  expconfig:
+    name: stringmotion0
+    spdim: 1
+    exp_para: {}
+    obj_info:
+      SPa: |-
+        [Objstructure] obj_type: Spring, attribute: [thickness, freel]
+        Attribute:
+        | thickness: [Parastructure] value: None, range: (2.0, 2.2)
+        | freel: [Parastructure] value: None, range: (9.0, 11.0).
+      Clock: |-
+        [Objstructure] obj_type: Clock, attribute: []
+        Attribute:.
+    data_info:
+    - - (1->Spring) |- length[1]
+      - - SPa
+    - - (1->Clock) |- t[1]
+      - - Clock
+    geometry_info: []
+    obj_id_map:
+      SPa:
+      - Spring
+      - 1
+      Clock:
+      - Clock
+      - 0
+    obj_name_map:
+      0:
+      - Clock
+      - Clock
+      1:
+      - Spring
+      - SPa
+    obj_info_dict:
+      Clock:
+        0: Clock
+      Spring:
+        1: SPa
+    data_atomexp:
+    - t[0]
+    - length[1]
+  do_experiment: <builtin_stringmotion0>
+motion0y:
+  expconfig:
+    name: motion0y
+    spdim: 1
+    exp_para:
+      v0: '[Parastructure] value: None, range: (-2.0, 2.0)'
+      y0: '[Parastructure] value: None, range: (9.0, 11.0)'
+    obj_info:
+      Clock: |-
+        [Objstructure] obj_type: Clock, attribute: []
+        Attribute:.
+      MPa: |-
+        [Objstructure] obj_type: Particle, attribute: [m, e]
+        Attribute:
+        | m: [Parastructure] value: None, range: (1.0, 1000.0)
+        | e: [Parastructure] value: None, range: (0.0, 0.0).
+    data_info:
+    - - (1->Particle) |- posx[1]
+      - - MPa
+    - - (1->Particle) |- posy[1]
+      - - MPa
+    - - (1->Particle) |- posz[1]
+      - - MPa
+    - - (1->Clock) |- t[1]
+      - - Clock
+    geometry_info:
+    - posz[1] is zero
+    - posx[1] is zero
+    obj_id_map:
+      Clock:
+      - Clock
+      - 0
+      MPa:
+      - Particle
+      - 1
+    obj_name_map:
+      0:
+      - Clock
+      - Clock
+      1:
+      - Particle
+      - MPa
+    obj_info_dict:
+      Particle:
+        1: MPa
+      Clock:
+        0: Clock
+    data_atomexp:
+    - posy[1]
+    - posx[1]
+    - posz[1]
+    - t[0]
+  do_experiment: <builtin_motion0y>
+oscillation_x_2:
+  expconfig:
+    name: oscillation_x_2
+    spdim: 1
+    exp_para:
+      x2: '[Parastructure] value: None, range: (-0.5, 0.5)'
+      v3: '[Parastructure] value: None, range: (-2.0, 2.0)'
+      x1: '[Parastructure] value: None, range: (-6.5, -5.5)'
+      v2: '[Parastructure] value: None, range: (-2.0, 2.0)'
+      x3: '[Parastructure] value: None, range: (5.5, 6.5)'
+      v1: '[Parastructure] value: None, range: (-2.0, 2.0)'
+    obj_info:
+      s2: |-
+        [Objstructure] obj_type: Spring, attribute: [thickness, freel]
+        Attribute:
+        | thickness: [Parastructure] value: None, range: (1.5, 2.5)
+        | freel: [Parastructure] value: None, range: (4.0, 6.0).
+      o1: |-
+        [Objstructure] obj_type: Particle, attribute: [e, m]
+        Attribute:
+        | e: [Parastructure] value: None, range: (0.0, 0.0)
+        | m: [Parastructure] value: None, range: (3.0, 6.0).
+      s1: |-
+        [Objstructure] obj_type: Spring, attribute: [freel, thickness]
+        Attribute:
+        | freel: [Parastructure] value: None, range: (4.0, 6.0)
+        | thickness: [Parastructure] value: None, range: (1.5, 2.5).
+      o3: |-
+        [Objstructure] obj_type: Particle, attribute: [e, m]
+        Attribute:
+        | e: [Parastructure] value: None, range: (0.0, 0.0)
+        | m: [Parastructure] value: None, range: (3.0, 6.0).
+      clock: |-
+        [Objstructure] obj_type: Clock, attribute: []
+        Attribute:.
+      o2: |-
+        [Objstructure] obj_type: Particle, attribute: [e, m]
+        Attribute:
+        | e: [Parastructure] value: None, range: (0.0, 0.0)
+        | m: [Parastructure] value: None, range: (3.0, 6.0).
+    data_info:
+    - - (1->Particle) |- posx[1]
+      - - o1
+    - - (1->Particle) |- posx[1]
+      - - o2
+    - - (1->Particle) |- posx[1]
+      - - o3
+    - - (1->Particle) |- posy[1]
+      - - o1
+    - - (1->Particle) |- posy[1]
+      - - o2
+    - - (1->Particle) |- posy[1]
+      - - o3
+    - - (1->Particle) |- posz[1]
+      - - o1
+    - - (1->Particle) |- posz[1]
+      - - o2
+    - - (1->Particle) |- posz[1]
+      - - o3
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o1
+        - o2
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o2
+        - o1
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o1
+        - o3
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o3
+        - o1
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o2
+        - o3
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o3
+        - o2
+    - - (1->Spring) |- length[1]
+      - - s1
+    - - (1->Spring) |- length[1]
+      - - s2
+    - - (1->Clock) |- t[1]
+      - - clock
+    geometry_info:
+    - ((posx[2] - posx[1]) - length[4]) is zero
+    - ((posx[3] - posx[2]) - length[5]) is zero
+    - ((posx[2] - posx[1]) - dist[1, 2]) is zero
+    - (dist[1, 2] - dist[2, 1]) is zero
+    - ((posx[3] - posx[1]) - dist[1, 3]) is zero
+    - (dist[1, 3] - dist[3, 1]) is zero
+    - ((posx[3] - posx[2]) - dist[2, 3]) is zero
+    - (dist[2, 3] - dist[3, 2]) is zero
+    - posy[1] is zero
+    - posy[2] is zero
+    - posy[3] is zero
+    - posz[1] is zero
+    - posz[2] is zero
+    - posz[3] is zero
+    obj_id_map:
+      o1:
+      - Particle
+      - 1
+      o3:
+      - Particle
+      - 3
+      s2:
+      - Spring
+      - 5
+      o2:
+      - Particle
+      - 2
+      s1:
+      - Spring
+      - 4
+      clock:
+      - Clock
+      - 0
+    obj_name_map:
+      0:
+      - Clock
+      - clock
+      2:
+      - Particle
+      - o2
+      5:
+      - Spring
+      - s2
+      3:
+      - Particle
+      - o3
+      1:
+      - Particle
+      - o1
+      4:
+      - Spring
+      - s1
+    obj_info_dict:
+      Clock:
+        0: clock
+      Spring:
+        4: s1
+        5: s2
+      Particle:
+        1: o1
+        2: o2
+        3: o3
+    data_atomexp:
+    - dist[1, 3]
+    - posz[2]
+    - dist[2, 1]
+    - length[5]
+    - dist[3, 1]
+    - posx[3]
+    - posy[1]
+    - posx[1]
+    - posz[3]
+    - length[4]
+    - dist[2, 3]
+    - posy[3]
+    - posy[2]
+    - t[0]
+    - dist[3, 2]
+    - dist[1, 2]
+    - posx[2]
+    - posz[1]
+  do_experiment: aiphy/experiment/oscillation/oscillation_x_2.py
+collision_elastic_3body:
+  expconfig:
+    name: collision_elastic_3body
+    spdim: 1
+    exp_para:
+      v1: '[Parastructure] value: None, range: (4.2, 4.5)'
+      x3: '[Parastructure] value: None, range: (4.5, 5.0)'
+      v2: '[Parastructure] value: None, range: (2.2, 2.5)'
+      v3: '[Parastructure] value: None, range: (-4.0, -3.5)'
+      x1: '[Parastructure] value: None, range: (-5.0, -4.8)'
+      x2: '[Parastructure] value: None, range: (-0.1, 0.1)'
+    obj_info:
+      MPc: |-
+        [Objstructure] obj_type: Particle, attribute: [m, e]
+        Attribute:
+        | m: [Parastructure] value: None, range: (2.5, 3.0)
+        | e: [Parastructure] value: None, range: (0.0, 0.0).
+      MPb: |-
+        [Objstructure] obj_type: Particle, attribute: [m, e]
+        Attribute:
+        | m: [Parastructure] value: None, range: (2.75, 3.0)
+        | e: [Parastructure] value: None, range: (0.0, 0.0).
+      clock: |-
+        [Objstructure] obj_type: Clock, attribute: []
+        Attribute:.
+      MPa: |-
+        [Objstructure] obj_type: Particle, attribute: [e, m]
+        Attribute:
+        | e: [Parastructure] value: None, range: (0.0, 0.0)
+        | m: [Parastructure] value: None, range: (2.5, 2.75).
+    data_info:
+    - - (1->Particle) |- posx[1]
+      - - MPa
+    - - (1->Particle) |- posx[1]
+      - - MPb
+    - - (1->Particle) |- posx[1]
+      - - MPc
+    - - (1->Particle) |- posy[1]
+      - - MPa
+    - - (1->Particle) |- posy[1]
+      - - MPb
+    - - (1->Particle) |- posy[1]
+      - - MPc
+    - - (1->Particle) |- posz[1]
+      - - MPa
+    - - (1->Particle) |- posz[1]
+      - - MPb
+    - - (1->Particle) |- posz[1]
+      - - MPc
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - MPa
+        - MPb
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - MPb
+        - MPa
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - MPa
+        - MPc
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - MPc
+        - MPa
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - MPb
+        - MPc
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - MPc
+        - MPb
+    - - (1->Clock) |- t[1]
+      - - clock
+    geometry_info:
+    - ((posx[2] - posx[1]) - dist[2, 1]) is zero
+    - (dist[2, 1] - dist[1, 2]) is zero
+    - ((posx[3] - posx[1]) - dist[1, 3]) is zero
+    - (dist[1, 3] - dist[3, 1]) is zero
+    - ((posx[3] - posx[2]) - dist[2, 3]) is zero
+    - (dist[2, 3] - dist[3, 2]) is zero
+    - posz[1] is zero
+    - posz[2] is zero
+    - posz[3] is zero
+    obj_id_map:
+      clock:
+      - Clock
+      - 0
+      MPa:
+      - Particle
+      - 1
+      MPb:
+      - Particle
+      - 2
+      MPc:
+      - Particle
+      - 3
+    obj_name_map:
+      2:
+      - Particle
+      - MPb
+      3:
+      - Particle
+      - MPc
+      1:
+      - Particle
+      - MPa
+      0:
+      - Clock
+      - clock
+    obj_info_dict:
+      Clock:
+        0: clock
+      Particle:
+        3: MPc
+        1: MPa
+        2: MPb
+    data_atomexp:
+    - posx[3]
+    - posx[2]
+    - dist[1, 2]
+    - dist[2, 3]
+    - dist[1, 3]
+    - posz[2]
+    - posz[3]
+    - posy[3]
+    - dist[3, 1]
+    - posy[2]
+    - posx[1]
+    - t[0]
+    - posy[1]
+    - posz[1]
+    - dist[3, 2]
+    - dist[2, 1]
+  do_experiment: aiphy/experiment/basic/collision_elastic_3body.py
+collision_y:
+  expconfig:
+    name: collision_y
+    spdim: 1
+    exp_para:
+      y2: '[Parastructure] value: None, range: (3.0, 4.0)'
+      y1: '[Parastructure] value: None, range: (-4.0, -3.0)'
+      v1: '[Parastructure] value: None, range: (3.0, 5.0)'
+      v2: '[Parastructure] value: None, range: (-5.0, -3.0)'
+    obj_info:
+      MPa: |-
+        [Objstructure] obj_type: Particle, attribute: [m, e]
+        Attribute:
+        | m: [Parastructure] value: None, range: (2.0, 10.0)
+        | e: [Parastructure] value: None, range: (0.0, 0.0).
+      clock: |-
+        [Objstructure] obj_type: Clock, attribute: []
+        Attribute:.
+      MPb: |-
+        [Objstructure] obj_type: Particle, attribute: [m, e]
+        Attribute:
+        | m: [Parastructure] value: None, range: (2.0, 10.0)
+        | e: [Parastructure] value: None, range: (0.0, 0.0).
+    data_info:
+    - - (1->Particle) |- posx[1]
+      - - MPa
+    - - (1->Particle) |- posx[1]
+      - - MPb
+    - - (1->Particle) |- posy[1]
+      - - MPa
+    - - (1->Particle) |- posy[1]
+      - - MPb
+    - - (1->Particle) |- posz[1]
+      - - MPa
+    - - (1->Particle) |- posz[1]
+      - - MPb
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - MPa
+        - MPb
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - MPb
+        - MPa
+    - - (1->Clock) |- t[1]
+      - - clock
+    geometry_info:
+    - (dist[1, 2] - dist[2, 1]) is zero
+    - ((dist[1, 2] ** 2) - ((posy[1] - posy[2]) ** 2)) is zero
+    - posx[1] is zero
+    - posx[2] is zero
+    - posz[1] is zero
+    - posz[2] is zero
+    obj_id_map:
+      MPb:
+      - Particle
+      - 2
+      clock:
+      - Clock
+      - 0
+      MPa:
+      - Particle
+      - 1
+    obj_name_map:
+      0:
+      - Clock
+      - clock
+      2:
+      - Particle
+      - MPb
+      1:
+      - Particle
+      - MPa
+    obj_info_dict:
+      Clock:
+        0: clock
+      Particle:
+        1: MPa
+        2: MPb
+    data_atomexp:
+    - posx[2]
+    - posx[1]
+    - dist[1, 2]
+    - posy[1]
+    - dist[2, 1]
+    - posy[2]
+    - posz[2]
+    - t[0]
+    - posz[1]
+  do_experiment: aiphy/experiment/basic/collision_y.py
+projectile_oscillation_2:
+  expconfig:
+    name: projectile_oscillation_2
+    spdim: 3
+    exp_para:
+      vx1: '[Parastructure] value: None, range: (-1.0, 1.0)'
+      vz1: '[Parastructure] value: None, range: (-1.0, 1.0)'
+      vz3: '[Parastructure] value: None, range: (-1.0, 1.0)'
+      y0: '[Parastructure] value: None, range: (-5.0, 5.0)'
+      theta1: '[Parastructure] value: None, range: (0.0, 3.1415926)'
+      vy1: '[Parastructure] value: None, range: (-1.0, 1.0)'
+      vy2: '[Parastructure] value: None, range: (-1.0, 1.0)'
+      vz2: '[Parastructure] value: None, range: (-1.0, 1.0)'
+      phi1: '[Parastructure] value: None, range: (0.0, 6.2831852)'
+      vy3: '[Parastructure] value: None, range: (-1.0, 1.0)'
+      theta2: '[Parastructure] value: None, range: (0.0, 3.1415926)'
+      x0: '[Parastructure] value: None, range: (-5.0, 5.0)'
+      z0: '[Parastructure] value: None, range: (-5.0, 5.0)'
+      vx2: '[Parastructure] value: None, range: (-1.0, 1.0)'
+      r1: '[Parastructure] value: None, range: (3.5, 5.5)'
+      phi2: '[Parastructure] value: None, range: (0.0, 6.2831852)'
+      r2: '[Parastructure] value: None, range: (3.5, 5.5)'
+      vx3: '[Parastructure] value: None, range: (-1.0, 1.0)'
+    obj_info:
+      o3: |-
+        [Objstructure] obj_type: Particle, attribute: [m, e]
+        Attribute:
+        | m: [Parastructure] value: None, range: (3.0, 6.0)
+        | e: [Parastructure] value: None, range: (0.0, 0.0).
+      s2: |-
+        [Objstructure] obj_type: Spring, attribute: [freel, thickness]
+        Attribute:
+        | freel: [Parastructure] value: None, range: (4.0, 6.0)
+        | thickness: [Parastructure] value: None, range: (1.5, 2.5).
+      o2: |-
+        [Objstructure] obj_type: Particle, attribute: [m, e]
+        Attribute:
+        | m: [Parastructure] value: None, range: (3.0, 6.0)
+        | e: [Parastructure] value: None, range: (0.0, 0.0).
+      o1: |-
+        [Objstructure] obj_type: Particle, attribute: [m, e]
+        Attribute:
+        | m: [Parastructure] value: None, range: (3.0, 6.0)
+        | e: [Parastructure] value: None, range: (0.0, 0.0).
+      s1: |-
+        [Objstructure] obj_type: Spring, attribute: [freel, thickness]
+        Attribute:
+        | freel: [Parastructure] value: None, range: (4.0, 6.0)
+        | thickness: [Parastructure] value: None, range: (1.5, 2.5).
+      clock: |-
+        [Objstructure] obj_type: Clock, attribute: []
+        Attribute:.
+    data_info:
+    - - (1->Particle) |- posx[1]
+      - - o1
+    - - (1->Particle) |- posy[1]
+      - - o1
+    - - (1->Particle) |- posz[1]
+      - - o1
+    - - (1->Particle) |- posx[1]
+      - - o2
+    - - (1->Particle) |- posy[1]
+      - - o2
+    - - (1->Particle) |- posz[1]
+      - - o2
+    - - (1->Particle) |- posx[1]
+      - - o3
+    - - (1->Particle) |- posy[1]
+      - - o3
+    - - (1->Particle) |- posz[1]
+      - - o3
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o1
+        - o2
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o2
+        - o1
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o1
+        - o3
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o3
+        - o1
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o3
+        - o2
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o2
+        - o3
+    - - (1->Spring) |- length[1]
+      - - s1
+    - - (1->Spring) |- length[1]
+      - - s2
+    - - (1->Clock) |- t[1]
+      - - clock
+    geometry_info:
+    - (dist[1, 2] - dist[2, 1]) is zero
+    - ((((dist[1, 2] ** 2) - ((posx[1] - posx[2]) ** 2)) - ((posy[1] - posy[2]) ** 2)) - ((posz[1] - posz[2]) ** 2)) is zero
+    - (dist[1, 2] - length[4]) is zero
+    - (dist[2, 3] - dist[3, 2]) is zero
+    - ((((dist[2, 3] ** 2) - ((posx[2] - posx[3]) ** 2)) - ((posy[2] - posy[3]) ** 2)) - ((posz[2] - posz[3]) ** 2)) is zero
+    - (dist[2, 3] - length[5]) is zero
+    - (dist[1, 3] - dist[3, 1]) is zero
+    - ((((dist[1, 3] ** 2) - ((posx[1] - posx[3]) ** 2)) - ((posy[1] - posy[3]) ** 2)) - ((posz[1] - posz[3]) ** 2)) is zero
+    obj_id_map:
+      s2:
+      - Spring
+      - 5
+      s1:
+      - Spring
+      - 4
+      o2:
+      - Particle
+      - 2
+      o3:
+      - Particle
+      - 3
+      o1:
+      - Particle
+      - 1
+      clock:
+      - Clock
+      - 0
+    obj_name_map:
+      1:
+      - Particle
+      - o1
+      0:
+      - Clock
+      - clock
+      5:
+      - Spring
+      - s2
+      3:
+      - Particle
+      - o3
+      4:
+      - Spring
+      - s1
+      2:
+      - Particle
+      - o2
+    obj_info_dict:
+      Clock:
+        0: clock
+      Spring:
+        4: s1
+        5: s2
+      Particle:
+        3: o3
+        2: o2
+        1: o1
+    data_atomexp:
+    - dist[3, 1]
+    - dist[3, 2]
+    - t[0]
+    - length[4]
+    - posx[3]
+    - posy[1]
+    - posx[1]
+    - dist[1, 2]
+    - dist[2, 3]
+    - posy[3]
+    - length[5]
+    - posy[2]
+    - posz[3]
+    - dist[2, 1]
+    - posz[2]
+    - posz[1]
+    - dist[1, 3]
+    - posx[2]
+  do_experiment: aiphy/experiment/ground_laboratory/projectile_oscillation_2.py
+free_fall:
+  expconfig:
+    name: free_fall
+    spdim: 1
+    exp_para:
+      z0: '[Parastructure] value: None, range: (-5.0, 5.0)'
+    obj_info:
+      clock: |-
+        [Objstructure] obj_type: Clock, attribute: []
+        Attribute:.
+      o1: |-
+        [Objstructure] obj_type: Particle, attribute: [m, e]
+        Attribute:
+        | m: [Parastructure] value: None, range: (1.0, 1000.0)
+        | e: [Parastructure] value: None, range: (0.0, 0.0).
+    data_info:
+    - - (1->Particle) |- posx[1]
+      - - o1
+    - - (1->Particle) |- posy[1]
+      - - o1
+    - - (1->Particle) |- posz[1]
+      - - o1
+    - - (1->Clock) |- t[1]
+      - - clock
+    geometry_info:
+    - posx[1] is zero
+    - posy[1] is zero
+    obj_id_map:
+      clock:
+      - Clock
+      - 0
+      o1:
+      - Particle
+      - 1
+    obj_name_map:
+      1:
+      - Particle
+      - o1
+      0:
+      - Clock
+      - clock
+    obj_info_dict:
+      Clock:
+        0: clock
+      Particle:
+        1: o1
+    data_atomexp:
+    - t[0]
+    - posy[1]
+    - posz[1]
+    - posx[1]
+  do_experiment: aiphy/experiment/ground_laboratory/free_fall.py
+slope_oscillation_2:
+  expconfig:
+    name: slope_oscillation_2
+    spdim: 2
+    exp_para:
+      theta: '[Parastructure] value: None, range: (0.5235987666666667, 1.0471975333333334)'
+      r1: '[Parastructure] value: None, range: (4.0, 6.0)'
+      r2: '[Parastructure] value: None, range: (4.0, 6.0)'
+      omega1: '[Parastructure] value: None, range: (-0.5235987666666667, 0.5235987666666667)'
+      phi: '[Parastructure] value: None, range: (0.5235987666666667, 1.0471975333333334)'
+      theta1: '[Parastructure] value: None, range: (-1.0471975333333334, 1.0471975333333334)'
+      v2: '[Parastructure] value: None, range: (-2.0, 2.0)'
+      v1: '[Parastructure] value: None, range: (-2.0, 2.0)'
+      theta2: '[Parastructure] value: None, range: (-1.0471975333333334, 1.0471975333333334)'
+      omega2: '[Parastructure] value: None, range: (-0.5235987666666667, 0.5235987666666667)'
+    obj_info:
+      slope: |-
+        [Objstructure] obj_type: Slope, attribute: []
+        Attribute:.
+      s2: |-
+        [Objstructure] obj_type: Spring, attribute: [thickness, freel]
+        Attribute:
+        | thickness: [Parastructure] value: None, range: (1.5, 2.5)
+        | freel: [Parastructure] value: None, range: (4.0, 6.0).
+      o1: |-
+        [Objstructure] obj_type: Particle, attribute: [m, e]
+        Attribute:
+        | m: [Parastructure] value: None, range: (3.0, 6.0)
+        | e: [Parastructure] value: None, range: (0.0, 0.0).
+      s1: |-
+        [Objstructure] obj_type: Spring, attribute: [freel, thickness]
+        Attribute:
+        | freel: [Parastructure] value: None, range: (4.0, 6.0)
+        | thickness: [Parastructure] value: None, range: (1.5, 2.5).
+      clock: |-
+        [Objstructure] obj_type: Clock, attribute: []
+        Attribute:.
+      o2: |-
+        [Objstructure] obj_type: Particle, attribute: [e, m]
+        Attribute:
+        | e: [Parastructure] value: None, range: (0.0, 0.0)
+        | m: [Parastructure] value: None, range: (3.0, 6.0).
+    data_info:
+    - - (1->Particle) |- posx[1]
+      - - o1
+    - - (1->Particle) |- posy[1]
+      - - o1
+    - - (1->Particle) |- posz[1]
+      - - o1
+    - - (1->Spring) |- length[1]
+      - - s1
+    - - (1->Particle) |- posx[1]
+      - - o2
+    - - (1->Particle) |- posy[1]
+      - - o2
+    - - (1->Particle) |- posz[1]
+      - - o2
+    - - (1->Spring) |- length[1]
+      - - s2
+    - - (1->Slope) |- cx[1]
+      - - slope
+    - - (1->Slope) |- cy[1]
+      - - slope
+    - - (1->Slope) |- cz[1]
+      - - slope
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o1
+        - o2
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o2
+        - o1
+    - - (1->Clock) |- t[1]
+      - - clock
+    geometry_info:
+    - cx[5] is conserved
+    - cy[5] is conserved
+    - cz[5] is conserved
+    - (((cx[5] * posx[1]) + (cy[5] * posy[1])) + (cz[5] * posz[1])) is conserved
+    - (((cx[5] * posx[2]) + (cy[5] * posy[2])) + (cz[5] * posz[2])) is conserved
+    - ((((posx[1] ** 2) + (posy[1] ** 2)) + (posz[1] ** 2)) - (length[3] ** 2)) is zero
+    - (dist[1, 2] - length[4]) is zero
+    - (dist[1, 2] - dist[2, 1]) is zero
+    - ((((dist[1, 2] ** 2) - ((posx[1] - posx[2]) ** 2)) - ((posy[1] - posy[2]) ** 2)) - ((posz[1] - posz[2]) ** 2)) is zero
+    obj_id_map:
+      o1:
+      - Particle
+      - 1
+      slope:
+      - Slope
+      - 5
+      s1:
+      - Spring
+      - 3
+      s2:
+      - Spring
+      - 4
+      o2:
+      - Particle
+      - 2
+      clock:
+      - Clock
+      - 0
+    obj_name_map:
+      5:
+      - Slope
+      - slope
+      3:
+      - Spring
+      - s1
+      1:
+      - Particle
+      - o1
+      0:
+      - Clock
+      - clock
+      4:
+      - Spring
+      - s2
+      2:
+      - Particle
+      - o2
+    obj_info_dict:
+      Clock:
+        0: clock
+      Spring:
+        3: s1
+        4: s2
+      Particle:
+        2: o2
+        1: o1
+      Slope:
+        5: slope
+    data_atomexp:
+    - posx[1]
+    - dist[1, 2]
+    - dist[2, 1]
+    - cy[5]
+    - posx[2]
+    - t[0]
+    - cz[5]
+    - length[3]
+    - length[4]
+    - cx[5]
+    - posy[1]
+    - posy[2]
+    - posz[2]
+    - posz[1]
+  do_experiment: aiphy/experiment/ground_laboratory/slope_oscillation_2.py
+oscillation_2d_2:
+  expconfig:
+    name: oscillation_2d_2
+    spdim: 2
+    exp_para:
+      x2: '[Parastructure] value: None, range: (-0.5, 0.5)'
+      v1: '[Parastructure] value: None, range: (-2.0, 2.0)'
+      x3: '[Parastructure] value: None, range: (5.5, 6.5)'
+      v3: '[Parastructure] value: None, range: (-2.0, 2.0)'
+      x1: '[Parastructure] value: None, range: (-6.5, -5.5)'
+      theta: '[Parastructure] value: None, range: (0.0, 3.1415926)'
+      v2: '[Parastructure] value: None, range: (-2.0, 2.0)'
+    obj_info:
+      s1: |-
+        [Objstructure] obj_type: Spring, attribute: [thickness, freel]
+        Attribute:
+        | thickness: [Parastructure] value: None, range: (1.5, 2.5)
+        | freel: [Parastructure] value: None, range: (4.0, 6.0).
+      o2: |-
+        [Objstructure] obj_type: Particle, attribute: [e, m]
+        Attribute:
+        | e: [Parastructure] value: None, range: (0.0, 0.0)
+        | m: [Parastructure] value: None, range: (4.5, 5.0).
+      s2: |-
+        [Objstructure] obj_type: Spring, attribute: [thickness, freel]
+        Attribute:
+        | thickness: [Parastructure] value: None, range: (1.5, 2.5)
+        | freel: [Parastructure] value: None, range: (4.0, 6.0).
+      clock: |-
+        [Objstructure] obj_type: Clock, attribute: []
+        Attribute:.
+      o3: |-
+        [Objstructure] obj_type: Particle, attribute: [m, e]
+        Attribute:
+        | m: [Parastructure] value: None, range: (4.5, 5.0)
+        | e: [Parastructure] value: None, range: (0.0, 0.0).
+      o1: |-
+        [Objstructure] obj_type: Particle, attribute: [m, e]
+        Attribute:
+        | m: [Parastructure] value: None, range: (4.5, 5.0)
+        | e: [Parastructure] value: None, range: (0.0, 0.0).
+    data_info:
+    - - (1->Particle) |- posx[1]
+      - - o1
+    - - (1->Particle) |- posx[1]
+      - - o2
+    - - (1->Particle) |- posx[1]
+      - - o3
+    - - (1->Particle) |- posy[1]
+      - - o1
+    - - (1->Particle) |- posy[1]
+      - - o2
+    - - (1->Particle) |- posy[1]
+      - - o3
+    - - (1->Particle) |- posz[1]
+      - - o1
+    - - (1->Particle) |- posz[1]
+      - - o2
+    - - (1->Particle) |- posz[1]
+      - - o3
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o1
+        - o2
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o2
+        - o1
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o1
+        - o3
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o3
+        - o1
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o3
+        - o2
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o2
+        - o3
+    - - (1->Spring) |- length[1]
+      - - s1
+    - - (1->Spring) |- length[1]
+      - - s2
+    - - (1->Clock) |- t[1]
+      - - clock
+    geometry_info:
+    - (dist[1, 2] - length[4]) is zero
+    - (((dist[1, 2] ** 2) - ((posx[1] - posx[2]) ** 2)) - ((posy[1] - posy[2]) ** 2)) is zero
+    - (dist[1, 2] - dist[2, 1]) is zero
+    - (dist[2, 3] - length[5]) is zero
+    - (((dist[2, 3] ** 2) - ((posx[2] - posx[3]) ** 2)) - ((posy[2] - posy[3]) ** 2)) is zero
+    - (dist[2, 3] - dist[3, 2]) is zero
+    - (((dist[1, 3] ** 2) - ((posx[1] - posx[3]) ** 2)) - ((posy[1] - posy[3]) ** 2)) is zero
+    - (dist[1, 3] - dist[3, 1]) is zero
+    - posz[1] is zero
+    - posz[2] is zero
+    - posz[3] is zero
+    obj_id_map:
+      o1:
+      - Particle
+      - 1
+      s2:
+      - Spring
+      - 5
+      clock:
+      - Clock
+      - 0
+      s1:
+      - Spring
+      - 4
+      o2:
+      - Particle
+      - 2
+      o3:
+      - Particle
+      - 3
+    obj_name_map:
+      2:
+      - Particle
+      - o2
+      3:
+      - Particle
+      - o3
+      0:
+      - Clock
+      - clock
+      1:
+      - Particle
+      - o1
+      4:
+      - Spring
+      - s1
+      5:
+      - Spring
+      - s2
+    obj_info_dict:
+      Particle:
+        1: o1
+        2: o2
+        3: o3
+      Clock:
+        0: clock
+      Spring:
+        4: s1
+        5: s2
+    data_atomexp:
+    - dist[3, 2]
+    - posy[2]
+    - length[4]
+    - posz[3]
+    - posz[1]
+    - dist[2, 1]
+    - posy[1]
+    - dist[2, 3]
+    - dist[3, 1]
+    - t[0]
+    - posx[3]
+    - dist[1, 2]
+    - posz[2]
+    - posx[2]
+    - dist[1, 3]
+    - posy[3]
+    - posx[1]
+    - length[5]
+  do_experiment: aiphy/experiment/oscillation/oscillation_2d_2.py
+projectile:
+  expconfig:
+    name: projectile
+    spdim: 3
+    exp_para:
+      vy0: '[Parastructure] value: None, range: (1.0, 2.0)'
+      y0: '[Parastructure] value: None, range: (-5.0, 5.0)'
+      x0: '[Parastructure] value: None, range: (-5.0, 5.0)'
+      vx0: '[Parastructure] value: None, range: (1.0, 2.0)'
+      z0: '[Parastructure] value: None, range: (-5.0, 5.0)'
+    obj_info:
+      o1: |-
+        [Objstructure] obj_type: Particle, attribute: [e, m]
+        Attribute:
+        | e: [Parastructure] value: None, range: (0.0, 0.0)
+        | m: [Parastructure] value: None, range: (3.0, 6.0).
+      clock: |-
+        [Objstructure] obj_type: Clock, attribute: []
+        Attribute:.
+    data_info:
+    - - (1->Particle) |- posx[1]
+      - - o1
+    - - (1->Particle) |- posy[1]
+      - - o1
+    - - (1->Particle) |- posz[1]
+      - - o1
+    - - (1->Clock) |- t[1]
+      - - clock
+    geometry_info: []
+    obj_id_map:
+      o1:
+      - Particle
+      - 1
+      clock:
+      - Clock
+      - 0
+    obj_name_map:
+      0:
+      - Clock
+      - clock
+      1:
+      - Particle
+      - o1
+    obj_info_dict:
+      Particle:
+        1: o1
+      Clock:
+        0: clock
+    data_atomexp:
+    - posx[1]
+    - posz[1]
+    - posy[1]
+    - t[0]
+  do_experiment: aiphy/experiment/ground_laboratory/projectile.py
+oblique_projectile:
+  expconfig:
+    name: oblique_projectile
+    spdim: 3
+    exp_para:
+      x0: '[Parastructure] value: None, range: (-5.0, 5.0)'
+      y0: '[Parastructure] value: None, range: (-5.0, 5.0)'
+      vy0: '[Parastructure] value: None, range: (1.0, 2.0)'
+      vz0: '[Parastructure] value: None, range: (1.0, 2.0)'
+      vx0: '[Parastructure] value: None, range: (1.0, 2.0)'
+      z0: '[Parastructure] value: None, range: (-5.0, 5.0)'
+    obj_info:
+      clock: |-
+        [Objstructure] obj_type: Clock, attribute: []
+        Attribute:.
+      o1: |-
+        [Objstructure] obj_type: Particle, attribute: [m, e]
+        Attribute:
+        | m: [Parastructure] value: None, range: (3.0, 6.0)
+        | e: [Parastructure] value: None, range: (0.0, 0.0).
+    data_info:
+    - - (1->Particle) |- posx[1]
+      - - o1
+    - - (1->Particle) |- posy[1]
+      - - o1
+    - - (1->Particle) |- posz[1]
+      - - o1
+    - - (1->Clock) |- t[1]
+      - - clock
+    geometry_info: []
+    obj_id_map:
+      o1:
+      - Particle
+      - 1
+      clock:
+      - Clock
+      - 0
+    obj_name_map:
+      1:
+      - Particle
+      - o1
+      0:
+      - Clock
+      - clock
+    obj_info_dict:
+      Clock:
+        0: clock
+      Particle:
+        1: o1
+    data_atomexp:
+    - posz[1]
+    - posx[1]
+    - posy[1]
+    - t[0]
+  do_experiment: aiphy/experiment/ground_laboratory/oblique_projectile.py
+oscillation_rot_2:
+  expconfig:
+    name: oscillation_rot_2
+    spdim: 2
+    exp_para:
+      omega20: '[Parastructure] value: None, range: (-0.78539815, 0.78539815)'
+      v20: '[Parastructure] value: None, range: (-2.0, 2.0)'
+      omega10: '[Parastructure] value: None, range: (0.78539815, 1.5707963)'
+      theta10: '[Parastructure] value: None, range: (0.0, 1.5707963)'
+      r20: '[Parastructure] value: None, range: (4.0, 7.0)'
+      v10: '[Parastructure] value: None, range: (-2.0, 2.0)'
+      r10: '[Parastructure] value: None, range: (4.0, 7.0)'
+      theta20: '[Parastructure] value: None, range: (0.0, 1.5707963)'
+    obj_info:
+      clock: |-
+        [Objstructure] obj_type: Clock, attribute: []
+        Attribute:.
+      o1: |-
+        [Objstructure] obj_type: Particle, attribute: [m, e]
+        Attribute:
+        | m: [Parastructure] value: None, range: (3.0, 6.0)
+        | e: [Parastructure] value: None, range: (0.0, 0.0).
+      o2: |-
+        [Objstructure] obj_type: Particle, attribute: [e, m]
+        Attribute:
+        | e: [Parastructure] value: None, range: (0.0, 0.0)
+        | m: [Parastructure] value: None, range: (3.0, 6.0).
+      s2: |-
+        [Objstructure] obj_type: Spring, attribute: [freel, thickness]
+        Attribute:
+        | freel: [Parastructure] value: None, range: (4.0, 6.0)
+        | thickness: [Parastructure] value: None, range: (1.5, 2.5).
+      s1: |-
+        [Objstructure] obj_type: Spring, attribute: [thickness, freel]
+        Attribute:
+        | thickness: [Parastructure] value: None, range: (1.5, 2.5)
+        | freel: [Parastructure] value: None, range: (4.0, 6.0).
+    data_info:
+    - - (1->Particle) |- posx[1]
+      - - o1
+    - - (1->Particle) |- posy[1]
+      - - o1
+    - - (1->Particle) |- posz[1]
+      - - o1
+    - - (1->Spring) |- length[1]
+      - - s1
+    - - (1->Particle) |- posx[1]
+      - - o2
+    - - (1->Particle) |- posy[1]
+      - - o2
+    - - (1->Particle) |- posz[1]
+      - - o2
+    - - (1->Spring) |- length[1]
+      - - s2
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o1
+        - o2
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o2
+        - o1
+    - - (1->Clock) |- t[1]
+      - - clock
+    geometry_info:
+    - (((length[3] ** 2) - (posx[1] ** 2)) - (posy[1] ** 2)) is zero
+    - (dist[1, 2] - dist[2, 1]) is zero
+    - (((dist[1, 2] ** 2) - ((posx[1] - posx[2]) ** 2)) - ((posy[1] - posy[2]) ** 2)) is zero
+    - (dist[1, 2] - length[4]) is zero
+    - posz[1] is zero
+    - posz[2] is zero
+    obj_id_map:
+      s1:
+      - Spring
+      - 3
+      clock:
+      - Clock
+      - 0
+      s2:
+      - Spring
+      - 4
+      o1:
+      - Particle
+      - 1
+      o2:
+      - Particle
+      - 2
+    obj_name_map:
+      4:
+      - Spring
+      - s2
+      3:
+      - Spring
+      - s1
+      2:
+      - Particle
+      - o2
+      1:
+      - Particle
+      - o1
+      0:
+      - Clock
+      - clock
+    obj_info_dict:
+      Particle:
+        2: o2
+        1: o1
+      Spring:
+        4: s2
+        3: s1
+      Clock:
+        0: clock
+    data_atomexp:
+    - posz[2]
+    - length[3]
+    - dist[2, 1]
+    - length[4]
+    - posx[2]
+    - dist[1, 2]
+    - t[0]
+    - posz[1]
+    - posy[2]
+    - posy[1]
+    - posx[1]
+  do_experiment: aiphy/experiment/oscillation/oscillation_rot_2.py
+collision_2d:
+  expconfig:
+    name: collision_2d
+    spdim: 2
+    exp_para:
+      theta: '[Parastructure] value: None, range: (0.0, 3.1415926)'
+      v2: '[Parastructure] value: None, range: (-25.0, -15.0)'
+      x1: '[Parastructure] value: None, range: (-20.0, -15.0)'
+      x2: '[Parastructure] value: None, range: (15.0, 20.0)'
+      v1: '[Parastructure] value: None, range: (15.0, 25.0)'
+    obj_info:
+      MPb: |-
+        [Objstructure] obj_type: Particle, attribute: [m, e]
+        Attribute:
+        | m: [Parastructure] value: None, range: (2.0, 4.0)
+        | e: [Parastructure] value: None, range: (0.0, 0.0).
+      clock: |-
+        [Objstructure] obj_type: Clock, attribute: []
+        Attribute:.
+      MPa: |-
+        [Objstructure] obj_type: Particle, attribute: [e, m]
+        Attribute:
+        | e: [Parastructure] value: None, range: (0.0, 0.0)
+        | m: [Parastructure] value: None, range: (2.0, 4.0).
+    data_info:
+    - - (1->Particle) |- posx[1]
+      - - MPa
+    - - (1->Particle) |- posx[1]
+      - - MPb
+    - - (1->Particle) |- posy[1]
+      - - MPa
+    - - (1->Particle) |- posy[1]
+      - - MPb
+    - - (1->Particle) |- posz[1]
+      - - MPa
+    - - (1->Particle) |- posz[1]
+      - - MPb
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - MPa
+        - MPb
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - MPb
+        - MPa
+    - - (1->Clock) |- t[1]
+      - - clock
+    geometry_info:
+    - (dist[1, 2] - dist[2, 1]) is zero
+    - (((dist[1, 2] ** 2) - ((posx[1] - posx[2]) ** 2)) - ((posy[1] - posy[2]) ** 2)) is zero
+    - posz[1] is zero
+    - posz[2] is zero
+    obj_id_map:
+      MPa:
+      - Particle
+      - 1
+      clock:
+      - Clock
+      - 0
+      MPb:
+      - Particle
+      - 2
+    obj_name_map:
+      0:
+      - Clock
+      - clock
+      1:
+      - Particle
+      - MPa
+      2:
+      - Particle
+      - MPb
+    obj_info_dict:
+      Clock:
+        0: clock
+      Particle:
+        2: MPb
+        1: MPa
+    data_atomexp:
+    - dist[1, 2]
+    - posz[1]
+    - posx[2]
+    - posx[1]
+    - posz[2]
+    - t[0]
+    - dist[2, 1]
+    - posy[1]
+    - posy[2]
+  do_experiment: aiphy/experiment/basic/collision_2d.py
+motiony:
+  expconfig:
+    name: motiony
+    spdim: 2
+    exp_para:
+      theta: '[Parastructure] value: None, range: (0.2, 0.4)'
+      z0: '[Parastructure] value: None, range: (9.0, 11.0)'
+      v0: '[Parastructure] value: None, range: (-2.0, 2.0)'
+      y0: '[Parastructure] value: None, range: (9.0, 11.0)'
+    obj_info:
+      Slope: |-
+        [Objstructure] obj_type: Slope, attribute: []
+        Attribute:.
+      Clock: |-
+        [Objstructure] obj_type: Clock, attribute: []
+        Attribute:.
+      MPa: |-
+        [Objstructure] obj_type: Particle, attribute: [m, e]
+        Attribute:
+        | m: [Parastructure] value: None, range: (1.0, 1000.0)
+        | e: [Parastructure] value: None, range: (0.0, 0.0).
+    data_info:
+    - - (1->Particle) |- posx[1]
+      - - MPa
+    - - (1->Particle) |- posy[1]
+      - - MPa
+    - - (1->Particle) |- posz[1]
+      - - MPa
+    - - (1->Slope) |- cy[1]
+      - - Slope
+    - - (1->Slope) |- cz[1]
+      - - Slope
+    - - (1->Clock) |- t[1]
+      - - Clock
+    geometry_info:
+    - posx[1] is zero
+    - cy[2] is conserved
+    - cz[2] is conserved
+    - ((cy[2] * posy[1]) + (cz[2] * posz[1])) is conserved
+    obj_id_map:
+      Clock:
+      - Clock
+      - 0
+      MPa:
+      - Particle
+      - 1
+      Slope:
+      - Slope
+      - 2
+    obj_name_map:
+      2:
+      - Slope
+      - Slope
+      1:
+      - Particle
+      - MPa
+      0:
+      - Clock
+      - Clock
+    obj_info_dict:
+      Slope:
+        2: Slope
+      Clock:
+        0: Clock
+      Particle:
+        1: MPa
+    data_atomexp:
+    - posx[1]
+    - t[0]
+    - posy[1]
+    - posz[1]
+    - cy[2]
+    - cz[2]
+  do_experiment: <builtin_motiony>
+pendulum_oscillation_1:
+  expconfig:
+    name: pendulum_oscillation_1
+    spdim: 2
+    exp_para:
+      omega1: '[Parastructure] value: None, range: (-1.0471975333333334, 1.0471975333333334)'
+      v1: '[Parastructure] value: None, range: (-2.0, 2.0)'
+      r1: '[Parastructure] value: None, range: (4.0, 6.0)'
+      theta1: '[Parastructure] value: None, range: (-1.0471975333333334, 1.0471975333333334)'
+    obj_info:
+      o1: |-
+        [Objstructure] obj_type: Particle, attribute: [m, e]
+        Attribute:
+        | m: [Parastructure] value: None, range: (3.0, 6.0)
+        | e: [Parastructure] value: None, range: (0.0, 0.0).
+      s1: |-
+        [Objstructure] obj_type: Spring, attribute: [thickness, freel]
+        Attribute:
+        | thickness: [Parastructure] value: None, range: (1.5, 2.5)
+        | freel: [Parastructure] value: None, range: (4.0, 6.0).
+      clock: |-
+        [Objstructure] obj_type: Clock, attribute: []
+        Attribute:.
+    data_info:
+    - - (1->Particle) |- posx[1]
+      - - o1
+    - - (1->Particle) |- posy[1]
+      - - o1
+    - - (1->Particle) |- posz[1]
+      - - o1
+    - - (1->Spring) |- length[1]
+      - - s1
+    - - (1->Clock) |- t[1]
+      - - clock
+    geometry_info:
+    - (((posz[1] ** 2) + (posx[1] ** 2)) - (length[2] ** 2)) is zero
+    - posy[1] is zero
+    obj_id_map:
+      s1:
+      - Spring
+      - 2
+      o1:
+      - Particle
+      - 1
+      clock:
+      - Clock
+      - 0
+    obj_name_map:
+      0:
+      - Clock
+      - clock
+      2:
+      - Spring
+      - s1
+      1:
+      - Particle
+      - o1
+    obj_info_dict:
+      Particle:
+        1: o1
+      Spring:
+        2: s1
+      Clock:
+        0: clock
+    data_atomexp:
+    - length[2]
+    - posz[1]
+    - posy[1]
+    - t[0]
+    - posx[1]
+  do_experiment: aiphy/experiment/ground_laboratory/pendulum_oscillation_1.py
+motion_3d:
+  expconfig:
+    name: motion_3d
+    spdim: 3
+    exp_para:
+      x0: '[Parastructure] value: None, range: (1.0, 5.0)'
+      theta: '[Parastructure] value: None, range: (0.5235987666666667, 1.0471975333333334)'
+      v0: '[Parastructure] value: None, range: (1.0, 2.0)'
+      y0: '[Parastructure] value: None, range: (1.0, 5.0)'
+      phi: '[Parastructure] value: None, range: (0.5235987666666667, 1.0471975333333334)'
+      z0: '[Parastructure] value: None, range: (-2.0, -1.0)'
+    obj_info:
+      clock: |-
+        [Objstructure] obj_type: Clock, attribute: []
+        Attribute:.
+      o1: |-
+        [Objstructure] obj_type: Particle, attribute: [m, e]
+        Attribute:
+        | m: [Parastructure] value: None, range: (1.0, 2.0)
+        | e: [Parastructure] value: None, range: (0.0, 0.0).
+      slope: |-
+        [Objstructure] obj_type: Slope, attribute: []
+        Attribute:.
+    data_info:
+    - - (1->Particle) |- posx[1]
+      - - o1
+    - - (1->Particle) |- posy[1]
+      - - o1
+    - - (1->Particle) |- posz[1]
+      - - o1
+    - - (1->Slope) |- cx[1]
+      - - slope
+    - - (1->Slope) |- cy[1]
+      - - slope
+    - - (1->Slope) |- cz[1]
+      - - slope
+    - - (1->Clock) |- t[1]
+      - - clock
+    geometry_info:
+    - cx[2] is conserved
+    - cy[2] is conserved
+    - cz[2] is conserved
+    - (((cx[2] * posx[1]) + (cy[2] * posy[1])) + (cz[2] * posz[1])) is conserved
+    - ((cy[2] * posx[1]) - (cx[2] * posy[1])) is conserved
+    obj_id_map:
+      o1:
+      - Particle
+      - 1
+      clock:
+      - Clock
+      - 0
+      slope:
+      - Slope
+      - 2
+    obj_name_map:
+      2:
+      - Slope
+      - slope
+      1:
+      - Particle
+      - o1
+      0:
+      - Clock
+      - clock
+    obj_info_dict:
+      Particle:
+        1: o1
+      Clock:
+        0: clock
+      Slope:
+        2: slope
+    data_atomexp:
+    - posz[1]
+    - posy[1]
+    - t[0]
+    - cz[2]
+    - posx[1]
+    - cx[2]
+    - cy[2]
+  do_experiment: aiphy/experiment/basic/motion.py
+oscillation_x_1:
+  expconfig:
+    name: oscillation_x_1
+    spdim: 1
+    exp_para:
+      x1: '[Parastructure] value: None, range: (-3.5, -2.5)'
+      v2: '[Parastructure] value: None, range: (-2.0, 2.0)'
+      v1: '[Parastructure] value: None, range: (-2.0, 2.0)'
+      x2: '[Parastructure] value: None, range: (2.5, 3.5)'
+    obj_info:
+      s1: |-
+        [Objstructure] obj_type: Spring, attribute: [thickness, freel]
+        Attribute:
+        | thickness: [Parastructure] value: None, range: (1.5, 2.5)
+        | freel: [Parastructure] value: None, range: (4.0, 6.0).
+      o1: |-
+        [Objstructure] obj_type: Particle, attribute: [m, e]
+        Attribute:
+        | m: [Parastructure] value: None, range: (3.0, 6.0)
+        | e: [Parastructure] value: None, range: (0.0, 0.0).
+      clock: |-
+        [Objstructure] obj_type: Clock, attribute: []
+        Attribute:.
+      o2: |-
+        [Objstructure] obj_type: Particle, attribute: [m, e]
+        Attribute:
+        | m: [Parastructure] value: None, range: (3.0, 6.0)
+        | e: [Parastructure] value: None, range: (0.0, 0.0).
+    data_info:
+    - - (1->Particle) |- posx[1]
+      - - o1
+    - - (1->Particle) |- posx[1]
+      - - o2
+    - - (1->Particle) |- posy[1]
+      - - o1
+    - - (1->Particle) |- posy[1]
+      - - o2
+    - - (1->Particle) |- posz[1]
+      - - o1
+    - - (1->Particle) |- posz[1]
+      - - o2
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o1
+        - o2
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o2
+        - o1
+    - - (1->Spring) |- length[1]
+      - - s1
+    - - (1->Clock) |- t[1]
+      - - clock
+    geometry_info:
+    - ((posx[2] - posx[1]) - length[3]) is zero
+    - ((posx[2] - posx[1]) - dist[1, 2]) is zero
+    - (dist[1, 2] - dist[2, 1]) is zero
+    - posy[1] is zero
+    - posy[2] is zero
+    - posz[1] is zero
+    - posz[2] is zero
+    obj_id_map:
+      s1:
+      - Spring
+      - 3
+      o2:
+      - Particle
+      - 2
+      clock:
+      - Clock
+      - 0
+      o1:
+      - Particle
+      - 1
+    obj_name_map:
+      2:
+      - Particle
+      - o2
+      1:
+      - Particle
+      - o1
+      0:
+      - Clock
+      - clock
+      3:
+      - Spring
+      - s1
+    obj_info_dict:
+      Spring:
+        3: s1
+      Particle:
+        1: o1
+        2: o2
+      Clock:
+        0: clock
+    data_atomexp:
+    - posy[2]
+    - posy[1]
+    - posx[2]
+    - posx[1]
+    - length[3]
+    - posz[1]
+    - dist[1, 2]
+    - dist[2, 1]
+    - posz[2]
+    - t[0]
+  do_experiment: aiphy/experiment/oscillation/oscillation_x_1.py
+slope_oscillation_1:
+  expconfig:
+    name: slope_oscillation_1
+    spdim: 2
+    exp_para:
+      omega1: '[Parastructure] value: None, range: (-0.5235987666666667, 0.5235987666666667)'
+      phi: '[Parastructure] value: None, range: (0.5235987666666667, 1.0471975333333334)'
+      v1: '[Parastructure] value: None, range: (-2.0, 2.0)'
+      theta1: '[Parastructure] value: None, range: (-1.0471975333333334, 1.0471975333333334)'
+      theta: '[Parastructure] value: None, range: (0.5235987666666667, 1.0471975333333334)'
+      r1: '[Parastructure] value: None, range: (4.0, 6.0)'
+    obj_info:
+      slope: |-
+        [Objstructure] obj_type: Slope, attribute: []
+        Attribute:.
+      o1: |-
+        [Objstructure] obj_type: Particle, attribute: [m, e]
+        Attribute:
+        | m: [Parastructure] value: None, range: (3.0, 6.0)
+        | e: [Parastructure] value: None, range: (0.0, 0.0).
+      s1: |-
+        [Objstructure] obj_type: Spring, attribute: [freel, thickness]
+        Attribute:
+        | freel: [Parastructure] value: None, range: (4.0, 6.0)
+        | thickness: [Parastructure] value: None, range: (1.5, 2.5).
+      clock: |-
+        [Objstructure] obj_type: Clock, attribute: []
+        Attribute:.
+    data_info:
+    - - (1->Particle) |- posx[1]
+      - - o1
+    - - (1->Particle) |- posy[1]
+      - - o1
+    - - (1->Particle) |- posz[1]
+      - - o1
+    - - (1->Spring) |- length[1]
+      - - s1
+    - - (1->Slope) |- cx[1]
+      - - slope
+    - - (1->Slope) |- cy[1]
+      - - slope
+    - - (1->Slope) |- cz[1]
+      - - slope
+    - - (1->Clock) |- t[1]
+      - - clock
+    geometry_info:
+    - cx[3] is conserved
+    - cy[3] is conserved
+    - cz[3] is conserved
+    - (((cx[3] * posx[1]) + (cy[3] * posy[1])) + (cz[3] * posz[1])) is conserved
+    - ((((posx[1] ** 2) + (posy[1] ** 2)) + (posz[1] ** 2)) - (length[2] ** 2)) is zero
+    obj_id_map:
+      o1:
+      - Particle
+      - 1
+      s1:
+      - Spring
+      - 2
+      clock:
+      - Clock
+      - 0
+      slope:
+      - Slope
+      - 3
+    obj_name_map:
+      3:
+      - Slope
+      - slope
+      0:
+      - Clock
+      - clock
+      2:
+      - Spring
+      - s1
+      1:
+      - Particle
+      - o1
+    obj_info_dict:
+      Particle:
+        1: o1
+      Spring:
+        2: s1
+      Clock:
+        0: clock
+      Slope:
+        3: slope
+    data_atomexp:
+    - length[2]
+    - cy[3]
+    - cz[3]
+    - posy[1]
+    - posx[1]
+    - cx[3]
+    - posz[1]
+    - t[0]
+  do_experiment: aiphy/experiment/ground_laboratory/slope_oscillation_1.py
+oblique_projectile_x:
+  expconfig:
+    name: oblique_projectile_x
+    spdim: 2
+    exp_para:
+      vx0: '[Parastructure] value: None, range: (1.0, 2.0)'
+      vz0: '[Parastructure] value: None, range: (1.0, 2.0)'
+      z0: '[Parastructure] value: None, range: (-5.0, 5.0)'
+      x0: '[Parastructure] value: None, range: (-5.0, 5.0)'
+    obj_info:
+      o1: |-
+        [Objstructure] obj_type: Particle, attribute: [m, e]
+        Attribute:
+        | m: [Parastructure] value: None, range: (3.0, 6.0)
+        | e: [Parastructure] value: None, range: (0.0, 0.0).
+      clock: |-
+        [Objstructure] obj_type: Clock, attribute: []
+        Attribute:.
+    data_info:
+    - - (1->Particle) |- posx[1]
+      - - o1
+    - - (1->Particle) |- posy[1]
+      - - o1
+    - - (1->Particle) |- posz[1]
+      - - o1
+    - - (1->Clock) |- t[1]
+      - - clock
+    geometry_info:
+    - posy[1] is zero
+    obj_id_map:
+      o1:
+      - Particle
+      - 1
+      clock:
+      - Clock
+      - 0
+    obj_name_map:
+      0:
+      - Clock
+      - clock
+      1:
+      - Particle
+      - o1
+    obj_info_dict:
+      Clock:
+        0: clock
+      Particle:
+        1: o1
+    data_atomexp:
+    - posy[1]
+    - posx[1]
+    - t[0]
+    - posz[1]
+  do_experiment: aiphy/experiment/ground_laboratory/oblique_projectile_x.py
+oscillation_r_3:
+  expconfig:
+    name: oscillation_r_3
+    spdim: 2
+    exp_para:
+      v30: '[Parastructure] value: None, range: (-0.05, 0.05)'
+      v20: '[Parastructure] value: None, range: (-0.05, 0.05)'
+      theta0: '[Parastructure] value: None, range: (0.0, 2.094395066666667)'
+      r0: '[Parastructure] value: None, range: (5.0, 7.0)'
+      omega30: '[Parastructure] value: None, range: (1.0, 2.0)'
+      v10: '[Parastructure] value: None, range: (-0.05, 0.05)'
+      y0: '[Parastructure] value: None, range: (-1.0, 1.0)'
+      omega10: '[Parastructure] value: None, range: (1.0, 2.0)'
+      omega20: '[Parastructure] value: None, range: (1.0, 2.0)'
+      x0: '[Parastructure] value: None, range: (-1.0, 1.0)'
+    obj_info:
+      o2: |-
+        [Objstructure] obj_type: Particle, attribute: [e, m]
+        Attribute:
+        | e: [Parastructure] value: None, range: (0.0, 0.0)
+        | m: [Parastructure] value: None, range: (3.0, 6.0).
+      o1: |-
+        [Objstructure] obj_type: Particle, attribute: [e, m]
+        Attribute:
+        | e: [Parastructure] value: None, range: (0.0, 0.0)
+        | m: [Parastructure] value: None, range: (3.0, 6.0).
+      s1: |-
+        [Objstructure] obj_type: Spring, attribute: [freel, thickness]
+        Attribute:
+        | freel: [Parastructure] value: None, range: (4.0, 6.0)
+        | thickness: [Parastructure] value: None, range: (1.5, 2.5).
+      clock: |-
+        [Objstructure] obj_type: Clock, attribute: []
+        Attribute:.
+      s2: |-
+        [Objstructure] obj_type: Spring, attribute: [thickness, freel]
+        Attribute:
+        | thickness: [Parastructure] value: None, range: (1.5, 2.5)
+        | freel: [Parastructure] value: None, range: (4.0, 6.0).
+      o3: |-
+        [Objstructure] obj_type: Particle, attribute: [e, m]
+        Attribute:
+        | e: [Parastructure] value: None, range: (0.0, 0.0)
+        | m: [Parastructure] value: None, range: (3.0, 6.0).
+      s3: |-
+        [Objstructure] obj_type: Spring, attribute: [thickness, freel]
+        Attribute:
+        | thickness: [Parastructure] value: None, range: (1.5, 2.5)
+        | freel: [Parastructure] value: None, range: (4.0, 6.0).
+    data_info:
+    - - (1->Particle) |- posx[1]
+      - - o1
+    - - (1->Particle) |- posx[1]
+      - - o2
+    - - (1->Particle) |- posx[1]
+      - - o3
+    - - (1->Particle) |- posy[1]
+      - - o1
+    - - (1->Particle) |- posy[1]
+      - - o2
+    - - (1->Particle) |- posy[1]
+      - - o3
+    - - (1->Particle) |- posz[1]
+      - - o1
+    - - (1->Particle) |- posz[1]
+      - - o2
+    - - (1->Particle) |- posz[1]
+      - - o3
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o1
+        - o2
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o2
+        - o1
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o1
+        - o3
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o3
+        - o1
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o3
+        - o2
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o2
+        - o3
+    - - (1->Spring) |- length[1]
+      - - s1
+    - - (1->Spring) |- length[1]
+      - - s2
+    - - (1->Spring) |- length[1]
+      - - s3
+    - - (1->Clock) |- t[1]
+      - - clock
+    geometry_info:
+    - (dist[1, 2] - length[4]) is zero
+    - (((dist[1, 2] ** 2) - ((posx[1] - posx[2]) ** 2)) - ((posy[1] - posy[2]) ** 2)) is zero
+    - (dist[1, 2] - dist[2, 1]) is zero
+    - (dist[2, 3] - length[5]) is zero
+    - (((dist[2, 3] ** 2) - ((posx[2] - posx[3]) ** 2)) - ((posy[2] - posy[3]) ** 2)) is zero
+    - (dist[2, 3] - dist[3, 2]) is zero
+    - (dist[1, 3] - length[6]) is zero
+    - (((dist[1, 3] ** 2) - ((posx[1] - posx[3]) ** 2)) - ((posy[1] - posy[3]) ** 2)) is zero
+    - (dist[1, 3] - dist[3, 1]) is zero
+    - posz[1] is zero
+    - posz[2] is zero
+    - posz[3] is zero
+    obj_id_map:
+      clock:
+      - Clock
+      - 0
+      s2:
+      - Spring
+      - 5
+      o2:
+      - Particle
+      - 2
+      o3:
+      - Particle
+      - 3
+      s3:
+      - Spring
+      - 6
+      s1:
+      - Spring
+      - 4
+      o1:
+      - Particle
+      - 1
+    obj_name_map:
+      0:
+      - Clock
+      - clock
+      6:
+      - Spring
+      - s3
+      4:
+      - Spring
+      - s1
+      2:
+      - Particle
+      - o2
+      1:
+      - Particle
+      - o1
+      3:
+      - Particle
+      - o3
+      5:
+      - Spring
+      - s2
+    obj_info_dict:
+      Particle:
+        3: o3
+        1: o1
+        2: o2
+      Clock:
+        0: clock
+      Spring:
+        4: s1
+        5: s2
+        6: s3
+    data_atomexp:
+    - posz[1]
+    - dist[1, 2]
+    - t[0]
+    - length[4]
+    - length[5]
+    - posy[1]
+    - posx[3]
+    - posz[2]
+    - posy[3]
+    - dist[3, 1]
+    - posy[2]
+    - posx[2]
+    - dist[2, 3]
+    - dist[2, 1]
+    - dist[1, 3]
+    - posz[3]
+    - posx[1]
+    - dist[3, 2]
+    - length[6]
+  do_experiment: aiphy/experiment/oscillation/oscillation_r_3.py
+hanging_spring_1:
+  expconfig:
+    name: hanging_spring_1
+    spdim: 1
+    exp_para:
+      zr: '[Parastructure] value: None, range: (-5.0, 3.0)'
+      zl: '[Parastructure] value: None, range: (10.0, 12.0)'
+    obj_info:
+      clock: |-
+        [Objstructure] obj_type: Clock, attribute: []
+        Attribute:.
+      s1: |-
+        [Objstructure] obj_type: Spring, attribute: [thickness, freel]
+        Attribute:
+        | thickness: [Parastructure] value: None, range: (1.7, 1.9)
+        | freel: [Parastructure] value: None, range: (13.0, 17.0).
+      o1: |-
+        [Objstructure] obj_type: Particle, attribute: [m, e]
+        Attribute:
+        | m: [Parastructure] value: None, range: (5.0, 6.0)
+        | e: [Parastructure] value: None, range: (0.0, 0.0).
+    data_info:
+    - - (1->Particle) |- posx[1]
+      - - o1
+    - - (1->Particle) |- posy[1]
+      - - o1
+    - - (1->Particle) |- posz[1]
+      - - o1
+    - - (1->Spring) |- length[1]
+      - - s1
+    - - (1->Clock) |- t[1]
+      - - clock
+    geometry_info:
+    - (posz[1] + length[2]) is conserved
+    - posx[1] is zero
+    - posy[1] is zero
+    obj_id_map:
+      o1:
+      - Particle
+      - 1
+      clock:
+      - Clock
+      - 0
+      s1:
+      - Spring
+      - 2
+    obj_name_map:
+      2:
+      - Spring
+      - s1
+      1:
+      - Particle
+      - o1
+      0:
+      - Clock
+      - clock
+    obj_info_dict:
+      Particle:
+        1: o1
+      Clock:
+        0: clock
+      Spring:
+        2: s1
+    data_atomexp:
+    - length[2]
+    - posy[1]
+    - t[0]
+    - posz[1]
+    - posx[1]
+  do_experiment: aiphy/experiment/ground_laboratory/hanging_spring_1.py
+oscillationy:
+  expconfig:
+    name: oscillationy
+    spdim: 1
+    exp_para:
+      y2: '[Parastructure] value: None, range: (9.0, 11.0)'
+      posl: '[Parastructure] value: None, range: (-1.0, 1.0)'
+      v2: '[Parastructure] value: None, range: (-2.0, 2.0)'
+    obj_info:
+      SPb: |-
+        [Objstructure] obj_type: Spring, attribute: [thickness, freel]
+        Attribute:
+        | thickness: [Parastructure] value: None, range: (2.0, 2.2)
+        | freel: [Parastructure] value: None, range: (9.0, 11.0).
+      MPa: |-
+        [Objstructure] obj_type: Particle, attribute: [e, m]
+        Attribute:
+        | e: [Parastructure] value: None, range: (0.0, 0.0)
+        | m: [Parastructure] value: None, range: (1.2, 5.0).
+      Clock: |-
+        [Objstructure] obj_type: Clock, attribute: []
+        Attribute:.
+    data_info:
+    - - (1->Particle) |- posx[1]
+      - - MPa
+    - - (1->Particle) |- posy[1]
+      - - MPa
+    - - (1->Particle) |- posz[1]
+      - - MPa
+    - - (1->Spring) |- length[1]
+      - - SPb
+    - - (1->Clock) |- t[1]
+      - - Clock
+    geometry_info:
+    - posx[1] is zero
+    - posz[1] is zero
+    - (length[2] - posy[1]) is conserved
+    obj_id_map:
+      MPa:
+      - Particle
+      - 1
+      SPb:
+      - Spring
+      - 2
+      Clock:
+      - Clock
+      - 0
+    obj_name_map:
+      0:
+      - Clock
+      - Clock
+      1:
+      - Particle
+      - MPa
+      2:
+      - Spring
+      - SPb
+    obj_info_dict:
+      Particle:
+        1: MPa
+      Spring:
+        2: SPb
+      Clock:
+        0: Clock
+    data_atomexp:
+    - length[2]
+    - posz[1]
+    - posy[1]
+    - posx[1]
+    - t[0]
+  do_experiment: <builtin_oscillationy>
+gravity:
+  expconfig:
+    name: gravity
+    spdim: 1
+    exp_para: {}
+    obj_info:
+      clock: |-
+        [Objstructure] obj_type: Clock, attribute: []
+        Attribute:.
+      s1: |-
+        [Objstructure] obj_type: Spring, attribute: [thickness, freel]
+        Attribute:
+        | thickness: [Parastructure] value: None, range: (2.0, 2.0)
+        | freel: [Parastructure] value: None, range: (9.0, 11.0).
+      o1: |-
+        [Objstructure] obj_type: Particle, attribute: [e, m]
+        Attribute:
+        | e: [Parastructure] value: None, range: (0.0, 0.0)
+        | m: [Parastructure] value: None, range: (2.0, 3.0).
+    data_info:
+    - - (1->Spring) |- length[1]
+      - - s1
+    - - (1->Particle) |- posx[1]
+      - - o1
+    - - (1->Particle) |- posy[1]
+      - - o1
+    - - (1->Particle) |- posz[1]
+      - - o1
+    - - (1->Clock) |- t[1]
+      - - clock
+    geometry_info:
+    - (posz[1] + length[2]) is conserved
+    - posx[1] is zero
+    - posy[1] is zero
+    obj_id_map:
+      s1:
+      - Spring
+      - 2
+      clock:
+      - Clock
+      - 0
+      o1:
+      - Particle
+      - 1
+    obj_name_map:
+      0:
+      - Clock
+      - clock
+      2:
+      - Spring
+      - s1
+      1:
+      - Particle
+      - o1
+    obj_info_dict:
+      Spring:
+        2: s1
+      Clock:
+        0: clock
+      Particle:
+        1: o1
+    data_atomexp:
+    - t[0]
+    - posz[1]
+    - posy[1]
+    - length[2]
+    - posx[1]
+  do_experiment: aiphy/experiment/ground_laboratory/gravity.py
+oscillation_rot_1:
+  expconfig:
+    name: oscillation_rot_1
+    spdim: 2
+    exp_para:
+      theta10: '[Parastructure] value: None, range: (0.0, 1.5707963)'
+      omega10: '[Parastructure] value: None, range: (0.78539815, 1.5707963)'
+      v10: '[Parastructure] value: None, range: (-2.0, 2.0)'
+      r10: '[Parastructure] value: None, range: (5.0, 7.0)'
+    obj_info:
+      s1: |-
+        [Objstructure] obj_type: Spring, attribute: [freel, thickness]
+        Attribute:
+        | freel: [Parastructure] value: None, range: (4.0, 6.0)
+        | thickness: [Parastructure] value: None, range: (1.5, 2.5).
+      o1: |-
+        [Objstructure] obj_type: Particle, attribute: [e, m]
+        Attribute:
+        | e: [Parastructure] value: None, range: (0.0, 0.0)
+        | m: [Parastructure] value: None, range: (3.0, 6.0).
+      clock: |-
+        [Objstructure] obj_type: Clock, attribute: []
+        Attribute:.
+    data_info:
+    - - (1->Particle) |- posx[1]
+      - - o1
+    - - (1->Particle) |- posy[1]
+      - - o1
+    - - (1->Particle) |- posz[1]
+      - - o1
+    - - (1->Spring) |- length[1]
+      - - s1
+    - - (1->Clock) |- t[1]
+      - - clock
+    geometry_info:
+    - (((length[2] ** 2) - (posx[1] ** 2)) - (posy[1] ** 2)) is zero
+    - posz[1] is zero
+    obj_id_map:
+      clock:
+      - Clock
+      - 0
+      s1:
+      - Spring
+      - 2
+      o1:
+      - Particle
+      - 1
+    obj_name_map:
+      0:
+      - Clock
+      - clock
+      2:
+      - Spring
+      - s1
+      1:
+      - Particle
+      - o1
+    obj_info_dict:
+      Particle:
+        1: o1
+      Clock:
+        0: clock
+      Spring:
+        2: s1
+    data_atomexp:
+    - posx[1]
+    - t[0]
+    - length[2]
+    - posz[1]
+    - posy[1]
+  do_experiment: aiphy/experiment/oscillation/oscillation_rot_1.py
+vertical_projectile:
+  expconfig:
+    name: vertical_projectile
+    spdim: 1
+    exp_para:
+      vz0: '[Parastructure] value: None, range: (1.0, 2.0)'
+      z0: '[Parastructure] value: None, range: (-5.0, 5.0)'
+    obj_info:
+      clock: |-
+        [Objstructure] obj_type: Clock, attribute: []
+        Attribute:.
+      o1: |-
+        [Objstructure] obj_type: Particle, attribute: [m, e]
+        Attribute:
+        | m: [Parastructure] value: None, range: (1.0, 1000.0)
+        | e: [Parastructure] value: None, range: (0.0, 0.0).
+    data_info:
+    - - (1->Particle) |- posx[1]
+      - - o1
+    - - (1->Particle) |- posy[1]
+      - - o1
+    - - (1->Particle) |- posz[1]
+      - - o1
+    - - (1->Clock) |- t[1]
+      - - clock
+    geometry_info:
+    - posx[1] is zero
+    - posy[1] is zero
+    obj_id_map:
+      o1:
+      - Particle
+      - 1
+      clock:
+      - Clock
+      - 0
+    obj_name_map:
+      1:
+      - Particle
+      - o1
+      0:
+      - Clock
+      - clock
+    obj_info_dict:
+      Clock:
+        0: clock
+      Particle:
+        1: o1
+    data_atomexp:
+    - posy[1]
+    - t[0]
+    - posx[1]
+    - posz[1]
+  do_experiment: aiphy/experiment/ground_laboratory/vertical_projectile.py
+oscillation_x_3:
+  expconfig:
+    name: oscillation_x_3
+    spdim: 1
+    exp_para:
+      x4: '[Parastructure] value: None, range: (7.0, 8.0)'
+      v2: '[Parastructure] value: None, range: (-2.0, 2.0)'
+      v1: '[Parastructure] value: None, range: (-2.0, 2.0)'
+      x1: '[Parastructure] value: None, range: (-8.0, -7.0)'
+      x3: '[Parastructure] value: None, range: (1.0, 2.0)'
+      x2: '[Parastructure] value: None, range: (-2.0, -1.0)'
+      v3: '[Parastructure] value: None, range: (-2.0, 2.0)'
+      v4: '[Parastructure] value: None, range: (-2.0, 2.0)'
+    obj_info:
+      o1: |-
+        [Objstructure] obj_type: Particle, attribute: [e, m]
+        Attribute:
+        | e: [Parastructure] value: None, range: (0.0, 0.0)
+        | m: [Parastructure] value: None, range: (3.0, 6.0).
+      o2: |-
+        [Objstructure] obj_type: Particle, attribute: [e, m]
+        Attribute:
+        | e: [Parastructure] value: None, range: (0.0, 0.0)
+        | m: [Parastructure] value: None, range: (3.0, 6.0).
+      o3: |-
+        [Objstructure] obj_type: Particle, attribute: [m, e]
+        Attribute:
+        | m: [Parastructure] value: None, range: (3.0, 6.0)
+        | e: [Parastructure] value: None, range: (0.0, 0.0).
+      clock: |-
+        [Objstructure] obj_type: Clock, attribute: []
+        Attribute:.
+      o4: |-
+        [Objstructure] obj_type: Particle, attribute: [e, m]
+        Attribute:
+        | e: [Parastructure] value: None, range: (0.0, 0.0)
+        | m: [Parastructure] value: None, range: (3.0, 6.0).
+      s3: |-
+        [Objstructure] obj_type: Spring, attribute: [freel, thickness]
+        Attribute:
+        | freel: [Parastructure] value: None, range: (4.0, 6.0)
+        | thickness: [Parastructure] value: None, range: (1.5, 2.5).
+      s2: |-
+        [Objstructure] obj_type: Spring, attribute: [thickness, freel]
+        Attribute:
+        | thickness: [Parastructure] value: None, range: (1.5, 2.5)
+        | freel: [Parastructure] value: None, range: (4.0, 6.0).
+      s1: |-
+        [Objstructure] obj_type: Spring, attribute: [freel, thickness]
+        Attribute:
+        | freel: [Parastructure] value: None, range: (4.0, 6.0)
+        | thickness: [Parastructure] value: None, range: (1.5, 2.5).
+    data_info:
+    - - (1->Particle) |- posx[1]
+      - - o1
+    - - (1->Particle) |- posx[1]
+      - - o2
+    - - (1->Particle) |- posx[1]
+      - - o3
+    - - (1->Particle) |- posx[1]
+      - - o4
+    - - (1->Particle) |- posy[1]
+      - - o1
+    - - (1->Particle) |- posy[1]
+      - - o2
+    - - (1->Particle) |- posy[1]
+      - - o3
+    - - (1->Particle) |- posy[1]
+      - - o4
+    - - (1->Particle) |- posz[1]
+      - - o1
+    - - (1->Particle) |- posz[1]
+      - - o2
+    - - (1->Particle) |- posz[1]
+      - - o3
+    - - (1->Particle) |- posz[1]
+      - - o4
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o1
+        - o2
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o2
+        - o1
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o1
+        - o3
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o3
+        - o1
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o1
+        - o4
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o4
+        - o1
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o2
+        - o3
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o3
+        - o2
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o2
+        - o4
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o4
+        - o2
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o3
+        - o4
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o4
+        - o3
+    - - (1->Spring) |- length[1]
+      - - s1
+    - - (1->Spring) |- length[1]
+      - - s2
+    - - (1->Spring) |- length[1]
+      - - s3
+    - - (1->Clock) |- t[1]
+      - - clock
+    geometry_info:
+    - ((posx[2] - posx[1]) - length[5]) is zero
+    - ((posx[3] - posx[2]) - length[6]) is zero
+    - ((posx[4] - posx[3]) - length[7]) is zero
+    - ((posx[2] - posx[1]) - dist[1, 2]) is zero
+    - (dist[1, 2] - dist[2, 1]) is zero
+    - ((posx[3] - posx[1]) - dist[1, 3]) is zero
+    - (dist[1, 3] - dist[3, 1]) is zero
+    - ((posx[4] - posx[1]) - dist[1, 4]) is zero
+    - (dist[1, 4] - dist[4, 1]) is zero
+    - ((posx[3] - posx[2]) - dist[2, 3]) is zero
+    - (dist[2, 3] - dist[3, 2]) is zero
+    - ((posx[4] - posx[2]) - dist[2, 4]) is zero
+    - (dist[2, 4] - dist[4, 2]) is zero
+    - ((posx[4] - posx[3]) - dist[3, 4]) is zero
+    - (dist[3, 4] - dist[4, 3]) is zero
+    - posy[1] is zero
+    - posy[2] is zero
+    - posy[3] is zero
+    - posy[4] is zero
+    - posz[1] is zero
+    - posz[2] is zero
+    - posz[3] is zero
+    - posz[4] is zero
+    obj_id_map:
+      s2:
+      - Spring
+      - 6
+      o4:
+      - Particle
+      - 4
+      o1:
+      - Particle
+      - 1
+      clock:
+      - Clock
+      - 0
+      o3:
+      - Particle
+      - 3
+      o2:
+      - Particle
+      - 2
+      s1:
+      - Spring
+      - 5
+      s3:
+      - Spring
+      - 7
+    obj_name_map:
+      3:
+      - Particle
+      - o3
+      6:
+      - Spring
+      - s2
+      7:
+      - Spring
+      - s3
+      2:
+      - Particle
+      - o2
+      4:
+      - Particle
+      - o4
+      1:
+      - Particle
+      - o1
+      0:
+      - Clock
+      - clock
+      5:
+      - Spring
+      - s1
+    obj_info_dict:
+      Clock:
+        0: clock
+      Particle:
+        4: o4
+        1: o1
+        2: o2
+        3: o3
+      Spring:
+        6: s2
+        7: s3
+        5: s1
+    data_atomexp:
+    - dist[3, 1]
+    - dist[1, 2]
+    - dist[2, 3]
+    - dist[2, 1]
+    - dist[3, 2]
+    - dist[2, 4]
+    - dist[4, 1]
+    - dist[3, 4]
+    - posy[1]
+    - t[0]
+    - posx[4]
+    - dist[4, 3]
+    - posy[2]
+    - dist[1, 3]
+    - posy[4]
+    - length[7]
+    - length[5]
+    - dist[4, 2]
+    - posx[2]
+    - dist[1, 4]
+    - posx[3]
+    - posz[4]
+    - posz[2]
+    - posz[1]
+    - length[6]
+    - posy[3]
+    - posx[1]
+    - posz[3]
+  do_experiment: aiphy/experiment/oscillation/oscillation_x_3.py
+collision:
+  expconfig:
+    name: collision
+    spdim: 1
+    exp_para:
+      v1: '[Parastructure] value: None, range: (3.0, 5.0)'
+      x1: '[Parastructure] value: None, range: (-4.0, -3.0)'
+      v2: '[Parastructure] value: None, range: (-5.0, -3.0)'
+      x2: '[Parastructure] value: None, range: (3.0, 4.0)'
+    obj_info:
+      Clock: |-
+        [Objstructure] obj_type: Clock, attribute: []
+        Attribute:.
+      MPa: |-
+        [Objstructure] obj_type: Particle, attribute: [m, e]
+        Attribute:
+        | m: [Parastructure] value: None, range: (2.0, 10.0)
+        | e: [Parastructure] value: None, range: (0.0, 0.0).
+      MPb: |-
+        [Objstructure] obj_type: Particle, attribute: [e, m]
+        Attribute:
+        | e: [Parastructure] value: None, range: (0.0, 0.0)
+        | m: [Parastructure] value: None, range: (2.0, 10.0).
+    data_info:
+    - - (1->Particle) |- posx[1]
+      - - MPa
+    - - (1->Particle) |- posx[1]
+      - - MPb
+    - - (1->Particle) |- posy[1]
+      - - MPa
+    - - (1->Particle) |- posy[1]
+      - - MPb
+    - - (1->Particle) |- posz[1]
+      - - MPa
+    - - (1->Particle) |- posz[1]
+      - - MPb
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - MPa
+        - MPb
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - MPb
+        - MPa
+    - - (1->Clock) |- t[1]
+      - - Clock
+    geometry_info:
+    - posy[1] is zero
+    - posy[2] is zero
+    - posz[1] is zero
+    - posz[2] is zero
+    - (dist[1, 2] - dist[2, 1]) is zero
+    - ((dist[1, 2] ** 2) - ((posx[1] - posx[2]) ** 2)) is zero
+    obj_id_map:
+      MPa:
+      - Particle
+      - 1
+      MPb:
+      - Particle
+      - 2
+      Clock:
+      - Clock
+      - 0
+    obj_name_map:
+      2:
+      - Particle
+      - MPb
+      0:
+      - Clock
+      - Clock
+      1:
+      - Particle
+      - MPa
+    obj_info_dict:
+      Clock:
+        0: Clock
+      Particle:
+        2: MPb
+        1: MPa
+    data_atomexp:
+    - posx[2]
+    - t[0]
+    - posy[1]
+    - dist[1, 2]
+    - dist[2, 1]
+    - posx[1]
+    - posz[2]
+    - posy[2]
+    - posz[1]
+  do_experiment: <builtin_collision>
+celestial_3:
+  expconfig:
+    name: celestial_3
+    spdim: 2
+    exp_para:
+      x0: '[Parastructure] value: None, range: (-0.1, 0.1)'
+      v20: '[Parastructure] value: None, range: (-5e-5, 5e-5)'
+      v10: '[Parastructure] value: None, range: (-5e-5, 5e-5)'
+      r0: '[Parastructure] value: None, range: (0.016, 0.018)'
+      omega10: '[Parastructure] value: None, range: (2.094395066666667, 3.1415926)'
+      y0: '[Parastructure] value: None, range: (-0.1, 0.1)'
+      theta0: '[Parastructure] value: None, range: (0.0, 2.094395066666667)'
+      v30: '[Parastructure] value: None, range: (-5e-5, 5e-5)'
+    obj_info:
+      o1: |-
+        [Objstructure] obj_type: Particle, attribute: [e, m]
+        Attribute:
+        | e: [Parastructure] value: None, range: (0.0, 0.0)
+        | m: [Parastructure] value: None, range: (500000.0, 600000.0).
+      o3: |-
+        [Objstructure] obj_type: Particle, attribute: [m, e]
+        Attribute:
+        | m: [Parastructure] value: None, range: (500000.0, 600000.0)
+        | e: [Parastructure] value: None, range: (0.0, 0.0).
+      o2: |-
+        [Objstructure] obj_type: Particle, attribute: [m, e]
+        Attribute:
+        | m: [Parastructure] value: None, range: (500000.0, 600000.0)
+        | e: [Parastructure] value: None, range: (0.0, 0.0).
+      clock: |-
+        [Objstructure] obj_type: Clock, attribute: []
+        Attribute:.
+    data_info:
+    - - (1->Particle) |- posx[1]
+      - - o1
+    - - (1->Particle) |- posy[1]
+      - - o1
+    - - (1->Particle) |- posz[1]
+      - - o1
+    - - (1->Particle) |- posx[1]
+      - - o2
+    - - (1->Particle) |- posy[1]
+      - - o2
+    - - (1->Particle) |- posz[1]
+      - - o2
+    - - (1->Particle) |- posx[1]
+      - - o3
+    - - (1->Particle) |- posy[1]
+      - - o3
+    - - (1->Particle) |- posz[1]
+      - - o3
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o1
+        - o2
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o2
+        - o1
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o1
+        - o3
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o3
+        - o1
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o3
+        - o2
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o2
+        - o3
+    - - (1->Clock) |- t[1]
+      - - clock
+    geometry_info:
+    - (dist[1, 2] - dist[2, 1]) is zero
+    - (((dist[1, 2] ** 2) - ((posx[1] - posx[2]) ** 2)) - ((posy[1] - posy[2]) ** 2)) is zero
+    - (dist[3, 2] - dist[2, 3]) is zero
+    - (((dist[3, 2] ** 2) - ((posx[3] - posx[2]) ** 2)) - ((posy[3] - posy[2]) ** 2)) is zero
+    - (dist[1, 3] - dist[3, 1]) is zero
+    - (((dist[1, 3] ** 2) - ((posx[1] - posx[3]) ** 2)) - ((posy[1] - posy[3]) ** 2)) is zero
+    - posz[1] is zero
+    - posz[2] is zero
+    - posz[3] is zero
+    obj_id_map:
+      clock:
+      - Clock
+      - 0
+      o1:
+      - Particle
+      - 1
+      o3:
+      - Particle
+      - 3
+      o2:
+      - Particle
+      - 2
+    obj_name_map:
+      2:
+      - Particle
+      - o2
+      0:
+      - Clock
+      - clock
+      3:
+      - Particle
+      - o3
+      1:
+      - Particle
+      - o1
+    obj_info_dict:
+      Clock:
+        0: clock
+      Particle:
+        2: o2
+        1: o1
+        3: o3
+    data_atomexp:
+    - dist[2, 1]
+    - dist[3, 1]
+    - t[0]
+    - posx[1]
+    - posz[2]
+    - posy[3]
+    - posy[2]
+    - dist[1, 2]
+    - posz[3]
+    - posy[1]
+    - dist[2, 3]
+    - posz[1]
+    - posx[2]
+    - dist[3, 2]
+    - dist[1, 3]
+    - posx[3]
+  do_experiment: aiphy/experiment/cosmos/celestial_2d_3.py
+celestial_2_yz:
+  expconfig:
+    name: celestial_2_yz
+    spdim: 2
+    exp_para:
+      omega10: '[Parastructure] value: None, range: (2.094395066666667, 3.1415926)'
+      theta0: '[Parastructure] value: None, range: (0.0, 1.5707963)'
+      v10: '[Parastructure] value: None, range: (-5e-5, 5e-5)'
+      z0: '[Parastructure] value: None, range: (-0.1, 0.1)'
+      r0: '[Parastructure] value: None, range: (0.012, 0.015)'
+      v20: '[Parastructure] value: None, range: (-5e-5, 5e-5)'
+      y0: '[Parastructure] value: None, range: (-0.1, 0.1)'
+    obj_info:
+      clock: |-
+        [Objstructure] obj_type: Clock, attribute: []
+        Attribute:.
+      o1: |-
+        [Objstructure] obj_type: Particle, attribute: [m, e]
+        Attribute:
+        | m: [Parastructure] value: None, range: (500000.0, 600000.0)
+        | e: [Parastructure] value: None, range: (0.0, 0.0).
+      o2: |-
+        [Objstructure] obj_type: Particle, attribute: [e, m]
+        Attribute:
+        | e: [Parastructure] value: None, range: (0.0, 0.0)
+        | m: [Parastructure] value: None, range: (500000.0, 600000.0).
+    data_info:
+    - - (1->Particle) |- posx[1]
+      - - o1
+    - - (1->Particle) |- posy[1]
+      - - o1
+    - - (1->Particle) |- posz[1]
+      - - o1
+    - - (1->Particle) |- posx[1]
+      - - o2
+    - - (1->Particle) |- posy[1]
+      - - o2
+    - - (1->Particle) |- posz[1]
+      - - o2
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o1
+        - o2
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o2
+        - o1
+    - - (1->Clock) |- t[1]
+      - - clock
+    geometry_info:
+    - (dist[1, 2] - dist[2, 1]) is zero
+    - (((dist[1, 2] ** 2) - ((posz[1] - posz[2]) ** 2)) - ((posy[1] - posy[2]) ** 2)) is zero
+    - posx[1] is zero
+    - posx[2] is zero
+    obj_id_map:
+      o2:
+      - Particle
+      - 2
+      clock:
+      - Clock
+      - 0
+      o1:
+      - Particle
+      - 1
+    obj_name_map:
+      0:
+      - Clock
+      - clock
+      1:
+      - Particle
+      - o1
+      2:
+      - Particle
+      - o2
+    obj_info_dict:
+      Particle:
+        2: o2
+        1: o1
+      Clock:
+        0: clock
+    data_atomexp:
+    - t[0]
+    - posx[2]
+    - posz[2]
+    - posy[1]
+    - posz[1]
+    - dist[1, 2]
+    - posy[2]
+    - posx[1]
+    - dist[2, 1]
+  do_experiment: aiphy/experiment/cosmos/celestial_2d_2_yz.py
+oscillation_2d_1:
+  expconfig:
+    name: oscillation_2d_1
+    spdim: 2
+    exp_para:
+      theta: '[Parastructure] value: None, range: (0.0, 3.1415926)'
+      v1: '[Parastructure] value: None, range: (-20.0, 20.0)'
+      v2: '[Parastructure] value: None, range: (-20.0, 20.0)'
+      x1: '[Parastructure] value: None, range: (-35.0, -25.0)'
+      x2: '[Parastructure] value: None, range: (25.0, 35.0)'
+    obj_info:
+      s1: |-
+        [Objstructure] obj_type: Spring, attribute: [freel, thickness]
+        Attribute:
+        | freel: [Parastructure] value: None, range: (40.0, 60.0)
+        | thickness: [Parastructure] value: None, range: (1.5, 2.5).
+      o2: |-
+        [Objstructure] obj_type: Particle, attribute: [e, m]
+        Attribute:
+        | e: [Parastructure] value: None, range: (0.0, 0.0)
+        | m: [Parastructure] value: None, range: (3.0, 6.0).
+      o1: |-
+        [Objstructure] obj_type: Particle, attribute: [m, e]
+        Attribute:
+        | m: [Parastructure] value: None, range: (3.0, 6.0)
+        | e: [Parastructure] value: None, range: (0.0, 0.0).
+      clock: |-
+        [Objstructure] obj_type: Clock, attribute: []
+        Attribute:.
+    data_info:
+    - - (1->Particle) |- posx[1]
+      - - o1
+    - - (1->Particle) |- posx[1]
+      - - o2
+    - - (1->Particle) |- posy[1]
+      - - o1
+    - - (1->Particle) |- posy[1]
+      - - o2
+    - - (1->Particle) |- posz[1]
+      - - o1
+    - - (1->Particle) |- posz[1]
+      - - o2
+    - - (1->Spring) |- length[1]
+      - - s1
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o1
+        - o2
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o2
+        - o1
+    - - (1->Clock) |- t[1]
+      - - clock
+    geometry_info:
+    - (dist[1, 2] - length[3]) is zero
+    - (((dist[1, 2] ** 2) - ((posx[1] - posx[2]) ** 2)) - ((posy[1] - posy[2]) ** 2)) is zero
+    - (dist[1, 2] - dist[2, 1]) is zero
+    - posz[1] is zero
+    - posz[2] is zero
+    obj_id_map:
+      o1:
+      - Particle
+      - 1
+      clock:
+      - Clock
+      - 0
+      s1:
+      - Spring
+      - 3
+      o2:
+      - Particle
+      - 2
+    obj_name_map:
+      3:
+      - Spring
+      - s1
+      2:
+      - Particle
+      - o2
+      0:
+      - Clock
+      - clock
+      1:
+      - Particle
+      - o1
+    obj_info_dict:
+      Clock:
+        0: clock
+      Particle:
+        1: o1
+        2: o2
+      Spring:
+        3: s1
+    data_atomexp:
+    - length[3]
+    - posx[2]
+    - dist[2, 1]
+    - posx[1]
+    - posz[2]
+    - posz[1]
+    - dist[1, 2]
+    - posy[2]
+    - posy[1]
+    - t[0]
+  do_experiment: aiphy/experiment/oscillation/oscillation_2d_1.py
+projectile_oscillation_1:
+  expconfig:
+    name: projectile_oscillation_1
+    spdim: 3
+    exp_para:
+      vx2: '[Parastructure] value: None, range: (-1.0, 1.0)'
+      z0: '[Parastructure] value: None, range: (-5.0, 5.0)'
+      vx1: '[Parastructure] value: None, range: (-1.0, 1.0)'
+      y0: '[Parastructure] value: None, range: (-5.0, 5.0)'
+      x0: '[Parastructure] value: None, range: (-5.0, 5.0)'
+      vz2: '[Parastructure] value: None, range: (-1.0, 1.0)'
+      vy1: '[Parastructure] value: None, range: (-1.0, 1.0)'
+      vz1: '[Parastructure] value: None, range: (-1.0, 1.0)'
+      vy2: '[Parastructure] value: None, range: (-1.0, 1.0)'
+      theta1: '[Parastructure] value: None, range: (0.0, 3.1415926)'
+      r1: '[Parastructure] value: None, range: (3.5, 5.5)'
+      phi1: '[Parastructure] value: None, range: (0.0, 6.2831852)'
+    obj_info:
+      o1: |-
+        [Objstructure] obj_type: Particle, attribute: [m, e]
+        Attribute:
+        | m: [Parastructure] value: None, range: (3.0, 6.0)
+        | e: [Parastructure] value: None, range: (0.0, 0.0).
+      s1: |-
+        [Objstructure] obj_type: Spring, attribute: [thickness, freel]
+        Attribute:
+        | thickness: [Parastructure] value: None, range: (1.5, 2.5)
+        | freel: [Parastructure] value: None, range: (4.0, 6.0).
+      clock: |-
+        [Objstructure] obj_type: Clock, attribute: []
+        Attribute:.
+      o2: |-
+        [Objstructure] obj_type: Particle, attribute: [m, e]
+        Attribute:
+        | m: [Parastructure] value: None, range: (3.0, 6.0)
+        | e: [Parastructure] value: None, range: (0.0, 0.0).
+    data_info:
+    - - (1->Particle) |- posx[1]
+      - - o1
+    - - (1->Particle) |- posy[1]
+      - - o1
+    - - (1->Particle) |- posz[1]
+      - - o1
+    - - (1->Particle) |- posx[1]
+      - - o2
+    - - (1->Particle) |- posy[1]
+      - - o2
+    - - (1->Particle) |- posz[1]
+      - - o2
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o1
+        - o2
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o2
+        - o1
+    - - (1->Spring) |- length[1]
+      - - s1
+    - - (1->Clock) |- t[1]
+      - - clock
+    geometry_info:
+    - (dist[1, 2] - dist[2, 1]) is zero
+    - ((((dist[1, 2] ** 2) - ((posx[1] - posx[2]) ** 2)) - ((posy[1] - posy[2]) ** 2)) - ((posz[1] - posz[2]) ** 2)) is zero
+    - (dist[1, 2] - length[3]) is zero
+    obj_id_map:
+      clock:
+      - Clock
+      - 0
+      o1:
+      - Particle
+      - 1
+      s1:
+      - Spring
+      - 3
+      o2:
+      - Particle
+      - 2
+    obj_name_map:
+      3:
+      - Spring
+      - s1
+      1:
+      - Particle
+      - o1
+      2:
+      - Particle
+      - o2
+      0:
+      - Clock
+      - clock
+    obj_info_dict:
+      Particle:
+        2: o2
+        1: o1
+      Clock:
+        0: clock
+      Spring:
+        3: s1
+    data_atomexp:
+    - posy[2]
+    - posx[1]
+    - dist[1, 2]
+    - posz[1]
+    - t[0]
+    - posz[2]
+    - posx[2]
+    - length[3]
+    - posy[1]
+    - dist[2, 1]
+  do_experiment: aiphy/experiment/ground_laboratory/projectile_oscillation_1.py
+pendulum_oscillation_2:
+  expconfig:
+    name: pendulum_oscillation_2
+    spdim: 2
+    exp_para:
+      omega1: '[Parastructure] value: None, range: (-1.0471975333333334, 1.0471975333333334)'
+      r2: '[Parastructure] value: None, range: (4.0, 6.0)'
+      v2: '[Parastructure] value: None, range: (-2.0, 2.0)'
+      v1: '[Parastructure] value: None, range: (-2.0, 2.0)'
+      theta1: '[Parastructure] value: None, range: (-1.0471975333333334, 1.0471975333333334)'
+      theta2: '[Parastructure] value: None, range: (-1.0471975333333334, 1.0471975333333334)'
+      omega2: '[Parastructure] value: None, range: (-1.0471975333333334, 1.0471975333333334)'
+      r1: '[Parastructure] value: None, range: (4.0, 6.0)'
+    obj_info:
+      s1: |-
+        [Objstructure] obj_type: Spring, attribute: [thickness, freel]
+        Attribute:
+        | thickness: [Parastructure] value: None, range: (1.5, 2.5)
+        | freel: [Parastructure] value: None, range: (4.0, 6.0).
+      o2: |-
+        [Objstructure] obj_type: Particle, attribute: [e, m]
+        Attribute:
+        | e: [Parastructure] value: None, range: (0.0, 0.0)
+        | m: [Parastructure] value: None, range: (3.0, 6.0).
+      s2: |-
+        [Objstructure] obj_type: Spring, attribute: [freel, thickness]
+        Attribute:
+        | freel: [Parastructure] value: None, range: (4.0, 6.0)
+        | thickness: [Parastructure] value: None, range: (1.5, 2.5).
+      clock: |-
+        [Objstructure] obj_type: Clock, attribute: []
+        Attribute:.
+      o1: |-
+        [Objstructure] obj_type: Particle, attribute: [m, e]
+        Attribute:
+        | m: [Parastructure] value: None, range: (3.0, 6.0)
+        | e: [Parastructure] value: None, range: (0.0, 0.0).
+    data_info:
+    - - (1->Particle) |- posx[1]
+      - - o1
+    - - (1->Particle) |- posy[1]
+      - - o1
+    - - (1->Particle) |- posz[1]
+      - - o1
+    - - (1->Spring) |- length[1]
+      - - s1
+    - - (1->Particle) |- posx[1]
+      - - o2
+    - - (1->Particle) |- posy[1]
+      - - o2
+    - - (1->Particle) |- posz[1]
+      - - o2
+    - - (1->Spring) |- length[1]
+      - - s2
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o1
+        - o2
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o2
+        - o1
+    - - (1->Clock) |- t[1]
+      - - clock
+    geometry_info:
+    - (((posz[1] ** 2) + (posx[1] ** 2)) - (length[3] ** 2)) is zero
+    - ((((posz[1] - posz[2]) ** 2) + ((posx[1] - posx[2]) ** 2)) - (length[4] ** 2)) is zero
+    - posy[1] is zero
+    - posy[2] is zero
+    - (dist[1, 2] - dist[2, 1]) is zero
+    - (dist[1, 2] - length[4]) is zero
+    obj_id_map:
+      o2:
+      - Particle
+      - 2
+      clock:
+      - Clock
+      - 0
+      o1:
+      - Particle
+      - 1
+      s2:
+      - Spring
+      - 4
+      s1:
+      - Spring
+      - 3
+    obj_name_map:
+      1:
+      - Particle
+      - o1
+      0:
+      - Clock
+      - clock
+      4:
+      - Spring
+      - s2
+      2:
+      - Particle
+      - o2
+      3:
+      - Spring
+      - s1
+    obj_info_dict:
+      Particle:
+        1: o1
+        2: o2
+      Clock:
+        0: clock
+      Spring:
+        3: s1
+        4: s2
+    data_atomexp:
+    - length[3]
+    - posz[2]
+    - posy[2]
+    - t[0]
+    - posx[1]
+    - posy[1]
+    - posx[2]
+    - dist[1, 2]
+    - length[4]
+    - dist[2, 1]
+    - posz[1]
+  do_experiment: aiphy/experiment/ground_laboratory/pendulum_oscillation_2.py
+celestial_2_xy:
+  expconfig:
+    name: celestial_2_xy
+    spdim: 2
+    exp_para:
+      y0: '[Parastructure] value: None, range: (-0.1, 0.1)'
+      v20: '[Parastructure] value: None, range: (-5e-5, 5e-5)'
+      theta0: '[Parastructure] value: None, range: (0.0, 1.5707963)'
+      r0: '[Parastructure] value: None, range: (0.012, 0.015)'
+      v10: '[Parastructure] value: None, range: (-5e-5, 5e-5)'
+      omega10: '[Parastructure] value: None, range: (2.094395066666667, 3.1415926)'
+      x0: '[Parastructure] value: None, range: (-0.1, 0.1)'
+    obj_info:
+      clock: |-
+        [Objstructure] obj_type: Clock, attribute: []
+        Attribute:.
+      o1: |-
+        [Objstructure] obj_type: Particle, attribute: [e, m]
+        Attribute:
+        | e: [Parastructure] value: None, range: (0.0, 0.0)
+        | m: [Parastructure] value: None, range: (500000.0, 600000.0).
+      o2: |-
+        [Objstructure] obj_type: Particle, attribute: [m, e]
+        Attribute:
+        | m: [Parastructure] value: None, range: (500000.0, 600000.0)
+        | e: [Parastructure] value: None, range: (0.0, 0.0).
+    data_info:
+    - - (1->Particle) |- posx[1]
+      - - o1
+    - - (1->Particle) |- posy[1]
+      - - o1
+    - - (1->Particle) |- posz[1]
+      - - o1
+    - - (1->Particle) |- posx[1]
+      - - o2
+    - - (1->Particle) |- posy[1]
+      - - o2
+    - - (1->Particle) |- posz[1]
+      - - o2
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o1
+        - o2
+    - - (1->Particle) (2->Particle) |- dist[1, 2]
+      - - o2
+        - o1
+    - - (1->Clock) |- t[1]
+      - - clock
+    geometry_info:
+    - (dist[1, 2] - dist[2, 1]) is zero
+    - (((dist[1, 2] ** 2) - ((posx[1] - posx[2]) ** 2)) - ((posy[1] - posy[2]) ** 2)) is zero
+    - posz[1] is zero
+    - posz[2] is zero
+    obj_id_map:
+      o1:
+      - Particle
+      - 1
+      o2:
+      - Particle
+      - 2
+      clock:
+      - Clock
+      - 0
+    obj_name_map:
+      1:
+      - Particle
+      - o1
+      2:
+      - Particle
+      - o2
+      0:
+      - Clock
+      - clock
+    obj_info_dict:
+      Clock:
+        0: clock
+      Particle:
+        2: o2
+        1: o1
+    data_atomexp:
+    - dist[2, 1]
+    - posx[1]
+    - posz[1]
+    - posy[1]
+    - t[0]
+    - posx[2]
+    - posy[2]
+    - dist[1, 2]
+    - posz[2]
+  do_experiment: aiphy/experiment/cosmos/celestial_2d_2_xy.py
+[end]
+{"concept_id": 3066, "conclusion_id": 1827, "object_id": 0}

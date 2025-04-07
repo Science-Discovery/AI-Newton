@@ -439,6 +439,7 @@ class Theorist(Manager):
         print('\n', flush=True)
         print('#'*10 + ' \033[1m' + exp_name + '\033[0m ' + '#'*10, flush=True)
         print('\n', flush=True)
+        print(f"Process ID: {os.getpid()} of experiment {exp_name}", flush=True)
         """
         动作一：选择抽取的概念组的数量 num_concept_groups
         """
@@ -773,6 +774,9 @@ class Theorist(Manager):
                     break
                 if exist_concept.is_sum:
                     concept = Concept.Mksum(list(exist_concept.objtype_id_map.keys())[0], concept)
+                if not knowledge.specialize(concept, exp_name):
+                    flag = False
+                    break
                 concept_name: str | None = self.knowledge.find_similar_concept(concept)
                 if concept_name is None:
                     flag = False

@@ -1,0 +1,18 @@
+{
+    "Spring": {
+        "obj_type": "Spring",
+        "attr": {
+            "C_01": "[#stringmotion0 (1->Spring) |- length[1]]",
+            "C_12": "[#oscillation (2->Spring) |- (D[(C_04[1] * C_04[1])]/D[(C_02[2] * C_02[2])] * C_09[1])]",
+            "C_1705": "[#hanging_spring_1 (2->Spring) |- (C_09[1] / (C_1162[1] + (C_12[2] * C_14[2, 1])))]"
+        },
+        "conclusion_about_attr": {}
+    },
+    "Particle": {
+        "obj_type": "Particle",
+        "attr": {
+            "C_09": "[#gravity (1->Particle) |- (C_01[2] + (-1 * length[2]))]"
+        },
+        "conclusion_about_attr": {}
+    }
+}
