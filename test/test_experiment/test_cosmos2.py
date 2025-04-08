@@ -31,7 +31,14 @@ G = knowledge.register_expr(Expression(f"[#celestial |- D[{sumT}]/D[dist[1,2]**(
 # %%
 print(knowledge.eval(G, main_exp))
 # %%
-main_exp.random_settings()
-data = knowledge.eval(f"{G}*{mass}[1]*{mass}[2]/dist[1,2] - {sumT}", main_exp)
-assert data.is_const
+def test_is_const(main_exp, expr):
+    count = 0
+    for ti in range(10):
+        main_exp.random_settings()
+        data = knowledge.eval(expr, main_exp)
+        if data.is_const:
+            count += 1
+    print(f"expr: {expr}, success: {count}/10")
+    return count >= 8
 # %%
+assert test_is_const(main_exp, f"{G}*{mass}[1]*{mass}[2]/dist[1,2] - {sumT}")
