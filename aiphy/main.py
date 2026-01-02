@@ -922,7 +922,7 @@ class Theorist(Manager):
                 if flag:
                     continue
                 val_dtt = self.knowledge.eval(expr.__difft__(2), spm.experiment)
-                if val_dtt.is_conserved and not val_dtt.is_zero:
+                if val_dtt.is_conserved:
                     concept_dt: Concept | None = self.knowledge.generalize_to_normal_concept(exp_name,
                                                                                              expr.__difft__(1))
                     if concept_dt is None:
