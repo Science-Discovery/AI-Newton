@@ -1,3 +1,4 @@
+import os
 from typing import List, Dict, Set, Tuple
 import json
 import sympy as sp
@@ -122,8 +123,13 @@ class Knowledge:
         English Description:
         Save the current knowledge base to a file `filename`.
         """
+        
         self.remove_useless_objects()
         print("Saving knowledge to", filename, '\n')
+        dirname = os.path.dirname(filename)
+        # create the directory if it doesn't exist
+        if dirname and not os.path.exists(dirname):
+            os.makedirs(dirname, exist_ok=True)
         with open(filename, "w") as f:
             f.write(str(self.K)+'\n')
             json.dump({
