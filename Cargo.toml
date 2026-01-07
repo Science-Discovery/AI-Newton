@@ -10,6 +10,9 @@ lalrpop = "0.20.2"
 name = "core"
 crate-type = ["cdylib"]
 
+[target.'cfg(target_os = "macos")'.build-dependencies]
+cc = "1.0"
+
 [dependencies]
 fraction = "0.15.3"
 itertools = "0.13.0"
@@ -30,9 +33,5 @@ statrs = "0.17.1"
 regex = "1.11.1"
 
 [dependencies.pyo3]
-version = "0.22.5"
-features = ["auto-initialize"]
-
-[dependencies.pyo3-ffi]
 version = "0.22.5"
 features = ["extension-module"]

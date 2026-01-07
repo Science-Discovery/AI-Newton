@@ -197,7 +197,8 @@ class GroupBandit:
             self.groups_N[exp_name] = {}
         ppuct_lst = []
         # Move self.policy_nn to GPU if available
-        self.policy_nn.to('cuda')
+        device = 'mps' if torch.backends.mps.is_available() else ('cuda' if torch.cuda.is_available() else 'cpu')
+        self.policy_nn.to(device)
         for i in range(len(name_list)):
             for j in range(i + 1, len(name_list)):
                 for k in range(j + 1, len(name_list)):
@@ -209,7 +210,7 @@ class GroupBandit:
                         Q += self.groups_V.get(subset, 0)
                     Q /= len(subsets)
                     N = self.groups_N[exp_name].get(group, 0)
-                    input_vec = torch.tensor(group_complexity, dtype=torch.float32, device='cuda')
+                    input_vec = torch.tensor(group_complexity, dtype=torch.float32, device=device)
                     ppuct: torch.Tensor = self.policy_nn(input_vec)
                     ppuct_lst.append(ppuct)
                     ucb = (0.1 + ppuct.clone().cpu().detach().numpy()) * Q + self.cpuct * np.sqrt(1.0 / (1 + N))

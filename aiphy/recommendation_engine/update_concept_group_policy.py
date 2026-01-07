@@ -12,16 +12,17 @@ def update_network_parameters(file_path: str,
     model = ConceptGroupPolicy()
     model.load_state_dict(torch.load(file_path, weights_only=True))
     # Move the model to the device
-    model.to('cuda')
+    device = 'mps' if torch.backends.mps.is_available() else ('cuda' if torch.cuda.is_available() else 'cpu')
+    model.to(device)
     model.train()
 
     epoch_decay = torch.softmax(epoch_decay, dim=0)
     delta_vec = delta_vec.view(-1, 1)
 
     # Move the tensors to the device
-    epoch_decay = epoch_decay.to('cuda')
-    input_vec = input_vec.to('cuda')
-    delta_vec = delta_vec.to('cuda')
+    epoch_decay = epoch_decay.to(device)
+    input_vec = input_vec.to(device)
+    delta_vec = delta_vec.to(device)
 
     optimizer = torch.optim.Adam(model.parameters(), lr=lr)
     for _ in range(10):
