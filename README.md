@@ -32,7 +32,7 @@ cargo build --release
 cp target/release/libcore.so aiphy/core.so
 ```
 4. Run the bench-marking test:
-You can run `aiphy/test_human_operating-benchmark.ipynb` to test the installation. It will take about 10-20 minutes to run. This test is not just for verifying the installation, but more importantly, it serves as a minimal working example to demonstrate how AI-Newton discovers and constructs important physical laws from Newtonian mechanics.
+You can run `aiphy/test_human_operating-benchmark.ipynb` to test the installation. It will take about 10-20 minutes to run. This test is not just for verifying the installation, but more importantly, it serves as a minimal working example to demonstrate how AI-Newton discovers and constructs important physical laws from Newtonian mechanics. An example output of this test can be found in the `data/human/example_output` directory.
 5. Run the test case:
 Since it may take several days to run the test case, it is recommended to run in the background:
 ```
