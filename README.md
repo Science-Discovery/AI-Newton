@@ -3,7 +3,7 @@
 This is a proof-of-concept implementation of AI-Newton, a concept-driven discovery system that can formulate general physical laws in an unsupervised manner without any prior physical knowledge. AI-Newton integrates  an autonomous discovery workflow, powered by a knowledge base (KB) and knowledge representation. The KB is responsible for storing and managing structured knowledge, including symbolic concepts, specific laws, and general laws. The knowledge representation is a physical domain specific language (DSL) that allows for the representation of physical concepts and laws in a structured and formalized manner. Given a collection of physical experiments, AI-Newton can formulate symbolic general laws applicable across a wide problem scope without neither supervision nor any prior physical knowledge. As a proof-of-concept implementation, it can rediscover Newton's second law, law of gravitation, conservation laws and others in classical mechanics.
 
 ## Installation
-The program currently only supports **Linux**. **CUDA** is also currently required.
+The program supports **Linux** and **macOS** (including Apple Silicon). For GPU acceleration, CUDA is used on Linux/NVIDIA, and MPS (Metal Performance Shaders) is automatically used on macOS with Apple Silicon.
 
 **Pre-requisites:**
 ```
@@ -27,10 +27,22 @@ conda activate ainewton
 pip install -r requirements.txt
 ```
 3. Compile Rust libraries:
-```
-cargo build --release
-cp target/release/libcore.so aiphy/core.so
-```
+   - **On Linux:**
+   ```
+   cargo build --release
+   cp target/release/libcore.so aiphy/core.so
+   ```
+   - **On macOS:**
+   3.1. install Rust (if done, skip next two lines)
+   ```
+   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+   source $HOME/.cargo/env
+   ```
+    3.2 Build the Rust library
+   ```
+   cargo build --release
+   cp target/release/libcore.dylib aiphy/core.so
+   ```
 4. Run the bench-marking test:
 You can run `aiphy/test_human_operating-benchmark.ipynb` to test the installation. It will take about 10-20 minutes to run. This test is not just for verifying the installation, but more importantly, it serves as a minimal working example to demonstrate how AI-Newton discovers and constructs important physical laws from Newtonian mechanics. An example output of this test can be found in the `data/human/example_output` directory.
 5. Run the test case:

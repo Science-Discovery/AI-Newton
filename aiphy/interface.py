@@ -1,3 +1,4 @@
+import os
 from typing import List, Dict, Set, Tuple
 import json
 import sympy as sp
@@ -48,6 +49,26 @@ class Knowledge:
     fetch_expstruct()  fetch_exps()  fetch_concepts()  print_concepts()  print_conclusions()
     注册新的概念、结论、实验的方法：
     register_expr()  register_conclusion()  register_expstruct()
+    ------------------------------------------------------------
+    English Description:
+    The `Knowledge` class is a wrapper class for `ai_physicist.Knowledge` (its built-in methods are implemented in Rust). 
+    It provides convenient methods for storing various types of knowledge, including experiments, concepts, and conclusions.
+
+    Concepts and conclusions can be registered and queried in this knowledge base.
+
+    Methods for viewing the current knowledge base information:
+
+    `fetch_expstruct()`
+    `fetch_exps()`
+    `fetch_concepts()`
+    `print_concepts()`
+    `print_conclusions()`
+
+    Methods for registering new concepts, conclusions, and experiments:
+
+    `register_expr()`
+    `register_conclusion()`
+    `register_expstruct()`
     """
     K: aiphy.Knowledge
     concept_id: int = 0
@@ -59,6 +80,10 @@ class Knowledge:
         """
         创建一个新的 Knowledge 对象，
         内部包含一些默认的实验 （ 程序内置的实验 ） 。
+
+        English Description:
+        Create a new `Knowledge` object,
+        internally containing some default experiments (builtin experiments).
         """
         obj = object.__new__(Knowledge)
         obj.K = aiphy.Knowledge.default()
@@ -68,6 +93,9 @@ class Knowledge:
     def read_from_file(filename: str) -> "Knowledge":
         """
         从文件中读取知识库。
+
+        English Description:
+        Load a knowledge base from a file `filename`.
         """
         obj = object.__new__(Knowledge)
         with open(filename, "r") as f:
@@ -91,9 +119,17 @@ class Knowledge:
     def save_to_file(self, filename: str):
         """
         将当前知识库保存到文件中。
+
+        English Description:
+        Save the current knowledge base to a file `filename`.
         """
+        
         self.remove_useless_objects()
         print("Saving knowledge to", filename, '\n')
+        dirname = os.path.dirname(filename)
+        # create the directory if it doesn't exist
+        if dirname and not os.path.exists(dirname):
+            os.makedirs(dirname, exist_ok=True)
         with open(filename, "w") as f:
             f.write(str(self.K)+'\n')
             json.dump({
@@ -152,18 +188,27 @@ class Knowledge:
     def eval_onebody_intrinsic(self, intrinsic: Intrinsic, obj: Objstructure) -> ConstData | None:
         """
         在特定的实验数据结构 （ 包含测量数据 ） 下，计算一个内禀概念的值。
+
+        English Description:
+        Evaluate the value of an intrinsic concept under a specific experimental data structure (containing measurement data).
         """
         return self.K.eval_intrinsic(intrinsic, [obj])
 
     def eval_manybody_intrinsic(self, intrinsic: Intrinsic, obj_list: List[Objstructure]) -> ConstData | None:
         """
         在特定的实验数据结构 （ 包含测量数据 ） 下，计算一个多体内禀概念的值。
+
+        English Description:
+        Evaluate the value of a many-body intrinsic concept under a specific experimental data structure (containing measurement data).
         """
         return self.K.eval_intrinsic(intrinsic, obj_list)
 
     def eval(self, expr: Exp | str, expstruct: ExpStructure) -> ExpData:
         """
         在特定的实验数据结构 （ 包含测量数据 ） 下，计算一个表达式的值。
+
+        English Description:
+        Evaluate the value of an expression under a specific experimental data structure (containing measurement data).
         """
         if isinstance(expr, str):
             expr = Exp(expr)
@@ -175,6 +220,9 @@ class Knowledge:
     def register_object(self, objstruct: Objstructure, name: str = None) -> str:
         """
         以 name 为名字，注册一个具体的物理对象 objstruct。
+
+        English Description:
+        Register a specific physical object `objstruct` with the name `name`.
         """
         name = self.auto_object_name() if name is None else name
         self.K.register_object(name, objstruct)
@@ -195,13 +243,25 @@ class Knowledge:
         "(1->Particle) (2->Clock) |- D[posx[1]]/D[t[2]]"
         2. 或者是 Intrinsic （内禀概念）， 例如
         "[#oscillation (1->Particle) [2->Obj_02] |- D[posx[1]]/D[posx[1]'']]"
+
+
+        English Description:
+        Register a concept `definition` with the name `name`.
+        It can be a Concept (normal concept), for example:
+        "(1->Particle) (2->Clock) |- D[posx[1]]/D[t[2]]"
+        Or an Intrinsic (intrinsic concept), for example:
+        "[#oscillation (1->Particle) [2->Obj_02] |- D[posx[1]]/D[posx[1]'']]"
         """
         name = self.auto_concept_name() if name is None else name
         expr: Expression = Expression(definition) if isinstance(definition, str) else definition
         if self.K.register_expression(name, expr):
             # 概念注册成功
+            # english description:
+            # the concept is registered successfully
             if expr.expr_type == "Intrinsic":
                 # 如果是内禀概念，那么将其相关的物体名字加入 obj_tmp
+                # english description:
+                # if the concept is an intrinsic concept, add the names of the relevant objects to obj_tmp
                 intr: Intrinsic = expr.unwrap_intrinsic
                 for obj_name in intr.relevant_objs:
                     self.obj_tmp.add(obj_name)
@@ -220,11 +280,24 @@ class Knowledge:
             "(1 -> Particle) |- m[1] * a[1] + Partial[V]/Partial[x[1]] is zero"
         4. 或者 Concept(...) is conserved，例如
             "|- T + V is conserved"
+        ------------------------------------------------------------
+        English Description:
+        Register a conclusion `definition` with the name `name`.
+        It can be an Exp (expression) is zero, for example:
+        "(posx[1] - posr[2]) is zero"
+        Or an Exp (expression) is conserved, for example:
+        "(m[1] * v[1] + m[2] * v[2]) is conserved"
+        Or a Concept (concept) is zero, for example:
+        "(1 -> Particle) |- m[1] * a[1] + Partial[V]/Partial[x[1]] is zero"
+        Or a Concept (concept) is conserved, for example:
+        "|- T + V is conserved"
         """
         name = self.auto_conclusion_name() if name is None else name
         prop: Proposition = Proposition(definition) if isinstance(definition, str) else definition
         if self.K.register_conclusion(name, prop):
             # 结论注册成功
+            # english description:
+            # the conclusion is registered successfully
             return name
         else:
             return None
@@ -232,18 +305,27 @@ class Knowledge:
     def remove_conclusion(self, name: str):
         """
         移除一个结论。
+
+        English Description:
+        Remove a conclusion with the name `name`.
         """
         self.K.remove_conclusion(name)
 
     def remove_concept(self, name: str):
         """
         移除一个概念。
+
+        English Description:
+        Remove a concept with the name `name`.
         """
         self.K.remove_concept(name)
 
     def remove_useless_objects(self):
         """
         移除那些没有被任何内禀概念引用的物体。
+
+        English Description:
+        Remove objects that are not referenced by any intrinsic concepts.
         """
         for obj_name in self.K.fetch_object_keys:
             if obj_name not in self.obj_tmp:
@@ -300,12 +382,17 @@ class Knowledge:
     def print_concepts(self):
         """
         打印当前知识库中的所有概念。
+        English Description:
+        Print all concepts in the current knowledge base.
         """
         self.K.list_concepts()
 
     def print_conclusions(self):
         """
         打印当前知识库中的所有结论。
+
+        English Description:
+        Print all conclusions in the current knowledge base.
         """
         self.K.list_conclusions()
 
@@ -328,6 +415,11 @@ class Knowledge:
         计算一个表达式的复杂度，
         第一关键字：raw definition 的复杂度
         第二关键字：exp 的复杂度
+
+        English Description:
+        Calculate the complexity of an expression.
+        The first keyword is the complexity of the raw definition.
+        The second keyword is the complexity of the expression.
         """
         if isinstance(exp, Exp):
             return self.K.raw_definition_exp(exp, exp_name).complexity * 100 + exp.complexity

@@ -130,6 +130,7 @@ dependencies = [
 name = "core"
 version = "0.1.0"
 dependencies = [
+ "cc",
  "fraction",
  "itertools 0.13.0",
  "lalrpop",
@@ -140,7 +141,6 @@ dependencies = [
  "num-traits",
  "plotly",
  "pyo3",
- "pyo3-ffi",
  "rand",
  "rand_distr",
  "rayon",
